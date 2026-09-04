@@ -1,2 +1,2 @@
-# ECE-592---Cache-Reverse-Engineering
-HW1
+# ECE 592 - Homework 1: Cache Reverse Engineering
+This homework is for the Microarchitecture Reverse Engineering and Security course at NCSU. It asks students to reverse-engineer the CPU cache hierarchy for various NCSU-owned CPUs using controlled software microbenchmarks and timing measurements, and then verify the inferred results using hardware performance counters (when available). The central question is not only the design of each cache hierarchy but also how cache design changes over time and across computer architectures. The goal is to investigate whether any cache-related quantity exhibits a trend that can be modeled or extrapolated in a way similar to Moore’s Law for transistors.
