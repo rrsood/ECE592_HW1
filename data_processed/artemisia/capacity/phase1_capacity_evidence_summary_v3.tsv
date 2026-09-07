@@ -1,0 +1,21 @@
+ece592_capacity_evidence_summary_version=1
+coarse_dense_comparison_file=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/artemisia/capacity/phase1_capacity_coarse_dense_candidate_comparison_v3.tsv
+coarse_dense_comparison_sha256=8319efc1020856c8a1a50f08cd47047ce81fadd720aeceb373d041d6395aab69
+top_count=6
+summary_purpose=report_evidence_for_8.2.1_and_8.2.2
+evidence_scope=coarse_and_dense_randomized_dependent_pointer_chasing
+cache_boundary_labels_assigned=false
+timer_overhead_subtracted=false
+summary_script=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/scripts/make_capacity_evidence_summary.py
+summary_command=scripts/make_capacity_evidence_summary.py --candidate-comparison data_processed/artemisia/capacity/phase1_capacity_coarse_dense_candidate_comparison_v3.tsv --top-count 6 --output data_processed/artemisia/capacity/phase1_capacity_evidence_summary_v3.tsv
+summary_working_directory=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering
+python_version=3.9.25
+data_begin
+evidence_rank	coarse_interval_bytes	coarse_relative_increase	coarse_trial_disagreement_fraction	dense_overlapping_interval_count	dense_refined_interval_bytes	dense_relative_increase	dense_trial_disagreement_fraction	dense_support_status
+1	2097152..2796208	1.0944276055024482	0.086274073249471228	6	2097152..2236968	0.27159863945578233	0.2445578231292517	strong-measured-jump
+2	33554432..44739248	0.4704841983183532	0.08825746593215425	6	36909880..40265320	0.17923393802932219	0.069365197144538551	strong-measured-jump
+3	54616..65536	0.24791086350974934	0.0072423398328690805	4	61176..65544	0.07945736434108519	0.0071813285457809697	moderate-measured-jump
+4	43696..54616	0.29043853342918768	0.0072423398328690805	4	49160..52440	0.15164220824598185	0.0036407766990291263	strong-measured-jump
+5	2796208..3495256	0.28609595903373042	0.086274073249471228	6	2796208..2936016	0.17054643469737818	0.075361105296211012	strong-measured-jump
+6	22369624..27962032	0.24594583554593363	0.024386258731260976	3	24606592..26843552	0.15209618482574361	0.11915967532910443	strong-measured-jump
+data_end
