@@ -6,209 +6,177 @@ Author:
     2. Rohit Sood (rrsood@ncsu.edu) - Developer
 
 Description:
-A parameterizable C microbenchmark that can allocate a linked list of nodes, each W bytes (the 
-parameterizable working set), connecting the nodes into one randomized cycle, and then time batches
-of N dependent pointer-chase loads. Because the order of the nodes in the linked list are 
-randomized, and each next load is dependent on the current load resolving, the true latency is 
-measured instead of throughput or memory-level parallelism contaminating the timing measurements.
-Either a working set can fit in a cache level or it cannot. If it can't, when we access items and 
-measure the time, we'll never be accessing an item that is in the cache because items will be too 
-far apart from one another that they'll be evicted from the cache by the time we get back around to 
-them. We do batching either because of counter granularity and/or because we don't want the overhead
-of the timing to itself to add noise, that means limiting the overhead to well-sized batches 
-decreases its overall effect to be negligible. 
+A parameterizable C microbenchmark that creates a randomized pointer-chase dependent load chain for 
+measuring the true latency of loads to a given CPU core's cache hierarchy. The user-configurable 
+working set can be swept to determine the number of levels in a hierarchy and the capcity of each
+level. 
+
+The following are the commands required to build the microbenchmark, save the compiler version, and 
+save the build command ([1], pg. 6, 7): 
+
+  (1) gcc --version
+
+  (2) gcc -O0 -g -std=c11 -Wall -Wextra -fno-omit-frame-pointer -S -o 
+      x86_64_cache_hierarchy_microbench x86_64_cache_hierarchy_microbench.c.
+
+  (3) objdump -d ./x86_64_cache_hierarchy_microbench > x86_64_cache_hierarchy_microbench.dis
+
+  (4) objdump -d -S ./x86_64_cache_hierarchy_microbench > 
+      x86_64_cache_hierarchy_microbench.source.dis
+
+Note, the use of level zero optimization is a requirement set by the assignment specifications.
+
+The following is the command required to run the executable built with the above command:
+
+  (1) ./x86_64_cache_hierarchy_microbench <working_set_bytes> <line_size> <N_per_batch>
+      <num_samples> <seed> [sequential].
+
+Note, this command assumes the shell environment's current working directory is the one that
+that contains the executable file. The chevron placeholders for the command-line arguments are 
+replaced with user-defined values in an actual run command. The Sequential argument is either 
+included (without the brackets), or excluded, if the user wants to issue a non-randomized 
+pointer-chase dependent load chain (to guage the effects of the prefetcher). Below is an overview of 
+each command-line argument:
+
+  - <working_set_bytes> - The size, in bytes, of the load chain. ([1], pg. 6, 14)
+
+  - <line_size_bytes> - The block size of the memory hierarchy. ([1], pg. 9)
+
+  - <N_per_batch> - The number of loads per one timed batch. Setting this parameter to zero can be 
+    used to measure an empty batch, which is useful for gauging time lost to microbenchmark 
+    overhead. ([2], pg. 7, 11)
+
+  - <num_samples> - The number of timed batches. ([2], pg. 11)
+
+  - <seed> - A number used to pseudo-randomize the order of the load chain, allowing results to be 
+    reproducible when the same seed and other command-line arguments are reused. ([1], pg. 8-9)
+
+  - [sequential] - If this command-line argument is included, the load chain is non-randomized. This
+    allows the user to guage the effects of a core's prefetcher.
 
 Version Log:
 Date         Version #   Description
 ----------   ---------   --------------------------------------------------
-2026-09-05   01.00       Developed benchmark according to specs (compliance verification needed).
+2026-09-05   01.00       Initial implementation of microbench specs
+2026-09-06   01.01       Improved documentation & code + corrected spec compliance issues
 ================================================================================================= */
 
-/*
- * cache_bench.c -- Experiment 1: cache capacity / hierarchy detector
- *
- * Method: allocate a working set of W bytes as linked nodes, connect them
- * into ONE randomized cycle, then time batches of N dependent pointer-chase
- * steps. Because each load's address depends on the previous load's value,
- * the core cannot use memory-level parallelism to hide latency -- we are
- * measuring true latency, not throughput.
- *
- * Usage:
- *   ./cache_bench <working_set_bytes> <N_per_batch> <num_samples> <seed> [sequential]
- *
- * Output (to stdout): one CSV line per sample:
- *   sample_index,ticks_elapsed,N_per_batch
- *
- * Build (per spec, -O0 is required for Phase I):
- *   gcc -O0 -g -std=c11 -Wall -Wextra -fno-omit-frame-pointer -o cache_bench cache_bench.c
- */
- 
+// ------------- Included File(s) ------------- //
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#include <x86intrin.h>
- 
-/* ---------- 1. The node type for the pointer-chase ring ---------- */
- 
-typedef struct Node {
-    struct Node *next;
-    char padding[56]; /* pad node to 64 bytes = typical cache line size,
-                          so each node occupies exactly one line and we
-                          control spacing precisely via node count, not
-                          incidental struct size */
-} Node;
- 
-/* ---------- 2. The fenced timer pair (x86-64) ---------- */
- 
-static inline uint64_t tsc_start(void) {
-    _mm_lfence();              /* wait for all prior instructions to retire */
-    uint64_t t = __rdtsc();    /* read the timestamp counter */
-    _mm_lfence();              /* prevent later instructions from starting early */
-    return t;
+/* The x86intrin.h is a header filed that provides access to x86-specific functions, such as RDTSC 
+   ([2], pg. 5). */
+#include <x86intrin.h>>
+// -------------------------------------------- //
+
+/* The structure used for the nodes in the load chain. */
+struct load_link {
+    /* A pointer-chase dependent load chain is a singly linked list of nodes, where each node
+       points to the next node in the list. Traversing through the list generates a load for each
+       node that reads the next node's address. The next load cannot execute until the current load
+       has resolved, as the CPU core cannot determine the address of the next node's next node 
+       before it has yet to even determine the address of the next node. This dependency between
+       loads prevents the CPU core from issuing loads in parallel, which can contaminate the 
+       microbenchmarks timing measurements. The microbenchmark functions by tracking the access time 
+       for a N sized batch of loads, and dividing the total batch access time by the batch's size to 
+       find the average time per load. Note, that batching is used to amortize the cost of the 
+       microbenchmark's own overhead over the N loads. If multiple loads within a batch issue in 
+       parallel, the average access time will be lower than the true time it would takes to load a 
+       single item from the memory hierarchy. A working set that is actually too large to be in a 
+       certain cache level, may report access times that correspond to said level, not because the 
+       memory accesses are actually in that level, but because memory-level parallelism is making 
+       the effective access time shorter than it truly is. ([1], pg. 8) */
+    struct load_link * next;
+};
+
+/* This function is used to record the processor's timestamp counter before an N-batch of loads are
+   executed. It ensures that the counter is not read before prior loads (e.g., from a previous batch)
+   have finished executing, and that subsequent loads (i.e., the loads from the batch) are not
+   issued before the timestamp counter can be read. By enforcing a serial execution order, this 
+   function ensures the microbenchmarks timing measurements are accurate. ([2], pg. 5) */
+static inline uint64_t x86_tsc_start (unsigned * log_cpu) {
+    /* A function that forces all prior load instructions to execute before any subsequent load
+       instructions are issued. Note, this function is largely redundant when using RDTSCP, which 
+       already waits for prior loads to finish executing before it reads the processor's timestamp 
+       counter. This structure was kept to maintain the one presented in the homework materials. 
+       ([1], pg. 7) */
+    _mm_lfence();
+
+    /* __rdtscp() waits for all prior loads to finish executing and then returns the processor's 
+       64-bit timestamp counter value and the logical CPU ID. The ID can be used to verify that the 
+       OS did not migrate the running microbenchmark to a different core, which could contaminate 
+       the measurements. ([1], pg. 7) */
+    uint64_t timestamp = __rdtscp(log_cpu);
+
+    /* _mm_lfence() is called again to ensure that no subsequent load instructions are issued
+       before the processor's timestamp counter is read. */
+    _mm_lfence();
+
+    return timestamp;
 }
- 
-static inline uint64_t tsc_stop(void) {
-    unsigned aux;
-    uint64_t t = __rdtscp(&aux); /* waits for prior instructions (esp. loads)
-                                     to execute before reading the counter */
-    _mm_lfence();                /* stop later instructions from hoisting above this */
-    return t;
+
+/* This function is used to record the processor's timestamp counter after an N-batch of loads are 
+   executed. ([2], pg. 5) */
+static inline uint64_t x86_tsc_stop (unsigned * log_cpu) {
+    /* No redundant _mm_lfence() is used for the recording the processor's timestamp counter after 
+       an N batch of loads. This is purely to match the structure presented in the homework 
+       materials. ([1], pg. 7) */
+    uint64_t timestamp = __rdtscp(log_cpu);
+
+    /* Load instructions from the next batch should not execute before the timestamp counter for the 
+       end of the current batch can be read. */
+    _mm_lfence();
 }
- 
-/* ---------- 3. A small, fast, seedable RNG (xorshift32) ---------- */
-/* We avoid rand()/random() because their internal state and quality vary
- * by libc and are not guaranteed reproducible across the 8 machines. A
- * self-contained RNG means the SAME seed produces the SAME shuffle on
- * every machine, which is required for reproducibility. */
- 
-static uint32_t xorshift_state;
- 
-static uint32_t xorshift32(void) {
-    uint32_t x = xorshift_state;
+
+/* Passes in a pointer to an unsigned 32 bit integer called seed. Sets the local unsigned 32 bit int
+   x to the value pointed to by seed. Does some shifting and xoring that makes X difficult to track
+   (pseudo-randomization). sets the value at the pointer to x and also returns said value. */
+static uint32_t xorshift32 (uint32_t * state) {
+    uint32_t x = *state;
     x ^= x << 13;
     x ^= x >> 17;
     x ^= x << 5;
-    xorshift_state = x;
-    return x;
+    return (*state = x);
 }
- 
-/* ---------- 4. Build the pointer-chase ring ---------- */
- 
-/*
- * Allocates 'num_nodes' Node structs and links them into ONE cycle.
- * If 'sequential' is 0: the cycle visits nodes in RANDOM order (this is
- *   the primary method -- defeats stride prefetchers).
- * If 'sequential' is 1: the cycle visits nodes in ARRAY order (this is
- *   the control -- if this is much faster at large W, that speed
- *   difference is the prefetcher, not evidence of a bigger cache).
- */
-static Node *build_ring(size_t num_nodes, int sequential) {
-    Node *nodes = aligned_alloc(64, num_nodes * sizeof(Node));
-    if (!nodes) {
-        fprintf(stderr, "allocation failed for %zu nodes\n", num_nodes);
-        exit(1);
-    }
- 
-    /* First-touch every page NOW, right after allocation, so physical
-     * pages are actually mapped before we start timing anything. */
-    memset(nodes, 0, num_nodes * sizeof(Node));
- 
-    /* permutation[] will hold a random ordering of node indices 0..num_nodes-1 */
-    size_t *permutation = malloc(num_nodes * sizeof(size_t));
-    for (size_t i = 0; i < num_nodes; i++) permutation[i] = i;
- 
-    if (!sequential) {
-        /* Fisher-Yates shuffle using our seeded RNG */
-        for (size_t i = num_nodes - 1; i > 0; i--) {
-            uint32_t r = xorshift32() % (uint32_t)(i + 1);
-            size_t tmp = permutation[i];
-            permutation[i] = permutation[r];
-            permutation[r] = tmp;
-        }
-    }
-    /* if sequential, permutation stays 0,1,2,...,num_nodes-1 */
- 
-    /* Link nodes[permutation[i]] -> nodes[permutation[i+1]], and wrap the
-     * last one back to the first, forming a single cycle through every
-     * node. Note we link the STRUCTS in permutation order; each node
-     * still lives at its original array slot, so the memory ADDRESSES
-     * visited over time follow the permutation, not the allocation order. */
-    for (size_t i = 0; i < num_nodes; i++) {
-        size_t cur  = permutation[i];
-        size_t nxt  = permutation[(i + 1) % num_nodes];
-        nodes[cur].next = &nodes[nxt];
-    }
- 
-    free(permutation);
-    return nodes;
+
+/* Load Chain Building Function Skeleton from Project Specs */
+// static void make_random_cycle(struct node * nodes, size_t n, uint32_t seed) {
+//     size_t * order = malloc(n * sizeof(*order));
+//     if (!order || n < 2) exit(1);
+
+//     for (size_t i = 0; i < n; i++) order[i] = i;
+
+//     uint32_t state = seed ? seed : 1u;
+
+//     for (size_t i = n - 1; i > 0; i--) {
+//         size_t j = (size_t)(xorshift32(&state) % (uint32_t)(i + 1));
+//         size_t tmp = order[i];
+//         order[i] = order[j];
+//         order[j] = tmp;
+//     }
+
+//     for (size_t i = 0; i < n; i++)
+//         nodes[order[i]].next = &nodes[order[(i + 1) % n]];
+
+//     free(order);
+// }
+
+/* My goal is to build the load chain as a series of pointers seperated by bytes such that each
+   pointer spacing pair is a node. I need to determine the size of a pointer (practically will 
+   always be 8 bytes for a 64-bit system but ill still use robust checking) and then i get the user
+   provided line size. I'll create these "nodes" and first link them in order and then randomize
+   them */
+static void build_load_chain (struct load_link * node, size_t working_set_bytes, size_t line_size_bytes) {
+    /* find the size of a pointer for the system */
+    uintmax_t padding = line_size_bytes - sizeof(node);
+    /* malloc the load link, add the spacing, repeat, making sure to connect the pointers, also save first pointer address to have it link to the last load (chain) */
 }
- 
-/* ---------- 5. The timed chase: N dependent steps, batched ---------- */
- 
-/* Advances the pointer chain N times and returns the final pointer.
- * The caller times the call to this function; N loads happen inside,
- * each one dependent on the previous (p = p->next), so nothing here
- * can be parallelized by the core. */
-static Node *chase(Node *p, size_t N) {
-    for (size_t i = 0; i < N; i++) {
-        p = p->next;
-    }
-    return p;
-}
- 
-/* ---------- 6. main: parse args, warm up, run 1e6 timed samples ---------- */
- 
-int main(int argc, char **argv) {
-    if (argc < 5) {
-        fprintf(stderr,
-            "usage: %s <working_set_bytes> <N_per_batch> <num_samples> <seed> [sequential]\n",
-            argv[0]);
-        return 1;
-    }
- 
-    size_t working_set_bytes = strtoull(argv[1], NULL, 10);
-    size_t N_per_batch       = strtoull(argv[2], NULL, 10);
-    size_t num_samples       = strtoull(argv[3], NULL, 10);
-    xorshift_state           = (uint32_t)strtoul(argv[4], NULL, 10);
-    int sequential            = (argc >= 6) ? atoi(argv[5]) : 0;
- 
-    if (xorshift_state == 0) xorshift_state = 1; /* xorshift breaks at seed 0 */
- 
-    size_t num_nodes = working_set_bytes / sizeof(Node);
-    if (num_nodes < 2) num_nodes = 2;
- 
-    /* --- Build the ring --- */
-    Node *nodes = build_ring(num_nodes, sequential);
-    Node *p = &nodes[0];
- 
-    /* --- Warm-up: touch the working set before timing so page faults,
-     *     TLB fills, and cold-cache effects don't pollute the first
-     *     timed samples. 10x the batch size is a reasonable warm-up. */
-    const size_t WARMUP_STEPS = (num_nodes > 10 * N_per_batch) ? num_nodes : 10 * N_per_batch;
-    p = chase(p, WARMUP_STEPS);
- 
-    /* --- Timed loop: this is the required 1,000,000-sample method. --- */
-    uint64_t *samples = malloc(num_samples * sizeof(uint64_t));
- 
-    for (size_t r = 0; r < num_samples; r++) {
-        uint64_t t0 = tsc_start();
-        p = chase(p, N_per_batch);
-        uint64_t t1 = tsc_stop();
-        samples[r] = t1 - t0;
-    }
- 
-    /* Keep the final pointer value "live" so the compiler cannot decide
-     * the entire chase loop was dead code and delete it. Printing to
-     * stderr (not stdout) keeps this out of our CSV data stream. */
-    fprintf(stderr, "sink (ignore): %p\n", (void *)p);
- 
-    /* --- Emit raw CSV: sample_index,ticks_elapsed,N_per_batch --- */
-    for (size_t r = 0; r < num_samples; r++) {
-        printf("%zu,%llu,%zu\n", r, (unsigned long long)samples[r], N_per_batch);
-    }
- 
-    free(samples);
-    free(nodes);
-    return 0;
-}
+
+// =================================================================================================
+// ========================================= References ========================================= //
+/* [1] ECE 592 - Homework 1: Specifications - Ajorpaz, Samira */
+/* [2] ECE 592 - Reverse Engineering the CPU Cache Hierarchy Problem Session: Slide Deck - 
+       Ajorpaz, Samira */
+// ============================================================================================== // 
