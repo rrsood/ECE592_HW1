@@ -66,6 +66,12 @@ common_sources=(
     main_code/common/raw_output.c
     main_code/common/measurement.c
     main_code/common/pointer_chase.c
+    main_code/common/spatial_chase.c
+    main_code/common/conflict_chase.c
+    main_code/common/eviction_layout.c
+    main_code/common/eviction_measurement.c
+    main_code/common/inclusion_chase.c
+    main_code/common/inclusion_measurement.c
     main_code/common/metadata_linux.c
     main_code/common/affinity_linux.c
 )

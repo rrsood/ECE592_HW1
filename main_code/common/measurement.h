@@ -31,6 +31,15 @@ int measurement_run(const struct pointer_chase *chase,
                     const struct measurement_config *config,
                     struct measurement_results *results);
 
+/*
+ * Lower-level form used by experiments that build their own dependent
+ * chase cycle. The start node must be non-NULL and must eventually form a
+ * valid cycle so repeated batches can keep traversing safely.
+ */
+int measurement_run_from_start(struct chase_node *start,
+                               const struct measurement_config *config,
+                               struct measurement_results *results);
+
 void measurement_results_destroy(struct measurement_results *results);
 
 #endif

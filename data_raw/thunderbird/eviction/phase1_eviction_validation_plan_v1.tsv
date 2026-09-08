@@ -1,0 +1,14 @@
+ece592_eviction_plan_version=1
+generator=SplitMix64+Fisher-Yates
+measurement_goal=8.2.7_cross_level_eviction_behavior
+target_offset_sets=0,64
+pressure_offset_sets=128,192,256,320
+target_offset_set_count=1
+pressure_offset_set_count=1
+trial_count=1
+plan_seed=10592
+plan_row_count=1
+data_begin
+global_execution_index	trial	trial_execution_index	plot_index	target_set_index	pressure_set_index	target_offsets_bytes	pressure_offsets_bytes	target_offset_count	pressure_offset_count	point_seed
+0	0	0	0	0	0	0,64	128,192,256,320	2	4	13353903712298148505
+data_end

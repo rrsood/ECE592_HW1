@@ -4,5 +4,5 @@ __pycache__/
 
 # Phase-I raw sample dumps are intentionally preserved outside Git because
 # each run contains millions of timing rows. Keep small reproducible plans.
-data_raw/*/capacity/phase1_capacity_*_randomized*/
-!data_raw/*/capacity/*plan*.tsv
+data_raw/*/*/phase1_*_randomized*/
+!data_raw/*/*/*plan*.tsv

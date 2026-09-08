@@ -41,13 +41,13 @@ void measurement_results_destroy(struct measurement_results *results)
     memset(results, 0, sizeof(*results));
 }
 
-int measurement_run(const struct pointer_chase *chase,
-                    const struct measurement_config *config,
-                    struct measurement_results *results)
+int measurement_run_from_start(struct chase_node *start,
+                               const struct measurement_config *config,
+                               struct measurement_results *results)
 {
     struct chase_node *current;
 
-    if (chase == NULL || chase->start == NULL || config == NULL ||
+    if (start == NULL || config == NULL ||
         results == NULL ||
         config->timed_sample_count < ECE592_MINIMUM_TIMED_SAMPLES ||
         config->dependent_accesses_per_sample == 0u ||
@@ -71,7 +71,7 @@ int measurement_run(const struct pointer_chase *chase,
         return -1;
     }
 
-    current = chase->start;
+    current = start;
     for (size_t warmup = 0; warmup < config->warmup_batch_count; ++warmup) {
         current = run_dependent_batch(
             current, config->dependent_accesses_per_sample);
@@ -113,6 +113,18 @@ int measurement_run(const struct pointer_chase *chase,
     results->final_node = current;
     final_node_sink = current;
     return 0;
+}
+
+int measurement_run(const struct pointer_chase *chase,
+                    const struct measurement_config *config,
+                    struct measurement_results *results)
+{
+    if (chase == NULL) {
+        errno = EINVAL;
+        return -1;
+    }
+
+    return measurement_run_from_start(chase->start, config, results);
 }
 
 #if defined(ECE592_MEASUREMENT_SELF_TEST)

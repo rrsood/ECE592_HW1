@@ -1,0 +1,26 @@
+ece592_miss_latency_evidence_format_version=1
+evidence_purpose=8.2.6_miss_next_level_latency
+method=compare_representative_points_below_and_above_measured_timing_boundaries
+cache_boundary_labels_assigned=false
+timer_overhead_subtracted=false
+source_latency_representatives_file=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/thunderbird/latency/phase1_hit_latency_representatives_v1.tsv
+source_latency_representatives_sha256=c5459a003513abb94fd1b302baab8f99361064f9a66c542a53531f925ab2030b
+source_raw_hostname=thunderbird.ece.ncsu.edu
+source_raw_isa=aarch64
+source_raw_timer_unit=generic-timer ticks
+source_raw_traversal=randomized-dependent-single-cycle
+source_raw_timed_sample_count=1000000
+evidence_script=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/scripts/make_miss_latency_evidence.py
+evidence_command=scripts/make_miss_latency_evidence.py --latency-representatives data_processed/thunderbird/latency/phase1_hit_latency_representatives_v1.tsv --output data_processed/thunderbird/latency/phase1_miss_next_level_latency_evidence_v1.tsv
+evidence_working_directory=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering
+python_version=3.9.25
+evidence_row_count=6
+data_begin
+evidence_rank	dense_refined_interval_bytes	dense_support_status	below_span_bytes	near_upper_span_bytes	above_span_bytes	below_median_ticks_per_access	near_upper_median_ticks_per_access	above_median_ticks_per_access	above_minus_below_median_ticks_per_access	above_divided_by_below_median_ratio	below_iqr_ticks_per_access	above_iqr_ticks_per_access	below_min_ticks_per_access	above_max_ticks_per_access	timed_sample_count	dependent_accesses_per_sample	timer_overhead_raw_ticks_median
+1	31317480..33554432	strong-measured-jump	30758240	33554432	33554440	1.73046875	1.91796875	1.75390625	0.0234375	1.0135440180586908	0.09375	0.0859375	1.26171875	33.51953125	1000000	256	1
+2	1092272..1153432	strong-measured-jump	1048584	1153432	1258296	0.421875	0.31640625	0.3515625	-0.0703125	0.8333333333333334	0.02734375	0.0234375	0.3359375	8.9296875	1000000	256	1
+3	838872..908776	strong-measured-jump	838864	908776	943720	0.23046875	0.265625	0.27734375	0.046875	1.2033898305084745	0.015625	0.01953125	0.1875	9.5703125	1000000	256	1
+4	24606592..25165832	strong-measured-jump	22369632	25165832	26843552	1.11328125	1.68359375	1.43359375	0.3203125	1.287719298245614	0.0703125	0.09375	0.9140625	18.921875	1000000	256	1
+5	36909880..39146848	strong-measured-jump	36350640	39146848	40265320	2.01171875	2.00390625	1.87109375	-0.140625	0.9300970873786408	0.09375	0.09375	1.73046875	42.02734375	1000000	256	1
+6	65536..72088	strong-measured-jump	58984	72088	78648	0.0859375	0.09375	0.1015625	0.015625	1.1818181818181819	0.0	0.0	0.078125	5.6796875	1000000	256	1
+data_end

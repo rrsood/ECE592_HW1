@@ -251,7 +251,6 @@ def write_gnuplot_script(path, data_path, temporary_pdf, metadata,
             aggregated[0]["span"], aggregated[-1]["span"]))
         stream.write("set yrange [0:*]\n")
         stream.write("set xtics rotate by -35 ({})\n".format(tick_text))
-        stream.write("set grid xtics ytics lc rgb '#dddddd'\n")
         stream.write("set key top left opaque\n")
         stream.write("set title {}\n".format(gnuplot_quote(title)))
         stream.write("set xlabel 'Actual pointer-chase footprint (bytes, log_2 scale)'\n")

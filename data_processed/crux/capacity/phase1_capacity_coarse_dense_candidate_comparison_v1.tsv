@@ -1,0 +1,29 @@
+ece592_capacity_candidate_comparison_version=1
+coarse_transition_file=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/crux/capacity/phase1_capacity_coarse_transition_candidates_v1.tsv
+coarse_transition_sha256=8d6ad628c11d32aaefba1043c173f75cd7b4953c4195ad602dd150136bae2011
+dense_transition_file=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/crux/capacity/phase1_capacity_dense_transition_candidates_v1.tsv
+dense_transition_sha256=bd6e60eb69d607ed147b9f23d28a5bc70a450b6c937a8a018fd476d8c6f3713b
+source_hostname=crux.ece.ncsu.edu
+source_isa=x86_64
+top_coarse_rank_count=10
+comparison_method=coarse_interval_vs_overlapping_dense_intervals
+dense_best_selection=largest_relative_increase_then_largest_slope
+cache_boundary_labels_assigned=false
+timer_overhead_subtracted=false
+comparison_script=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/scripts/compare_capacity_candidates.py
+comparison_command=scripts/compare_capacity_candidates.py --coarse data_processed/crux/capacity/phase1_capacity_coarse_transition_candidates_v1.tsv --dense data_processed/crux/capacity/phase1_capacity_dense_transition_candidates_v1.tsv --output data_processed/crux/capacity/phase1_capacity_coarse_dense_candidate_comparison_v1.tsv --top-count 10
+comparison_working_directory=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering
+python_version=3.9.25
+data_begin
+coarse_rank	coarse_lower_span	coarse_upper_span	coarse_relative_increase	coarse_log2_latency_slope	coarse_trial_disagreement_fraction	dense_overlapping_interval_count	dense_best_rank	dense_best_lower_span	dense_best_upper_span	dense_best_relative_increase	dense_best_log2_latency_slope	dense_best_trial_disagreement_fraction	dense_support_status
+1	4194304	5592408	0.92883036935704522	2.2834676437369543	0.17975376196990425	9	3	4613736	4893360	0.35320553975969915	5.1405482884043465	0.058240851141887554	strong-measured-jump
+2	109232	131072	0.32564962279966481	1.5465978968041518	0.22699968384445146	2	9	120160	131080	0.23568191182529863	2.4329055809187805	0.12270756918972991	strong-measured-jump
+3	349528	436912	0.38423015450186471	1.457077599394877	0.12785774767146485	3	26	349528	384480	0.081418581418581493	0.82126997938120072	0.071039260969976911	moderate-measured-jump
+4	3495256	4194304	0.25037417147744279	1.2255477775161885	0.17975376196990425	5	12	3914696	4194304	0.12370625924100542	1.6905758090960148	0.0090111642743221695	strong-measured-jump
+5	2796208	3495256	0.23762900238158235	0.95543226109268709	0.1693820825315373	5	28	3145736	3355448	0.047238136417684595	0.71518757136781475	0.034698951464706515	weak-measured-jump
+6	174768	218456	0.20515768725361361	0.83634831363577911	0.055199672890827313	3	11	174768	192248	0.17829593267882182	1.7211238251913021	0.03585775926201458	strong-measured-jump
+7	6990512	8388608	0.15819028972969695	0.80549611888562744	0.042389473204935572	0							not-covered-by-dense-plan
+8	5592408	6990512	0.16826539477650315	0.6969499223059139	0.055976169790244508	4	10	5452600	5872032	0.16708687108375653	2.0849356513818349	0.01357013088131697	strong-measured-jump
+9	54616	65536	0.12927663734115358	0.66700753256648748	0.063838995888335859	0							not-covered-by-dense-plan
+10	32768	43696	0.20181112548512292	0.63873192796781353	0.0016146393972012918	0							not-covered-by-dense-plan
+data_end
