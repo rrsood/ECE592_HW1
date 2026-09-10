@@ -1,0 +1,9 @@
+phase2_combined_validation_version=1
+source=pmu/<machine>/phase2_validation_v1
+data_begin
+machine	reported_l1d	reported_l2	reported_l3	line_size_bytes	l1d_ways	l2_ways	l3_ways	small_working_set_bytes	small_l1_miss_rate_percent	large_working_set_bytes	large_l1_miss_rate_percent	large_llc_miss_rate_percent	phase2_validation_result
+thunderbird	64K	1024K	none_reported	64	4	8	none	32768	0.02	33554432	9.90	not_collected	Phase-I boundaries match reported L1D/L2 and PMU small-vs-large contrast
+artemisia	48K	2048K	53760K	64	12	16	15	32768	0.04	67108864	11.83	77.84	Phase-I boundaries match reported L1D/L2/L3 and PMU small-vs-large contrast
+crux	32K	256K	12288K	64	8	4	12	16384	0.12	16777216	21.01	62.58	Phase-I line/associativity evidence matches reported geometry and PMU contrast
+upgrade	32K	256K	12288K	64	8	4	16	16384	0.13	16777216	20.95	43.90	Phase-I line/associativity evidence matches reported geometry and PMU contrast
+data_end

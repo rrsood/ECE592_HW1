@@ -1,0 +1,31 @@
+experiment=phase2_8counter_l1_resident
+machine=artemisia
+workload=l1_resident
+nodes=4096
+spacing_bytes=8
+timed_samples=1000000
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/tmp/ece592_phase2_artemisia_8ctr_l1_resident.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_artemisia_8ctr_v1 --mode capacity --cpu 4 --nodes 4096 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 44592 --experiment phase2-8counter-l1_resident --output /tmp/ece592_phase2_artemisia_8ctr_l1_resident.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_artemisia_8ctr_v1 --smt-siblings-idle no --environment-variables Phase-II 8-counter cross-generation workload; SMT sibling 60 not reserved':
+
+     2,129,511,637      cycles                                                                
+     3,552,999,164      instructions                     #    1.67  insn per cycle            
+         1,130,866      cache-references                                                      
+           828,483      cache-misses                     #   73.26% of all cache refs         
+     1,653,605,329      L1-dcache-loads                                                       
+         1,476,675      L1-dcache-load-misses            #    0.09% of all L1-dcache accesses 
+           464,471      LLC-loads                                                             
+           313,284      LLC-load-misses                  #   67.45% of all LL-cache accesses  
+
+       3.727260665 seconds time elapsed
+
+       1.041446000 seconds user
+       0.028984000 seconds sys
+
+
+data_end

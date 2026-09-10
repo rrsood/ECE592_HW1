@@ -1,0 +1,24 @@
+experiment=phase2_associativity_l2_before
+command=perf stat conflict associativity validation
+data_begin
+output_filename=/tmp/ece592_phase2_thunderbird_assoc_l2_before.tsv
+timed_sample_count=1000000
+timer_unit=generic-timer ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_thunderbird_pmu_v1 --mode conflict --cpu 4 --lines 8 --conflict-stride 8192 --batch 256 --warmup 1000 --samples 1000000 --seed 40792 --experiment phase2-associativity-l2_before --output /tmp/ece592_phase2_thunderbird_assoc_l2_before.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_thunderbird_pmu_v1 --smt-siblings-idle not-applicable --environment-variables Phase-II PMU associativity validation':
+
+     3,461,243,633      cycles:u                                                              
+     4,126,271,151      instructions:u                   #    1.19  insn per cycle            
+     2,283,375,581      cache-references:u                                                    
+           392,713      cache-misses:u                   #    0.02% of all cache refs         
+     2,283,375,581      L1-dcache-loads:u                                                     
+           392,713      L1-dcache-load-misses:u          #    0.02% of all L1-dcache accesses 
+
+       1.177123883 seconds time elapsed
+
+       1.154064000 seconds user
+       0.010035000 seconds sys
+
+
+data_end

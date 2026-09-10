@@ -22,6 +22,7 @@ import tempfile
 REQUIRED_COLUMNS = {
     "trial",
     "target_set_index",
+    "pressure_offsets_bytes",
     "pressure_offset_count",
     "timer_unit",
     "target_reloads_per_sample",
@@ -76,6 +77,7 @@ def read_processed(path):
                 "trial": int(record["trial"], 10),
                 "target_set": int(record["target_set_index"], 10),
                 "pressure_count": int(record["pressure_offset_count"], 10),
+                "pressure_offsets": record["pressure_offsets_bytes"],
                 "timer_unit": record["timer_unit"],
                 "reloads": int(record["target_reloads_per_sample"], 10),
                 "baseline": float(record[
@@ -116,6 +118,29 @@ def read_processed(path):
     return metadata, rows
 
 
+def infer_pressure_footprint(row):
+    offsets = [int(value, 10) for value in row["pressure_offsets"].split(",")]
+    if len(offsets) != row["pressure_count"]:
+        raise ValueError("pressure offset count does not match offset list")
+    if len(offsets) < 2:
+        return 0
+    sorted_offsets = sorted(offsets)
+    stride = min(
+        later - earlier
+        for earlier, later in zip(sorted_offsets, sorted_offsets[1:])
+        if later > earlier)
+    return row["pressure_count"] * stride
+
+
+def byte_label(value):
+    if value >= 1024:
+        kib = value / 1024
+        if value % 1024 == 0:
+            return "{} KiB".format(value // 1024)
+        return "{:.1f} KiB".format(kib)
+    return "{} B".format(value)
+
+
 def aggregate(rows):
     by_key = {}
     for row in rows:
@@ -128,9 +153,13 @@ def aggregate(rows):
         baselines = [row["baseline"] for row in group]
         afters = [row["after"] for row in group]
         deltas = [row["delta"] for row in group]
+        pressure_footprints = [infer_pressure_footprint(row) for row in group]
+        if len(set(pressure_footprints)) != 1:
+            raise ValueError("mixed pressure footprints for one condition")
         output.append({
             "target_set": key[0],
             "pressure_count": key[1],
+            "pressure_footprint": pressure_footprints[0],
             "repeat_count": len(group),
             "baseline_median": statistics.median(baselines),
             "baseline_min": min(baselines),
@@ -151,15 +180,17 @@ def write_plot_data(path, rows):
     with open(path, "w", encoding="ascii", newline="\n") as stream:
         stream.write(
             "x\tlabel\ttarget_set\tpressure_count\trepeat_count\t"
-            "baseline_median\tbaseline_min\tbaseline_max\t"
+            "pressure_footprint_bytes\tbaseline_median\tbaseline_min\tbaseline_max\t"
             "after_median\tafter_min\tafter_max\tdelta_median\n")
         for index, row in enumerate(rows, 1):
-            label = "T{} P{}".format(row["target_set"], row["pressure_count"])
+            label = "target {} / {}".format(
+                row["target_set"], byte_label(row["pressure_footprint"]))
             stream.write(
-                "{}\t{}\t{}\t{}\t{}\t{:.17g}\t{:.17g}\t{:.17g}\t"
+                "{}\t{}\t{}\t{}\t{}\t{}\t{:.17g}\t{:.17g}\t{:.17g}\t"
                 "{:.17g}\t{:.17g}\t{:.17g}\t{:.17g}\n".format(
                     index, label, row["target_set"], row["pressure_count"],
-                    row["repeat_count"], row["baseline_median"],
+                    row["repeat_count"], row["pressure_footprint"],
+                    row["baseline_median"],
                     row["baseline_min"], row["baseline_max"],
                     row["after_median"], row["after_min"], row["after_max"],
                     row["delta_median"]))
@@ -172,27 +203,25 @@ def write_gnuplot_script(path, data_path, output_path, title, ylabel):
             "size 7.2in,4.6in\n")
         stream.write("set output {}\n".format(quote(output_path)))
         stream.write("set datafile separator '\\t'\n")
-        stream.write("set key top left opaque\n")
+        stream.write("unset grid\n")
+        stream.write("set key outside right center opaque\n")
         stream.write("set border lw 1.5\n")
         stream.write("set style fill solid 0.35 border\n")
         stream.write("set boxwidth 0.32\n")
         stream.write("set xtics rotate by -35\n")
+        stream.write("set yrange [0:*]\n")
         stream.write("set title {}\n".format(quote(title)))
-        stream.write("set xlabel 'Target-set / pressure-count condition'\n")
+        stream.write("set xlabel 'Target-set / pressure footprint condition'\n")
         stream.write("set ylabel {}\n".format(quote(ylabel)))
-        stream.write("set label 1 {} at graph 0.99,0.03 right front font ',8'\n"
-                     .format(quote(
-                         "Positive gap means target reload slowed after "
-                         "pressure; no policy label assigned")))
         stream.write(
             "plot "
-            "{} using ($1-0.18):6:7:8:xtic(2) with yerrorbars "
+            "{} using ($1-0.18):7:8:9:xtic(2) with yerrorbars "
             "lc rgb '#08519c' pt 7 title 'baseline reload', \\\n"
-            "     {} using ($1-0.18):6 with boxes "
+            "     {} using ($1-0.18):7 with boxes "
             "lc rgb '#9ecae1' notitle, \\\n"
-            "     {} using ($1+0.18):9:10:11 with yerrorbars "
+            "     {} using ($1+0.18):10:11:12 with yerrorbars "
             "lc rgb '#a50f15' pt 5 title 'after pressure reload', \\\n"
-            "     {} using ($1+0.18):9 with boxes "
+            "     {} using ($1+0.18):10 with boxes "
             "lc rgb '#fb6a4a' notitle\n".format(
                 quote(data_path), quote(data_path),
                 quote(data_path), quote(data_path)))
@@ -244,7 +273,10 @@ def main():
         data_path = os.path.join(tmpdir, "eviction_plot_data.tsv")
         script_path = os.path.join(tmpdir, "plot.gnuplot")
         write_plot_data(data_path, aggregated)
-        title = "Phase I cross-level eviction/reload evidence"
+        title = "{} Phase I cross-level eviction/reload evidence".format(
+            os.path.normpath(args.input).split(os.sep)[1]
+            if len(os.path.normpath(args.input).split(os.sep)) > 2
+            else "Phase I")
         ylabel = "Median target reload latency ({}/target, unadjusted)".format(
             timer_units[0])
         write_gnuplot_script(script_path, data_path, args.output, title, ylabel)

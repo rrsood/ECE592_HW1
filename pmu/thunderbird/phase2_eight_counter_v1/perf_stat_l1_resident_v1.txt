@@ -1,0 +1,31 @@
+experiment=phase2_8counter_l1_resident
+machine=thunderbird
+workload=l1_resident
+nodes=4096
+spacing_bytes=8
+timed_samples=1000000
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,l2d_cache_rd,l2d_cache_refill_rd
+data_begin
+output_filename=/tmp/ece592_phase2_thunderbird_8ctr_l1_resident.tsv
+timed_sample_count=1000000
+timer_unit=generic-timer ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_thunderbird_8ctr_v1 --mode capacity --cpu 4 --nodes 4096 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 41592 --experiment phase2-8counter-l1_resident --output /tmp/ece592_phase2_thunderbird_8ctr_l1_resident.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_thunderbird_8ctr_v1 --smt-siblings-idle not-applicable --environment-variables Phase-II 8-counter cross-generation workload':
+
+     3,448,202,751      cycles:u                                                                (87.36%)
+     4,126,730,979      instructions:u                   #    1.20  insn per cycle              (87.38%)
+     2,283,130,304      cache-references:u                                                      (87.36%)
+           314,148      cache-misses:u                   #    0.01% of all cache refs           (87.36%)
+     2,282,543,023      L1-dcache-loads:u                                                       (87.37%)
+           313,531      L1-dcache-load-misses:u          #    0.01% of all L1-dcache accesses   (87.53%)
+           675,226      l2d_cache_rd:u                                                          (88.15%)
+            80,266      l2d_cache_refill_rd:u                                                   (74.84%)
+
+       1.201636526 seconds time elapsed
+
+       1.177330000 seconds user
+       0.009977000 seconds sys
+
+
+data_end

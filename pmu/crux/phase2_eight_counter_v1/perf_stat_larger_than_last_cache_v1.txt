@@ -1,0 +1,31 @@
+experiment=phase2_8counter_larger_than_last_cache
+machine=crux
+workload=larger_than_last_cache
+nodes=2097152
+spacing_bytes=8
+timed_samples=1000000
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/tmp/ece592_phase2_crux_8ctr_larger_than_last_cache.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_crux_8ctr_v1 --mode capacity --cpu 4 --nodes 2097152 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 49592 --experiment phase2-8counter-larger_than_last_cache --output /tmp/ece592_phase2_crux_8ctr_larger_than_last_cache.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_crux_8ctr_v1 --smt-siblings-idle not-applicable --environment-variables Phase-II 8-counter cross-generation workload':
+
+    69,687,598,114      cycles                                                                
+     3,899,240,229      instructions                     #    0.06  insn per cycle            
+       839,581,744      cache-references                                                      
+       591,837,066      cache-misses                     #   70.49% of all cache refs         
+     1,823,951,045      L1-dcache-loads                                                       
+       382,883,132      L1-dcache-load-misses            #   20.99% of all L1-dcache accesses 
+       280,005,861      LLC-loads                                                             
+       195,605,491      LLC-load-misses                  #   69.86% of all LL-cache accesses  
+
+      15.281791683 seconds time elapsed
+
+      15.221551000 seconds user
+       0.037998000 seconds sys
+
+
+data_end

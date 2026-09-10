@@ -176,8 +176,13 @@ def gnuplot_quote(text):
 def byte_label(value):
     units = ((1 << 30, "GiB"), (1 << 20, "MiB"), (1 << 10, "KiB"))
     for divisor, suffix in units:
-        if value >= divisor and value % divisor == 0:
-            return "{} {}".format(value // divisor, suffix)
+        if value >= divisor:
+            scaled = value / divisor
+            if value % divisor == 0:
+                return "{} {}".format(value // divisor, suffix)
+            if scaled >= 10:
+                return "{:.1f} {}".format(scaled, suffix)
+            return "{:.2f} {}".format(scaled, suffix)
     return "{} B".format(value)
 
 
@@ -189,7 +194,7 @@ def tick_values(minimum, maximum):
         value = 1 << power
         if minimum <= value <= maximum and (power - minimum_power) % 2 == 0:
             ticks.append(value)
-    if maximum not in ticks:
+    if maximum not in ticks and (not ticks or maximum / ticks[-1] > 1.05):
         ticks.append(maximum)
     return sorted(set(ticks))
 
@@ -201,7 +206,10 @@ def write_plot_data(path, aggregated, maximum_repeat_count):
         headings.extend("repeat_{}_median".format(repeat)
                         for repeat in range(maximum_repeat_count))
         stream.write("\t".join(headings) + "\n")
+        previous_span = None
         for point in aggregated:
+            if previous_span is not None and point["span"] > previous_span * 2:
+                stream.write("\n")
             values = [
                 point["span"], point["aggregate_median"],
                 point["iqr_envelope_low"], point["iqr_envelope_high"],
@@ -213,10 +221,11 @@ def write_plot_data(path, aggregated, maximum_repeat_count):
                 "{:.17g}".format(value)
                 if isinstance(value, float) else str(value)
                 for value in values) + "\n")
+            previous_span = point["span"]
 
 
 def write_gnuplot_script(path, data_path, temporary_pdf, metadata,
-                         aggregated, trial_count, maximum_repeat_count):
+                         aggregated, trial_count, maximum_repeat_count, style):
     ticks = tick_values(aggregated[0]["span"], aggregated[-1]["span"])
     tick_text = ", ".join(
         "{} {}".format(gnuplot_quote(byte_label(value)), value)
@@ -226,15 +235,17 @@ def write_gnuplot_script(path, data_path, temporary_pdf, metadata,
     note = ("{} trials; >=1,000,000 samples/point; timer overhead not "
             "subtracted".format(trial_count))
 
-    plot_parts = [
-        "{} using 1:3:4 with filledcurves lc rgb '#c6dbef' "
-        "title 'Envelope of per-repeat IQRs'".format(gnuplot_quote(data_path)),
-    ]
-    for repeat in range(maximum_repeat_count):
+    plot_parts = []
+    if style == "band":
         plot_parts.append(
-            "{} using 1:{} with linespoints lw 1 pt 6 ps 0.35 dt 2 "
-            "title 'Repeat {} median'".format(
-                gnuplot_quote(data_path), 5 + repeat, repeat))
+            "{} using 1:3:4 with filledcurves lc rgb '#c6dbef' "
+            "title 'Envelope of per-repeat IQRs'".format(
+                gnuplot_quote(data_path)))
+        for repeat in range(maximum_repeat_count):
+            plot_parts.append(
+                "{} using 1:{} with linespoints lw 1 pt 6 ps 0.35 dt 2 "
+                "title 'Repeat {} median'".format(
+                    gnuplot_quote(data_path), 5 + repeat, repeat))
     plot_parts.append(
         "{} using 1:2 with linespoints lw 2.5 pt 7 ps 0.5 "
         "lc rgb '#08519c' title 'Median of trial medians'".format(
@@ -246,16 +257,22 @@ def write_gnuplot_script(path, data_path, temporary_pdf, metadata,
         stream.write("set output {}\n".format(gnuplot_quote(temporary_pdf)))
         stream.write("set datafile separator '\\t'\n")
         stream.write("set datafile missing ''\n")
+        stream.write("unset grid\n")
         stream.write("set logscale x 2\n")
         stream.write("set xrange [{}:{}]\n".format(
             aggregated[0]["span"], aggregated[-1]["span"]))
         stream.write("set yrange [0:*]\n")
         stream.write("set xtics rotate by -35 ({})\n".format(tick_text))
-        stream.write("set key top left opaque\n")
+        if style == "band":
+            stream.write("set key top left opaque\n")
+        else:
+            stream.write("set key outside right center opaque\n")
         stream.write("set title {}\n".format(gnuplot_quote(title)))
         stream.write("set xlabel 'Actual pointer-chase footprint (bytes, log_2 scale)'\n")
         stream.write(
-            "set ylabel 'Median latency (generic-timer ticks/dependent access, unadjusted)'\n")
+            "set ylabel {}\n".format(gnuplot_quote(
+                "Median latency ({}/dependent access, unadjusted)".format(
+                    metadata["source_raw_timer_unit"]))))
         stream.write("set label 1 {} at graph 0.99,0.03 right front "
                      "font ',8'\n".format(gnuplot_quote(note)))
         stream.write("plot " + ", \\\n+    ".join(plot_parts) + "\n")
@@ -267,13 +284,14 @@ def processing_command():
 
 def write_provenance(path, input_path, input_digest, output_path,
                      metadata, trial_count, point_count, maximum_repeat_count,
-                     gnuplot_version):
+                     gnuplot_version, style):
     created = False
     try:
         with open(path, "x", encoding="utf-8", newline="\n") as stream:
             created = True
             stream.write("ece592_plot_provenance_version=1\n")
             stream.write("plot_type=capacity-latency-curve\n")
+            stream.write("plot_style={}\n".format(style))
             stream.write("source_processed_file={}\n".format(
                 os.path.abspath(input_path)))
             stream.write("source_processed_sha256={}\n".format(input_digest))
@@ -295,7 +313,10 @@ def write_provenance(path, input_path, input_digest, output_path,
             stream.write("x_field={}\n".format(X_FIELD))
             stream.write("y_field={}\n".format(MEDIAN_FIELD))
             stream.write("central_curve=median of per-repeat medians\n")
-            stream.write("band=minimum Q1 to maximum Q3 across repeats\n")
+            if style == "band":
+                stream.write("band=minimum Q1 to maximum Q3 across repeats\n")
+            else:
+                stream.write("band=none; median curve only\n")
             stream.write("timer_overhead_subtracted=false\n")
             stream.write("cache_boundaries_annotated=false\n")
             stream.write("plotting_script={}\n".format(
@@ -331,7 +352,8 @@ def create_plot(arguments, metadata, trial_count, aggregated,
         temporary_pdf = os.path.join(temporary, "capacity.pdf")
         write_plot_data(data_path, aggregated, maximum_repeat_count)
         write_gnuplot_script(script_path, data_path, temporary_pdf, metadata,
-                             aggregated, trial_count, maximum_repeat_count)
+                             aggregated, trial_count, maximum_repeat_count,
+                             arguments.style)
         completed = subprocess.run(
             ["gnuplot", script_path], check=False, text=True,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -350,7 +372,7 @@ def create_plot(arguments, metadata, trial_count, aggregated,
             write_provenance(
                 provenance_path, arguments.input, input_digest, output_path,
                 metadata, trial_count, len(aggregated), maximum_repeat_count,
-                version)
+                version, arguments.style)
         except Exception:
             if output_created:
                 try:
@@ -365,6 +387,10 @@ def parse_arguments():
         description="Plot an unannotated Phase-I randomized capacity curve.")
     parser.add_argument("--input", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument(
+        "--style", choices=("band", "median"), default="band",
+        help="band shows repeat medians and IQR envelope; median shows only "
+             "the aggregate median curve for a cleaner report plot")
     arguments = parser.parse_args()
 
     if not os.path.isfile(arguments.input):

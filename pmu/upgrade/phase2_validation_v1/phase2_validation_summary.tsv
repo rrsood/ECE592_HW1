@@ -1,0 +1,10 @@
+machine=upgrade
+phase2_validation_summary_version=1
+system_cache_info=pmu/upgrade/phase2_validation_v1/system_cache_sysfs.tsv
+perf_small_resident=pmu/upgrade/phase2_validation_v1/perf_stat_small_resident_v1.txt
+perf_large_nonresident=pmu/upgrade/phase2_validation_v1/perf_stat_large_nonresident_v1.txt
+data_begin
+case	working_set_bytes	l1_dcache_loads	l1_dcache_load_misses	l1_miss_rate_percent	llc_loads	llc_load_misses	llc_miss_rate_percent	time_seconds	interpretation
+small_resident	16384	1649155097	2137040	0.13	154644	18647	12.06	0.746653603	fits reported 32K L1D; validates low-latency Phase-I region
+large_nonresident	16777216	1825995441	382596357	20.95	268492293	117880165	43.90	10.889676392	exceeds reported 12288K L3; validates beyond-LLC/high-latency Phase-I region
+data_end

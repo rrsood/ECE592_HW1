@@ -1,0 +1,8 @@
+machine=thunderbird
+phase=phase2
+timestamp_utc=2026-09-08T23:05:50Z
+git_commit=0664d5ad6477ae99e4c9c92d51f6ca8fa80e91e0
+phase1_freeze_reference=git_commit_above
+hostname=thunderbird.ece.ncsu.edu
+kernel=Linux thunderbird.ece.ncsu.edu 5.14.0-611.54.1.el9_7.aarch64 #1 SMP PREEMPT_DYNAMIC Sat May 2 14:05:02 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
+isa=aarch64

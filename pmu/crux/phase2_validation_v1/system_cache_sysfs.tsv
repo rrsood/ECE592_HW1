@@ -1,0 +1,5 @@
+index	level	type	size	line_size_bytes	ways	sets	shared_cpu_list
+index0	1	Data	32K	64	8	64	4
+index1	1	Instruction	32K	64	8	64	4
+index2	2	Unified	256K	64	4	1024	4
+index3	3	Unified	12288K	64	12	16384	0-7

@@ -1,0 +1,26 @@
+experiment=phase2_associativity_l2_before
+command=perf stat conflict associativity validation
+data_begin
+output_filename=/tmp/ece592_phase2_artemisia_assoc_l2_before.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_artemisia_pmu_v1 --mode conflict --cpu 4 --lines 4 --conflict-stride 65536 --batch 256 --warmup 1000 --samples 1000000 --seed 100132 --experiment phase2-associativity-l2_before --output /tmp/ece592_phase2_artemisia_assoc_l2_before.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_artemisia_pmu_v1 --smt-siblings-idle no --environment-variables Phase-II PMU associativity validation; SMT sibling 60 not reserved':
+
+     2,156,962,697      cycles                                                                
+     3,551,160,605      instructions                     #    1.65  insn per cycle            
+         1,337,261      cache-references                                                      
+           832,756      cache-misses                     #   62.27% of all cache refs         
+     1,653,000,187      L1-dcache-loads                                                       
+           662,825      L1-dcache-load-misses            #    0.04% of all L1-dcache accesses 
+           466,190      LLC-loads                                                             
+           302,802      LLC-load-misses                  #   64.95% of all LL-cache accesses  
+
+       3.835970185 seconds time elapsed
+
+       1.060172000 seconds user
+       0.024003000 seconds sys
+
+
+data_end

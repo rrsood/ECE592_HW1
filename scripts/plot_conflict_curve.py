@@ -180,7 +180,7 @@ def write_plot_data(path, aggregated):
 
 
 def write_gnuplot_script(path, data_path, temporary_pdf, metadata,
-                         aggregated, trial_count):
+                         aggregated, trial_count, style):
     strides = sorted({point["stride"] for point in aggregated})
     title = "{} Phase I randomized conflict-set sweep".format(
         metadata["source_raw_hostname"])
@@ -195,10 +195,11 @@ def write_gnuplot_script(path, data_path, temporary_pdf, metadata,
         color = colors[index % len(colors)]
         point_type = point_types[index % len(point_types)]
         label = "stride {} B".format(stride)
-        plot_parts.append(
-            "{} using ($1=={}?$2:1/0):4:5 with filledcurves "
-            "lc rgb '{}' notitle".format(
-                gnuplot_quote(data_path), stride, color))
+        if style == "band":
+            plot_parts.append(
+                "{} using ($1=={}?$2:1/0):4:5 with filledcurves "
+                "lc rgb '{}' notitle".format(
+                    gnuplot_quote(data_path), stride, color))
         plot_parts.append(
             "{} using ($1=={}?$2:1/0):3 with linespoints lw 2 pt {} "
             "ps 0.65 lc rgb '{}' title {}".format(
@@ -213,15 +214,19 @@ def write_gnuplot_script(path, data_path, temporary_pdf, metadata,
                      "size 7.2in,4.6in\n")
         stream.write("set output {}\n".format(gnuplot_quote(temporary_pdf)))
         stream.write("set datafile separator '\\t'\n")
+        stream.write("unset grid\n")
         stream.write("set yrange [0:*]\n")
         stream.write("set xrange [{}:{}]\n".format(
             minimum_line_count, maximum_line_count))
-        stream.write("set xtics 1\n")
-        stream.write("set key top left opaque\n")
+        stream.write("set xtics 2\n")
+        stream.write("set mxtics 2\n")
+        stream.write("set key outside right center opaque\n")
         stream.write("set title {}\n".format(gnuplot_quote(title)))
         stream.write("set xlabel 'Simultaneously live candidate-conflict lines'\n")
         stream.write(
-            "set ylabel 'Median latency (timer ticks/dependent access, unadjusted)'\n")
+            "set ylabel {}\n".format(gnuplot_quote(
+                "Median latency ({}/dependent access, unadjusted)".format(
+                    metadata["source_raw_timer_unit"]))))
         stream.write("set label 1 {} at graph 0.99,0.03 right front "
                      "font ',8'\n".format(gnuplot_quote(note)))
         stream.write("plot " + ", \\\n+    ".join(plot_parts) + "\n")
@@ -233,13 +238,14 @@ def processing_command():
 
 def write_provenance(path, input_path, input_digest, output_path,
                      metadata, trial_count, point_count, stride_count,
-                     maximum_repeat_count, gnuplot_version):
+                     maximum_repeat_count, gnuplot_version, style):
     created = False
     try:
         with open(path, "x", encoding="utf-8", newline="\n") as stream:
             created = True
             stream.write("ece592_plot_provenance_version=1\n")
             stream.write("plot_type=associativity-conflict-curve\n")
+            stream.write("plot_style={}\n".format(style))
             stream.write("source_processed_file={}\n".format(
                 os.path.abspath(input_path)))
             stream.write("source_processed_sha256={}\n".format(input_digest))
@@ -265,7 +271,10 @@ def write_provenance(path, input_path, input_digest, output_path,
             stream.write("curve_group=conflict_stride_bytes\n")
             stream.write("y_field={}\n".format(MEDIAN_FIELD))
             stream.write("central_curve=median of per-repeat medians\n")
-            stream.write("band=minimum Q1 to maximum Q3 across repeats\n")
+            if style == "band":
+                stream.write("band=minimum Q1 to maximum Q3 across repeats\n")
+            else:
+                stream.write("band=none; median curves only\n")
             stream.write("timer_overhead_subtracted=false\n")
             stream.write("associativity_boundaries_annotated=false\n")
             stream.write("plotting_script={}\n".format(
@@ -302,7 +311,7 @@ def create_plot(arguments, metadata, trial_count, aggregated,
         temporary_pdf = os.path.join(temporary, "conflict.pdf")
         write_plot_data(data_path, aggregated)
         write_gnuplot_script(script_path, data_path, temporary_pdf, metadata,
-                             aggregated, trial_count)
+                             aggregated, trial_count, arguments.style)
         completed = subprocess.run(
             ["gnuplot", script_path], check=False, text=True,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -321,7 +330,7 @@ def create_plot(arguments, metadata, trial_count, aggregated,
             write_provenance(
                 provenance_path, arguments.input, input_digest, output_path,
                 metadata, trial_count, len(aggregated), len(strides),
-                maximum_repeat_count, version)
+                maximum_repeat_count, version, arguments.style)
         except Exception:
             if output_created:
                 try:
@@ -336,6 +345,10 @@ def parse_arguments():
         description="Plot an unannotated Phase-I associativity/conflict curve.")
     parser.add_argument("--input", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument(
+        "--style", choices=("band", "median"), default="band",
+        help="band shows the repeat IQR envelope; median shows only median "
+             "curves for a cleaner report plot")
     arguments = parser.parse_args()
 
     if not os.path.isfile(arguments.input):

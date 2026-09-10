@@ -1,0 +1,8 @@
+machine=crux
+phase=phase2
+timestamp_utc=2026-09-09T00:16:14Z
+git_commit=0664d5ad6477ae99e4c9c92d51f6ca8fa80e91e0
+phase1_freeze_reference=git_commit_above
+hostname=crux.ece.ncsu.edu
+kernel=Linux crux.ece.ncsu.edu 6.8.0-88-generic #89-Ubuntu SMP PREEMPT_DYNAMIC Sat Oct 11 01:02:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+isa=x86_64

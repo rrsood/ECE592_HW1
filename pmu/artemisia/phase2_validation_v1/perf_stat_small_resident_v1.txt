@@ -1,0 +1,26 @@
+experiment=phase2_pmu_small_resident
+command=perf stat small randomized pointer chase
+data_begin
+output_filename=/tmp/ece592_phase2_artemisia_pmu_small_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_artemisia_pmu_v1 --mode capacity --cpu 4 --nodes 4096 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 23592 --experiment phase2-pmu-small-resident --output /tmp/ece592_phase2_artemisia_pmu_small_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_artemisia_pmu_v1 --smt-siblings-idle no --environment-variables Phase-II PMU validation run; SMT sibling 60 not reserved':
+
+     2,068,018,134      cycles                                                                
+     3,528,452,491      instructions                     #    1.71  insn per cycle            
+           982,913      cache-references                                                      
+           864,067      cache-misses                     #   87.91% of all cache refs         
+     1,646,833,523      L1-dcache-loads                                                       
+           651,850      L1-dcache-load-misses            #    0.04% of all L1-dcache accesses 
+           308,400      LLC-loads                                                             
+           251,063      LLC-load-misses                  #   81.41% of all LL-cache accesses  
+
+       1.042443678 seconds time elapsed
+
+       1.018128000 seconds user
+       0.019021000 seconds sys
+
+
+data_end

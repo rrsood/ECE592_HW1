@@ -1,0 +1,26 @@
+experiment=phase2_pmu_large_nonresident
+command=perf stat large randomized pointer chase
+data_begin
+output_filename=/tmp/ece592_phase2_crux_pmu_large_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_crux_pmu_v1 --mode capacity --cpu 4 --nodes 2097152 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 26592 --experiment phase2-pmu-large-nonresident --output /tmp/ece592_phase2_crux_pmu_large_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_crux_pmu_v1 --smt-siblings-idle not-applicable --environment-variables Phase-II PMU validation run':
+
+    63,275,510,507      cycles                                                                
+     3,888,230,186      instructions                     #    0.06  insn per cycle            
+       817,639,579      cache-references                                                      
+       509,094,544      cache-misses                     #   62.26% of all cache refs         
+     1,821,201,757      L1-dcache-loads                                                       
+       382,606,849      L1-dcache-load-misses            #   21.01% of all L1-dcache accesses 
+       271,445,676      LLC-loads                                                             
+       169,868,299      LLC-load-misses                  #   62.58% of all LL-cache accesses  
+
+      13.899068632 seconds time elapsed
+
+      13.851331000 seconds user
+       0.025996000 seconds sys
+
+
+data_end

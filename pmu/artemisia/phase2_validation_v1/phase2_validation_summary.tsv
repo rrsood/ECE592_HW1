@@ -1,0 +1,10 @@
+machine=artemisia
+phase2_validation_summary_version=1
+system_cache_info=pmu/artemisia/phase2_validation_v1/system_cache_sysfs.tsv
+perf_small_resident=pmu/artemisia/phase2_validation_v1/perf_stat_small_resident_v1.txt
+perf_large_nonresident=pmu/artemisia/phase2_validation_v1/perf_stat_large_nonresident_v1.txt
+data_begin
+case	working_set_bytes	l1_dcache_loads	l1_dcache_load_misses	l1_miss_rate_percent	llc_loads	llc_load_misses	llc_miss_rate_percent	time_seconds	interpretation
+small_resident	32768	1646833523	651850	0.04	308400	251063	81.41	1.042443678	fits reported 48K L1D; validates low-latency Phase-I region
+large_nonresident	67108864	2291630279	271182588	11.83	259713559	202162497	77.84	28.139572631	exceeds reported 53760K L3; validates beyond-LLC/high-latency Phase-I region
+data_end

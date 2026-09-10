@@ -19,6 +19,8 @@ MEDIAN_FIELD = "elapsed_raw_ticks_per_access_unadjusted_median"
 Q3_FIELD = "elapsed_raw_ticks_per_access_unadjusted_q3"
 MAX_FIELD = "elapsed_raw_ticks_per_access_unadjusted_maximum"
 OUTLIER_FIELD = "elapsed_raw_ticks_per_access_unadjusted_outlier_count"
+P05_FIELD = "elapsed_raw_ticks_per_access_unadjusted_p05"
+P95_FIELD = "elapsed_raw_ticks_per_access_unadjusted_p95"
 
 
 def sha256_file(path):
@@ -60,9 +62,11 @@ def read_selection(path):
             "trial",
             "timed_sample_count",
             MIN_FIELD,
+            P05_FIELD,
             Q1_FIELD,
             MEDIAN_FIELD,
             Q3_FIELD,
+            P95_FIELD,
             MAX_FIELD,
             OUTLIER_FIELD,
         }
@@ -90,9 +94,11 @@ def read_selection(path):
                     "trial": int(record["trial"], 10),
                     "sample_count": int(record["timed_sample_count"], 10),
                     "minimum": float(record[MIN_FIELD]),
+                    "p05": float(record[P05_FIELD]),
                     "q1": float(record[Q1_FIELD]),
                     "median": float(record[MEDIAN_FIELD]),
                     "q3": float(record[Q3_FIELD]),
+                    "p95": float(record[P95_FIELD]),
                     "maximum": float(record[MAX_FIELD]),
                     "outlier_count": int(record[OUTLIER_FIELD], 10),
                 }
@@ -103,8 +109,8 @@ def read_selection(path):
                     row["outlier_count"] < 0):
                 raise ValueError("invalid selected latency row")
             ordered = (
-                row["minimum"], row["q1"], row["median"], row["q3"],
-                row["maximum"])
+                row["minimum"], row["p05"], row["q1"], row["median"],
+                row["q3"], row["p95"], row["maximum"])
             if (not all(math.isfinite(value) for value in ordered) or
                     list(ordered) != sorted(ordered)):
                 raise ValueError("invalid five-number summary")
@@ -140,11 +146,6 @@ def read_selection(path):
     if len(rows) != int(metadata["selected_point_count"], 10):
         raise ValueError("selected_point_count does not match row count")
 
-    rows.sort(key=lambda row: (
-        row["evidence_rank"],
-        point_role_order(row["point_role"]),
-        row["trial"],
-        row["actual_span_bytes"]))
     return metadata, rows
 
 
@@ -186,60 +187,107 @@ def gnuplot_quote(text):
     return "'" + text.replace("\\", "\\\\").replace("'", "\\'") + "'"
 
 
-def write_plot_data(path, rows):
+def order_rows(rows, order):
+    if order == "span":
+        return sorted(rows, key=lambda row: (
+            row["actual_span_bytes"],
+            row["evidence_rank"],
+            point_role_order(row["point_role"]),
+            row["trial"]))
+    return sorted(rows, key=lambda row: (
+        row["evidence_rank"],
+        point_role_order(row["point_role"]),
+        row["trial"],
+        row["actual_span_bytes"]))
+
+
+def filter_rows(rows, include_ranks):
+    if not include_ranks:
+        return rows
+    allowed = set()
+    for item in include_ranks.split(","):
+        item = item.strip()
+        if not item:
+            raise ValueError("empty evidence rank in --include-ranks")
+        allowed.add(int(item, 10))
+    filtered = [row for row in rows if row["evidence_rank"] in allowed]
+    if not filtered:
+        raise ValueError("--include-ranks selected no rows")
+    return filtered
+
+
+def write_plot_data(path, rows, whiskers):
     with open(path, "w", encoding="utf-8", newline="") as stream:
-        stream.write("# x label minimum q1 median q3 maximum outlier_count\n")
+        stream.write("# x label whisker_low q1 median q3 whisker_high outlier_count span_bytes\n")
         for index, row in enumerate(rows, start=1):
-            label = "r{} {} {}".format(
-                row["evidence_rank"],
-                short_role(row["point_role"]),
-                byte_label(row["actual_span_bytes"]))
+            label = "{}\\n{}".format(
+                byte_label(row["actual_span_bytes"]),
+                short_role(row["point_role"]))
+            whisker_low = row["minimum"]
+            whisker_high = row["maximum"]
+            if whiskers == "p05-p95":
+                whisker_low = row["p05"]
+                whisker_high = row["p95"]
             stream.write("{}\t{}\t{:.17g}\t{:.17g}\t{:.17g}\t{:.17g}\t"
-                         "{:.17g}\t{}\n".format(
+                         "{:.17g}\t{}\t{}\n".format(
                              index,
                              label,
-                             row["minimum"],
+                             whisker_low,
                              row["q1"],
                              row["median"],
                              row["q3"],
-                             row["maximum"],
-                             row["outlier_count"]))
+                             whisker_high,
+                             row["outlier_count"],
+                             row["actual_span_bytes"]))
 
 
-def write_gnuplot_script(path, data_path, output_path, metadata, rows):
+def write_gnuplot_script(path, data_path, output_path, metadata, rows,
+                         whiskers, yscale):
     maximum_y = max(row["q3"] for row in rows)
     if maximum_y <= 0.0:
         maximum_y = max(row["maximum"] for row in rows)
     y_limit = maximum_y * 1.20
     if y_limit <= 0.0:
         y_limit = 1.0
+    minimum_y = min(row["p05"] if whiskers == "p05-p95" else row["minimum"]
+                    for row in rows)
+    if minimum_y <= 0.0:
+        minimum_y = min(row["q1"] for row in rows if row["q1"] > 0.0)
+    y_floor = minimum_y * 0.75
 
     title = "{} latency representatives ({}, {})".format(
         metadata["source_raw_hostname"],
         metadata["source_raw_isa"],
         metadata["source_raw_timer_unit"])
-    note = ("Box=Q1..Q3, horizontal mark=median, whiskers=min..max; "
+    note = ("Box=Q1..Q3, horizontal mark=median, whiskers={}; "
             "selected below/near/above measured timing boundaries; "
-            "no cache labels assigned")
+            "no cache labels assigned").format(whiskers)
+    legend_label = "Q1-Q3 with {} whiskers".format(whiskers)
 
     with open(path, "w", encoding="utf-8") as stream:
         stream.write("set terminal pdfcairo enhanced color size 12in,6in\n")
         stream.write("set output {}\n".format(gnuplot_quote(output_path)))
         stream.write("set datafile separator '\\t'\n")
+        stream.write("unset grid\n")
         stream.write("set key outside top center horizontal\n")
         stream.write("set title {}\n".format(gnuplot_quote(title)))
         stream.write("set xlabel 'Selected measured point'\n")
         stream.write("set ylabel {}\n".format(gnuplot_quote(
             "elapsed raw {} per dependent access".format(
                 metadata["source_raw_timer_unit"]))))
-        stream.write("set yrange [0:{}]\n".format(y_limit))
+        if yscale == "log2":
+            stream.write("set logscale y 2\n")
+            stream.write("set yrange [{}:{}]\n".format(y_floor, y_limit))
+        else:
+            stream.write("set yrange [0:{}]\n".format(y_limit))
         stream.write("set xrange [0:{}]\n".format(len(rows) + 1))
-        stream.write("set xtics rotate by -60 right font ',7'\n")
+        stream.write("set xtics rotate by -55 right font ',7'\n")
         stream.write("set xtics (")
         xtics = []
         for index, row in enumerate(rows, start=1):
-            label = "r{}\\n{}".format(
-                row["evidence_rank"], short_role(row["point_role"]))
+            label = "{}\\n{}".format(
+                byte_label(row["actual_span_bytes"]),
+                short_role(row["point_role"]))
             xtics.append("{} {}".format(gnuplot_quote(label), index))
         stream.write(", ".join(xtics))
         stream.write(")\n")
@@ -248,15 +296,17 @@ def write_gnuplot_script(path, data_path, output_path, metadata, rows):
         stream.write("set label 1 {} at graph 0.01,0.96 left font ',8'\n".
                      format(gnuplot_quote(note)))
         stream.write("plot {} using 1:4:3:7:6 with candlesticks "
-                     "lc rgb '#225ea8' title 'Q1-Q3 with min/max whiskers' "
-                     "whiskerbars, \\\n".format(gnuplot_quote(data_path)))
+                     "lc rgb '#225ea8' title {} "
+                     "whiskerbars, \\\n".format(
+                         gnuplot_quote(data_path),
+                         gnuplot_quote(legend_label)))
         stream.write("     {} using 1:5:5:5:5 with candlesticks "
                      "lc rgb '#000000' notitle\n".format(
                          gnuplot_quote(data_path)))
 
 
 def write_provenance(path, input_path, output_path, metadata, rows,
-                     gnuplot_version):
+                     gnuplot_version, whiskers, order, yscale):
     temporary_path = path + ".tmp"
     with open(temporary_path, "w", encoding="utf-8", newline="") as stream:
         stream.write("ece592_latency_boxplot_provenance_version=1\n")
@@ -277,6 +327,9 @@ def write_provenance(path, input_path, output_path, metadata, rows,
         stream.write("source_raw_timed_sample_count={}\n".format(
             metadata["source_raw_timed_sample_count"]))
         stream.write("boxplot_source=processed_five_number_summaries\n")
+        stream.write("whiskers={}\n".format(whiskers))
+        stream.write("plot_order={}\n".format(order))
+        stream.write("y_scale={}\n".format(yscale))
         stream.write("boxplot_count={}\n".format(len(rows)))
         stream.write("cache_boundary_labels_assigned=false\n")
         stream.write("background_grid_lines=false\n")
@@ -291,6 +344,18 @@ def parse_arguments():
             "without using cache specifications or labels."))
     parser.add_argument("--input", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument(
+        "--whiskers", choices=("min-max", "p05-p95"), default="min-max",
+        help="select boxplot whisker endpoints")
+    parser.add_argument(
+        "--order", choices=("evidence-rank", "span"), default="evidence-rank",
+        help="order boxes by evidence rank or by working-set size")
+    parser.add_argument(
+        "--include-ranks",
+        help="optional comma-separated evidence ranks to plot")
+    parser.add_argument(
+        "--yscale", choices=("linear", "log2"), default="linear",
+        help="use a linear y-axis or log2 y-axis")
     arguments = parser.parse_args()
 
     if not os.path.isfile(arguments.input):
@@ -307,15 +372,18 @@ def main():
     try:
         arguments = parse_arguments()
         metadata, rows = read_selection(arguments.input)
+        rows = filter_rows(rows, arguments.include_ranks)
+        rows = order_rows(rows, arguments.order)
         output_parent = os.path.dirname(os.path.abspath(arguments.output))
         with tempfile.TemporaryDirectory(prefix="ece592_latency_plot_",
                                          dir=output_parent) as temp:
             data_path = os.path.join(temp, "latency_boxplot.tsv")
             script_path = os.path.join(temp, "latency_boxplot.gnuplot")
             temporary_pdf = os.path.join(temp, "latency_boxplot.pdf")
-            write_plot_data(data_path, rows)
+            write_plot_data(data_path, rows, arguments.whiskers)
             write_gnuplot_script(script_path, data_path, temporary_pdf,
-                                 metadata, rows)
+                                 metadata, rows, arguments.whiskers,
+                                 arguments.yscale)
             result = subprocess.run(
                 ["gnuplot", script_path], check=False, text=True,
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -332,7 +400,8 @@ def main():
             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         write_provenance(arguments.output + ".provenance.tsv",
                          arguments.input, arguments.output, metadata, rows,
-                         version_result.stdout.strip())
+                         version_result.stdout.strip(), arguments.whiskers,
+                         arguments.order, arguments.yscale)
 
         print("input_filename={}".format(arguments.input))
         print("output_filename={}".format(arguments.output))

@@ -1,0 +1,8 @@
+machine=upgrade
+phase=phase2
+timestamp_utc=2026-09-09T00:20:45Z
+git_commit=0664d5ad6477ae99e4c9c92d51f6ca8fa80e91e0
+phase1_freeze_reference=git_commit_above
+hostname=upgrade.ece.ncsu.edu
+kernel=Linux upgrade.ece.ncsu.edu 6.8.0-117-generic #117~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu May  7 22:17:46 UTC  x86_64 x86_64 x86_64 GNU/Linux
+isa=x86_64

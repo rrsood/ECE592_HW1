@@ -1,0 +1,8 @@
+source=lscpu --caches
+data_begin
+NAME ONE-SIZE ALL-SIZE WAYS TYPE        LEVEL  SETS PHY-LINE COHERENCY-SIZE
+L1d       48K     2.6M   12 Data            1    64        1             64
+L1i       32K     1.8M    8 Instruction     1    64        1             64
+L2         2M     112M   16 Unified         2  2048        1             64
+L3      52.5M     105M   15 Unified         3 57344        1             64
+data_end

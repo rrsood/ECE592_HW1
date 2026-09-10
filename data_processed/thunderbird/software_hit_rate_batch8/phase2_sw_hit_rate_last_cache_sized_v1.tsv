@@ -1,0 +1,22 @@
+ece592_software_hit_rate_estimate_version=1
+metric=timing_derived_cache_hit_rate
+pmu_counters_used=false
+estimator_script=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/software_hit_rate/estimate_hit_rate.py
+hit_calibration_file=/home/djariwa/ece592-raw-archive-2026-09-09/thunderbird/software_hit_rate/phase2_sw_hit_rate_batch8_v1/l1_resident.tsv
+miss_calibration_file=/home/djariwa/ece592-raw-archive-2026-09-09/thunderbird/software_hit_rate/phase2_sw_hit_rate_batch8_v1/larger_than_last_cache.tsv
+target_file=/home/djariwa/ece592-raw-archive-2026-09-09/thunderbird/software_hit_rate/phase2_sw_hit_rate_batch8_v1/last_cache_sized.tsv
+timer_unit=generic-timer ticks
+dependent_accesses_per_sample=8
+threshold_rule=midpoint_between_hit_p95_and_miss_p05
+threshold_ticks_per_access=0.5625
+classification_rule=sample_is_hit_like_if_ticks_per_access_le_threshold
+hit_calibration_median_ticks_per_access=0.25
+miss_calibration_median_ticks_per_access=1.125
+target_median_ticks_per_access=0.375
+hit_calibration_hit_like_fraction=0.99995599999999996
+miss_calibration_false_hit_like_fraction=1.9999999999999999e-06
+balanced_calibration_accuracy=0.999977
+data_begin
+target_sample_count	hit_like_sample_count	estimated_hit_rate	wilson_95_low	wilson_95_high	target_minimum_ticks_per_access	target_p05_ticks_per_access	target_q1_ticks_per_access	target_median_ticks_per_access	target_q3_ticks_per_access	target_p95_ticks_per_access	target_maximum_ticks_per_access
+1000000	886040	0.88604000000000005	0.8854157130786191	0.88666132101924822	0.25	0.25	0.375	0.375	0.5	0.625	103.25
+data_end

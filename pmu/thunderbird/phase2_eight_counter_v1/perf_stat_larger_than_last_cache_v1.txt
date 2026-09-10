@@ -1,0 +1,31 @@
+experiment=phase2_8counter_larger_than_last_cache
+machine=thunderbird
+workload=larger_than_last_cache
+nodes=4194304
+spacing_bytes=8
+timed_samples=1000000
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,l2d_cache_rd,l2d_cache_refill_rd
+data_begin
+output_filename=/tmp/ece592_phase2_thunderbird_8ctr_larger_than_last_cache.tsv
+timed_sample_count=1000000
+timer_unit=generic-timer ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_thunderbird_8ctr_v1 --mode capacity --cpu 4 --nodes 4194304 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 43592 --experiment phase2-8counter-larger_than_last_cache --output /tmp/ece592_phase2_thunderbird_8ctr_larger_than_last_cache.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_thunderbird_8ctr_v1 --smt-siblings-idle not-applicable --environment-variables Phase-II 8-counter cross-generation workload':
+
+    30,548,497,381      cycles:u                                                                (87.46%)
+     4,846,922,143      instructions:u                   #    0.16  insn per cycle              (87.46%)
+     2,676,454,311      cache-references:u                                                      (87.46%)
+       265,366,891      cache-misses:u                   #    9.91% of all cache refs           (87.46%)
+     2,681,008,059      L1-dcache-loads:u                                                       (87.50%)
+       265,631,411      L1-dcache-load-misses:u          #    9.91% of all L1-dcache accesses   (87.56%)
+       266,906,652      l2d_cache_rd:u                                                          (87.56%)
+       258,385,616      l2d_cache_refill_rd:u                                                   (75.00%)
+
+      10.221862119 seconds time elapsed
+
+      10.206668000 seconds user
+       0.000000000 seconds sys
+
+
+data_end

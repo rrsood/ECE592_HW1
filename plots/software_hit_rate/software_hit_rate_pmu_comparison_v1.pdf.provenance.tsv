@@ -1,0 +1,9 @@
+ece592_plot_provenance_version=1
+plot_type=software-hit-rate-pmu-comparison
+output_plot_file=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/plots/software_hit_rate/software_hit_rate_pmu_comparison_v1.pdf
+output_plot_sha256=3810bd6f299ca9c697fb26f12d416927e373e9226d74331530b9e1573c9f4d8e
+plotting_script=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/scripts/process_software_hit_rate_summary.py
+plotting_command=scripts/process_software_hit_rate_summary.py --repo-root . --pmu-summary data_processed/phase2_eight_counter/phase2_eight_counter_summary_v1.tsv --output data_processed/software_hit_rate/software_hit_rate_pmu_comparison_v1.tsv --plot-output plots/software_hit_rate/software_hit_rate_pmu_comparison_v1.pdf
+plotting_working_directory=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering
+python_version=3.9.25
+gnuplot_version=gnuplot 5.4 patchlevel 3

@@ -1,0 +1,24 @@
+experiment=phase2_pmu_large_nonresident
+command=perf stat large randomized pointer chase
+data_begin
+output_filename=/tmp/ece592_phase2_thunderbird_pmu_large_v1.tsv
+timed_sample_count=1000000
+timer_unit=generic-timer ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_thunderbird_pmu_v1 --mode capacity --cpu 4 --nodes 4194304 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 22592 --experiment phase2-pmu-large-nonresident --output /tmp/ece592_phase2_thunderbird_pmu_large_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_thunderbird_pmu_v1 --smt-siblings-idle not-applicable --environment-variables Phase-II PMU validation run':
+
+    54,294,912,982      cycles:u                                                              
+     4,872,432,094      instructions:u                   #    0.09  insn per cycle            
+     2,685,463,876      cache-references:u                                                    
+       265,776,851      cache-misses:u                   #    9.90% of all cache refs         
+     2,685,463,876      L1-dcache-loads:u                                                     
+       265,776,851      L1-dcache-load-misses:u          #    9.90% of all L1-dcache accesses 
+
+      18.181028192 seconds time elapsed
+
+      18.145530000 seconds user
+       0.009997000 seconds sys
+
+
+data_end

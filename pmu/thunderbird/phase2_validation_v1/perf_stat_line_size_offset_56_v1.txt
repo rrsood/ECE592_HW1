@@ -1,0 +1,24 @@
+experiment=phase2_line_size_offset_56
+command=perf stat spatial line-size validation
+data_begin
+output_filename=/tmp/ece592_phase2_thunderbird_line_offset_56.tsv
+timed_sample_count=1000000
+timer_unit=generic-timer ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_thunderbird_pmu_v1 --mode spatial --cpu 4 --regions 257 --region-spacing 4096 --probe-offset 56 --batch 256 --warmup 1000 --samples 1000000 --seed 31648 --experiment phase2-line-size-offset-56 --output /tmp/ece592_phase2_thunderbird_line_offset_56.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_thunderbird_pmu_v1 --smt-siblings-idle not-applicable --environment-variables Phase-II PMU line-size validation':
+
+     7,891,855,223      cycles:u                                                              
+     4,126,437,289      instructions:u                   #    0.52  insn per cycle            
+     2,283,348,467      cache-references:u                                                    
+       128,611,819      cache-misses:u                   #    5.63% of all cache refs         
+     2,283,348,467      L1-dcache-loads:u                                                     
+       128,611,819      L1-dcache-load-misses:u          #    5.63% of all L1-dcache accesses 
+
+       2.681850384 seconds time elapsed
+
+       2.657085000 seconds user
+       0.010026000 seconds sys
+
+
+data_end

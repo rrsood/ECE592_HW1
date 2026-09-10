@@ -1,0 +1,26 @@
+experiment=phase2_line_size_offset_56
+command=perf stat spatial line-size validation
+data_begin
+output_filename=/tmp/ece592_phase2_crux_line_offset_56.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_crux_pmu_v1 --mode spatial --cpu 4 --regions 257 --region-spacing 4096 --probe-offset 56 --batch 256 --warmup 1000 --samples 1000000 --seed 37648 --experiment phase2-line-size-offset-56 --output /tmp/ece592_phase2_crux_line_offset_56.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_crux_pmu_v1 --smt-siblings-idle not-applicable --environment-variables Phase-II PMU line-size validation':
+
+     8,889,527,899      cycles                                                                
+     3,427,474,847      instructions                     #    0.39  insn per cycle            
+       541,041,325      cache-references                                                      
+         2,010,861      cache-misses                     #    0.37% of all cache refs         
+     1,642,060,653      L1-dcache-loads                                                       
+       177,960,245      L1-dcache-load-misses            #   10.84% of all L1-dcache accesses 
+       129,946,012      LLC-loads                                                             
+           119,124      LLC-load-misses                  #    0.09% of all LL-cache accesses  
+
+       1.974999151 seconds time elapsed
+
+       1.926119000 seconds user
+       0.018981000 seconds sys
+
+
+data_end

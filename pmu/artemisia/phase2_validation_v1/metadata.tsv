@@ -1,0 +1,8 @@
+machine=artemisia
+phase=phase2
+timestamp_utc=2026-09-08T23:36:35Z
+git_commit=0664d5ad6477ae99e4c9c92d51f6ca8fa80e91e0
+phase1_freeze_reference=git_commit_above
+hostname=artemisia.ece.ncsu.edu
+kernel=Linux artemisia.ece.ncsu.edu 6.17.8-1.el9.elrepo.x86_64 #1 SMP PREEMPT_DYNAMIC Thu Nov 13 18:02:25 EST 2025 x86_64 x86_64 x86_64 GNU/Linux
+isa=x86_64

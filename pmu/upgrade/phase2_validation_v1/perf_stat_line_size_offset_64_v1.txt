@@ -1,0 +1,26 @@
+experiment=phase2_line_size_offset_64
+command=perf stat spatial line-size validation
+data_begin
+output_filename=/tmp/ece592_phase2_upgrade_line_offset_64.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_upgrade_pmu_v1 --mode spatial --cpu 4 --regions 257 --region-spacing 4096 --probe-offset 64 --batch 256 --warmup 1000 --samples 1000000 --seed 39656 --experiment phase2-line-size-offset-64 --output /tmp/ece592_phase2_upgrade_line_offset_64.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_upgrade_pmu_v1 --smt-siblings-idle no --environment-variables Phase-II PMU line-size validation; SMT sibling 10 not reserved':
+
+    10,337,153,606      cycles                                                                  (49.98%)
+     3,574,925,734      instructions                     #    0.35  insn per cycle              (62.49%)
+       864,300,065      cache-references                                                        (62.52%)
+         1,648,963      cache-misses                     #    0.19% of all cache refs           (62.52%)
+     1,648,021,669      L1-dcache-loads                                                         (62.53%)
+       258,352,941      L1-dcache-load-misses            #   15.68% of all L1-dcache accesses   (62.51%)
+       143,418,150      LLC-loads                                                               (49.97%)
+            29,262      LLC-load-misses                  #    0.02% of all LL-cache accesses    (49.97%)
+
+       2.424535057 seconds time elapsed
+
+       2.373172000 seconds user
+       0.012995000 seconds sys
+
+
+data_end

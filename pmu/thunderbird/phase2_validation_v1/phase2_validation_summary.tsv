@@ -1,0 +1,10 @@
+machine=thunderbird
+phase2_validation_summary_version=1
+system_cache_info=pmu/thunderbird/phase2_validation_v1/system_cache_sysfs.tsv
+perf_small_resident=pmu/thunderbird/phase2_validation_v1/perf_stat_small_resident_v3.txt
+perf_large_nonresident=pmu/thunderbird/phase2_validation_v1/perf_stat_large_nonresident_v1.txt
+data_begin
+case	working_set_bytes	cache_references	cache_misses	miss_rate_percent	time_seconds	interpretation
+small_resident	32768	2283650001	381115	0.02	1.203034725	fits reported 64K L1D; validates low-latency Phase-I region
+large_nonresident	33554432	2685463876	265776851	9.90	18.181028192	exceeds reported 1MiB L2; validates high-latency Phase-I region
+data_end

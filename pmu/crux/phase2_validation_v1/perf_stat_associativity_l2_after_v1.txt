@@ -1,0 +1,26 @@
+experiment=phase2_associativity_l2_after
+command=perf stat conflict associativity validation
+data_begin
+output_filename=/tmp/ece592_phase2_crux_assoc_l2_after.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_crux_pmu_v1 --mode conflict --cpu 4 --lines 5 --conflict-stride 16384 --batch 256 --warmup 1000 --samples 1000000 --seed 54981 --experiment phase2-associativity-l2_after --output /tmp/ece592_phase2_crux_assoc_l2_after.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_crux_pmu_v1 --smt-siblings-idle not-applicable --environment-variables Phase-II PMU associativity validation':
+
+     2,966,204,723      cycles                                                                
+     3,418,406,708      instructions                     #    1.15  insn per cycle            
+         2,484,729      cache-references                                                      
+         1,561,280      cache-misses                     #   62.84% of all cache refs         
+     1,639,810,696      L1-dcache-loads                                                       
+         1,552,849      L1-dcache-load-misses            #    0.09% of all L1-dcache accesses 
+           125,054      LLC-loads                                                             
+            59,085      LLC-load-misses                  #   47.25% of all LL-cache accesses  
+
+       0.677521346 seconds time elapsed
+
+       0.637115000 seconds user
+       0.013980000 seconds sys
+
+
+data_end

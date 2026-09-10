@@ -1,0 +1,15 @@
+source=perf stat cycles,instructions sleep 0.1
+data_begin
+
+ Performance counter stats for 'sleep 0.1':
+
+         1,099,845      cycles                                                                
+         1,005,565      instructions                     #    0.91  insn per cycle            
+
+       0.103199049 seconds time elapsed
+
+       0.001153000 seconds user
+       0.000000000 seconds sys
+
+
+data_end

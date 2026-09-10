@@ -1,0 +1,31 @@
+experiment=phase2_8counter_last_cache_sized
+machine=upgrade
+workload=last_cache_sized
+nodes=1048576
+spacing_bytes=8
+timed_samples=1000000
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/tmp/ece592_phase2_upgrade_8ctr_last_cache_sized.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_upgrade_8ctr_v1 --mode capacity --cpu 4 --nodes 1048576 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 51592 --experiment phase2-8counter-last_cache_sized --output /tmp/ece592_phase2_upgrade_8ctr_last_cache_sized.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_upgrade_8ctr_v1 --smt-siblings-idle no --environment-variables Phase-II 8-counter cross-generation workload; SMT sibling 10 not reserved':
+
+    47,999,756,275      cycles                                                                  (50.00%)
+     3,787,073,369      instructions                     #    0.08  insn per cycle              (62.50%)
+       774,532,792      cache-references                                                        (62.50%)
+       392,044,959      cache-misses                     #   50.62% of all cache refs           (62.50%)
+     1,745,729,492      L1-dcache-loads                                                         (62.50%)
+       310,266,233      L1-dcache-load-misses            #   17.77% of all L1-dcache accesses   (62.50%)
+       252,591,894      LLC-loads                                                               (50.00%)
+       131,416,994      LLC-load-misses                  #   52.03% of all LL-cache accesses    (50.00%)
+
+      10.896908103 seconds time elapsed
+
+      10.814035000 seconds user
+       0.026997000 seconds sys
+
+
+data_end

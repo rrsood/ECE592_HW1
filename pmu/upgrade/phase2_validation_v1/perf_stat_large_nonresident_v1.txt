@@ -1,0 +1,26 @@
+experiment=phase2_pmu_large_nonresident
+command=perf stat large randomized pointer chase
+data_begin
+output_filename=/tmp/ece592_phase2_upgrade_pmu_large_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase2_upgrade_pmu_v1 --mode capacity --cpu 4 --nodes 2097152 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 28592 --experiment phase2-pmu-large-nonresident --output /tmp/ece592_phase2_upgrade_pmu_large_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase2_upgrade_pmu_v1 --smt-siblings-idle no --environment-variables Phase-II PMU validation run; SMT sibling 10 not reserved':
+
+    46,245,024,131      cycles                                                                  (50.01%)
+     3,999,580,085      instructions                     #    0.09  insn per cycle              (62.51%)
+       812,493,621      cache-references                                                        (62.51%)
+       351,900,514      cache-misses                     #   43.31% of all cache refs           (62.51%)
+     1,825,995,441      L1-dcache-loads                                                         (62.50%)
+       382,596,357      L1-dcache-load-misses            #   20.95% of all L1-dcache accesses   (62.49%)
+       268,492,293      LLC-loads                                                               (49.99%)
+       117,880,165      LLC-load-misses                  #   43.90% of all LL-cache accesses    (49.99%)
+
+      10.889676392 seconds time elapsed
+
+      10.791804000 seconds user
+       0.033999000 seconds sys
+
+
+data_end

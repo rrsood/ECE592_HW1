@@ -1,0 +1,9 @@
+ece592_plot_provenance_version=1
+plot_type=phase2-eight-counter-ranked-summary
+output_plot_file=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/plots/phase2_eight_counter/phase2_eight_counter_ranked_summary_v1.pdf
+output_plot_sha256=e29ed379ecc05f124ae5972f05987b3a857346322dff126e6c822041088d08a1
+plotting_script=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/scripts/process_phase2_eight_counter.py
+plotting_command=scripts/process_phase2_eight_counter.py --repo-root . --output data_processed/phase2_eight_counter/phase2_eight_counter_summary_v1.tsv --plot-output plots/phase2_eight_counter/phase2_eight_counter_ranked_summary_v1.pdf
+plotting_working_directory=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering
+python_version=3.9.25
+gnuplot_version=gnuplot 5.4 patchlevel 3
