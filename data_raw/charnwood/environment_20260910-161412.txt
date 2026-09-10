@@ -1,0 +1,50 @@
+# ============================================================
+# Environment record -- ECE 592 HW1 Phase I
+# Generated: 2026-09-10T16:14:16Z (UTC)
+# NOTE: Phase-I-safe commands only; no cache-size fields queried.
+# ============================================================
+
+## hostname
+charnwood.ece.ncsu.edu
+
+## uname -a
+Linux charnwood.ece.ncsu.edu 6.8.0-101-generic #101-Ubuntu SMP PREEMPT_DYNAMIC Mon Feb  9 10:15:05 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+
+## CPU model (/proc/cpuinfo, first match only)
+model name	: Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz
+
+## Topology (lscpu -e=CPU,CORE,SOCKET,NODE -- no cache fields)
+CPU CORE SOCKET NODE
+  0    0      0    0
+  1    1      0    0
+  2    2      0    0
+  3    3      0    0
+  4    0      0    0
+  5    1      0    0
+  6    2      0    0
+  7    3      0    0
+
+## Page size (getconf PAGESIZE)
+4096
+
+## Compiler version
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+
+## Kernel version
+Linux version 6.8.0-101-generic (buildd@lcy02-amd64-051) (x86_64-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #101-Ubuntu SMP PREEMPT_DYNAMIC Mon Feb  9 10:15:05 UTC 2026
+
+## Load average at capture time (interference indicator)
+4.45 3.87 3.63 6/1577 1161526
+
+## Logged-in users (other users may perturb measurements)
+rrsood   pts/0        2026-09-10 11:57 (10.155.35.169)
+dchen27  pts/2        2026-09-08 23:53 (tmux(1015681).%0)
+dchen27  pts/8        2026-09-09 23:47 (tmux(1015681).%1)
+dchen27  pts/9        2026-09-09 23:48 (tmux(1015681).%2)
+
+## NUMA nodes present
+1
+
+## Transparent hugepage setting (affects TLB reach; not a cache field)
+always [madvise] never
+

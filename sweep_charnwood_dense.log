@@ -1,0 +1,86 @@
+nohup: ignoring input
+== Recording environment ==
+Environment recorded to: data_raw/charnwood/environment_20260910-183600.txt
+  pinned CPU=6 core=2 socket=0 numa=0
+  SMT siblings on this core: 2 6 
+== Measuring empty timer bracket ==
+== Sweep grid: 35 points, mode=dense, spacing=64B ==
+== 70 runs queued (each point x2 traversal modes), order shuffled ==
+[  1/ 70] ws=1923008     order=rand ... done (40s)
+[  2/ 70] ws=1763456     order=seq  ... done (18s)
+[  3/ 70] ws=2097088     order=rand ... done (40s)
+[  4/ 70] ws=2493888     order=seq  ... done (18s)
+[  5/ 70] ws=27520       order=rand ... done (14s)
+[  6/ 70] ws=2097088     order=seq  ... done (18s)
+[  7/ 70] ws=3234176     order=seq  ... done (17s)
+[  8/ 70] ws=2286912     order=seq  ... done (18s)
+[  9/ 70] ws=32768       order=rand ... done (14s)
+[ 10/ 70] ws=2965760     order=seq  ... done (18s)
+[ 11/ 70] ws=142912      order=rand ... done (20s)
+[ 12/ 70] ws=32768       order=seq  ... done (14s)
+[ 13/ 70] ws=38912       order=rand ... done (17s)
+[ 14/ 70] ws=35712       order=seq  ... done (15s)
+[ 15/ 70] ws=3526912     order=rand ... done (42s)
+[ 16/ 70] ws=4194304     order=seq  ... done (17s)
+[ 17/ 70] ws=46336       order=rand ... done (18s)
+[ 18/ 70] ws=3526912     order=seq  ... done (17s)
+[ 19/ 70] ws=155840      order=seq  ... done (17s)
+[ 20/ 70] ws=4194304     order=rand ... done (45s)
+[ 21/ 70] ws=169920      order=seq  ... done (17s)
+[ 22/ 70] ws=169920      order=rand ... done (20s)
+[ 23/ 70] ws=1763456     order=rand ... done (40s)
+[ 24/ 70] ws=285824      order=seq  ... done (16s)
+[ 25/ 70] ws=25280       order=rand ... done (15s)
+[ 26/ 70] ws=202112      order=rand ... done (24s)
+[ 27/ 70] ws=131072      order=seq  ... done (16s)
+[ 28/ 70] ws=240320      order=seq  ... done (18s)
+[ 29/ 70] ws=339904      order=rand ... done (27s)
+[ 30/ 70] ws=1617088     order=rand ... done (41s)
+[ 31/ 70] ws=131072      order=rand ... done (20s)
+[ 32/ 70] ws=23168       order=seq  ... done (15s)
+[ 33/ 70] ws=240320      order=rand ... done (22s)
+[ 34/ 70] ws=339904      order=seq  ... done (17s)
+[ 35/ 70] ws=23168       order=rand ... done (15s)
+[ 36/ 70] ws=2493888     order=rand ... done (53s)
+[ 37/ 70] ws=370688      order=seq  ... done (17s)
+[ 38/ 70] ws=2286912     order=rand ... done (50s)
+[ 39/ 70] ws=220416      order=rand ... done (23s)
+[ 40/ 70] ws=155840      order=rand ... done (19s)
+[ 41/ 70] ws=2965760     order=rand ... done (41s)
+[ 42/ 70] ws=38912       order=seq  ... done (16s)
+[ 43/ 70] ws=142912      order=seq  ... done (17s)
+[ 44/ 70] ws=42432       order=rand ... done (17s)
+[ 45/ 70] ws=1482880     order=seq  ... done (18s)
+[ 46/ 70] ws=25280       order=seq  ... done (16s)
+[ 47/ 70] ws=202112      order=seq  ... done (16s)
+[ 48/ 70] ws=220416      order=seq  ... done (17s)
+[ 49/ 70] ws=262080      order=seq  ... done (17s)
+[ 50/ 70] ws=1923008     order=seq  ... done (18s)
+[ 51/ 70] ws=35712       order=rand ... done (16s)
+[ 52/ 70] ws=30016       order=rand ... done (15s)
+[ 53/ 70] ws=311680      order=rand ... done (26s)
+[ 54/ 70] ws=3846144     order=seq  ... done (18s)
+[ 55/ 70] ws=311680      order=seq  ... done (17s)
+[ 56/ 70] ws=262080      order=rand ... done (24s)
+[ 57/ 70] ws=2719616     order=seq  ... done (18s)
+[ 58/ 70] ws=370688      order=rand ... done (29s)
+[ 59/ 70] ws=3234176     order=rand ... done (41s)
+[ 60/ 70] ws=1482880     order=rand ... done (40s)
+[ 61/ 70] ws=185344      order=rand ... done (20s)
+[ 62/ 70] ws=46336       order=seq  ... done (16s)
+[ 63/ 70] ws=1617088     order=seq  ... done (18s)
+[ 64/ 70] ws=2719616     order=rand ... done (45s)
+[ 65/ 70] ws=185344      order=seq  ... done (17s)
+[ 66/ 70] ws=30016       order=seq  ... done (16s)
+[ 67/ 70] ws=27520       order=seq  ... done (15s)
+[ 68/ 70] ws=42432       order=seq  ... done (17s)
+[ 69/ 70] ws=285824      order=rand ... done (24s)
+[ 70/ 70] ws=3846144     order=rand ... done (43s)
+
+== Sweep complete ==
+  Raw data: data_raw/charnwood/capacity/raw
+  Manifest: data_raw/charnwood/capacity/raw/manifest_20260910-183600.json
+
+Next: process and plot with
+  python3 scripts/process_capacity.py data_raw/charnwood/capacity/raw data_raw/charnwood/capacity/processed
+  python3 scripts/plot_capacity.py data_raw/charnwood/capacity/processed plots/

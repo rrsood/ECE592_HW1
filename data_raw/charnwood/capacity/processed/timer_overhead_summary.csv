@@ -1,0 +1,2 @@
+source_raw_file,unit,n_samples,median,mean,sd,q1,q3,p5,p95,min,max,n_outliers
+timer_overhead_charnwood_20260910-161412.csv.gz,TSC_ticks_per_empty_bracket,1000000,80.0,234.286282,49425.92620868385,76.0,82.0,74.0,86.0,68.0,23896616.0,15060

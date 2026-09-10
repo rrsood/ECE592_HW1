@@ -1,0 +1,59 @@
+{
+  "machine": "charnwood",
+  "experiment": "capacity",
+  "sweep_mode": "coarse",
+  "phase": "I_timing_only",
+
+  "pinning": {
+    "logical_cpu": 6,
+    "core": "2",
+    "socket": "0",
+    "numa_node": "0",
+    "smt_siblings": "2 6 ",
+    "method": "taskset -c 6"
+  },
+
+  "parameters": {
+    "node_spacing_bytes": 64,
+    "spacing_is_provisional": "TRUE until the line-size experiment confirms B; re-run with SPACING=B for reported values",
+    "N_per_batch": 1000,
+    "samples_per_point": 1000000,
+    "seed": 20260904,
+    "min_bytes": 4096,
+    "max_bytes": 536870912,
+    "num_points": 35,
+    "total_runs": 70,
+    "traversal_modes": ["randomized_primary", "sequential_control"],
+    "run_order": "shuffled (seed 20260904) to decorrelate drift from working-set size"
+  },
+
+  "timing": {
+    "timer_method": "lfence;rdtscp;lfence / rdtscp;lfence",
+    "units": "TSC ticks (NOT core clock cycles)",
+    "empty_bracket_dataset": "timer_overhead_charnwood_20260910-161412.csv.gz",
+    "overhead_handling": "characterized, NOT subtracted; amortized by batching"
+  },
+
+  "memory": {
+    "locality_method": "first-touch memset after taskset pinning",
+    "buffer_alignment_bytes": 4096,
+    "kernel_type": "read-only dependent pointer chase"
+  },
+
+  "build": {
+    "compiler": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "flags": "-O0 -g -std=c11 -Wall -Wextra -fno-omit-frame-pointer",
+    "build_log": "../../build/build_log.txt",
+    "disassembly": "../../build/critical_loop_chase.asm"
+  },
+
+  "provenance": {
+    "git_commit": "02b09fc852694415911a65c531b882836e920a2a",
+    "git_uncommitted_files": 4,
+    "sweep_start_utc": "2026-09-10T16:14:19Z",
+    "sweep_end_utc": "2026-09-10T17:30:06Z",
+    "environment_record": "../../environment_20260910-161412.txt",
+    "raw_file_pattern": "capacity_ws<BYTES>_sp<SPACING>_<rand|seq>_charnwood_20260910-161412.csv.gz",
+    "excluded_runs": []
+  }
+}
