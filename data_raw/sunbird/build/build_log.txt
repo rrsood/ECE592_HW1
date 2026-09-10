@@ -1,0 +1,48 @@
+# ============================================================
+# Build log -- ECE 592 HW1 Phase I
+# Generated: 2026-09-10T02:13:06Z (UTC)
+# Host: sunbird.ece.ncsu.edu
+# ============================================================
+
+## Compiler version
+gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-14)
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+## Flags
+CFLAGS = -O0 -g -std=c11 -Wall -Wextra -fno-omit-frame-pointer
+
+## Git commit (if the tree is a git repo)
+737948c9efb7fb6342546f6bda0ad5e0d8387d41
+ D main_code/x86_64/x86_64_cache_hierarchy_microbench.c
+ M scripts/build.sh
+ M scripts/plot_capacity.py
+ M scripts/process_capacity.py
+ M scripts/record_environment.sh
+ M scripts/run_capacity_sweep.sh
+?? data_raw/smoketest/
+?? data_raw/sunbird/build/
+?? sweep_sunbird_coarse.log
+
+## Built: cache_bench
+   source:   /home/rrsood/ECE592_HW1/main_code/x86_64/cache_bench.c
+   command:  gcc -O0 -g -std=c11 -Wall -Wextra -fno-omit-frame-pointer -o data_raw/sunbird/build/cache_bench /home/rrsood/ECE592_HW1/main_code/x86_64/cache_bench.c
+   sha256:   5823aae283988225b50c050511e4f00d84f3cf5ba33facf2ca02eccca687da99
+
+## Built: timer_overhead
+   source:   /home/rrsood/ECE592_HW1/main_code/x86_64/timer_overhead.c
+   command:  gcc -O0 -g -std=c11 -Wall -Wextra -fno-omit-frame-pointer -o data_raw/sunbird/build/timer_overhead /home/rrsood/ECE592_HW1/main_code/x86_64/timer_overhead.c
+   sha256:   98312a352c7c84d7b41e61542d94fd5b26d5cf3209352b7cdd158dfe1fc1175d
+
+## Critical loop (chase) -- Intel syntax
+   Extracted to: data_raw/sunbird/build/critical_loop_chase.asm
+   VERIFY MANUALLY (spec checklist):
+     1. the intended load exists (mov reg, QWORD PTR [reg])
+     2. the dependency chain is intact (loaded value feeds next address)
+     3. timer reads bracket the intended region (check main, not chase)
+     4. loop not removed / vectorized / unrolled into another pattern
+     5. no unexpected stores to the traversed buffer inside the loop
+        (the stack spill of 'p' at -O0 is expected and is NOT a violation)
+

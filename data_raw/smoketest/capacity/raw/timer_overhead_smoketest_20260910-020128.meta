@@ -1,0 +1,9 @@
+# cache_bench_metadata_version=1
+# experiment=timer_overhead
+# num_samples_requested=2000
+# num_samples_emitted=2000
+# timer_method=lfence;rdtscp;lfence / rdtscp;lfence
+# timer_units=TSC_ticks
+# bracket_contents=empty
+# logical_cpu_from_tsc_aux=4125
+# migrated_samples_excluded=0

@@ -1,0 +1,88 @@
+# ============================================================
+# Environment record -- ECE 592 HW1 Phase I
+# Generated: 2026-09-10T02:13:08Z (UTC)
+# NOTE: Phase-I-safe commands only; no cache-size fields queried.
+# ============================================================
+
+## hostname
+sunbird.ece.ncsu.edu
+
+## uname -a
+Linux sunbird.ece.ncsu.edu 5.14.0-611.54.1.el9_7.x86_64 #1 SMP PREEMPT_DYNAMIC Sat May 2 08:58:52 EDT 2026 x86_64 x86_64 x86_64 GNU/Linux
+
+## CPU model (/proc/cpuinfo, first match only)
+model name	: Intel(R) Xeon(R) CPU E5-2680 v3 @ 2.50GHz
+
+## Topology (lscpu -e=CPU,CORE,SOCKET,NODE -- no cache fields)
+CPU CORE SOCKET NODE
+  0    0      0    0
+  1    1      1    1
+  2    2      0    0
+  3    3      1    1
+  4    4      0    0
+  5    5      1    1
+  6    6      0    0
+  7    7      1    1
+  8    8      0    0
+  9    9      1    1
+ 10   10      0    0
+ 11   11      1    1
+ 12   12      0    0
+ 13   13      1    1
+ 14   14      0    0
+ 15   15      1    1
+ 16   16      0    0
+ 17   17      1    1
+ 18   18      0    0
+ 19   19      1    1
+ 20   20      0    0
+ 21   21      1    1
+ 22   22      0    0
+ 23   23      1    1
+ 24    0      0    0
+ 25    1      1    1
+ 26    2      0    0
+ 27    3      1    1
+ 28    4      0    0
+ 29    5      1    1
+ 30    6      0    0
+ 31    7      1    1
+ 32    8      0    0
+ 33    9      1    1
+ 34   10      0    0
+ 35   11      1    1
+ 36   12      0    0
+ 37   13      1    1
+ 38   14      0    0
+ 39   15      1    1
+ 40   16      0    0
+ 41   17      1    1
+ 42   18      0    0
+ 43   19      1    1
+ 44   20      0    0
+ 45   21      1    1
+ 46   22      0    0
+ 47   23      1    1
+
+## Page size (getconf PAGESIZE)
+4096
+
+## Compiler version
+gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-14)
+
+## Kernel version
+Linux version 5.14.0-611.54.1.el9_7.x86_64 (mockbuild@x86-64-03.build.eng.rdu2.redhat.com) (gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-11), GNU ld version 2.35.2-67.el9_7.1) #1 SMP PREEMPT_DYNAMIC Sat May 2 08:58:52 EDT 2026
+
+## Load average at capture time (interference indicator)
+0.72 0.93 1.32 1/1528 1158264
+
+## Logged-in users (other users may perturb measurements)
+hbsu     pts/1        2026-09-04 10:39 (sunbird.ece.ncsu.edu:101)
+rrsood   pts/3        2026-09-09 21:21 (10.136.40.199)
+
+## NUMA nodes present
+2
+
+## Transparent hugepage setting (affects TLB reach; not a cache field)
+[always] madvise never
+
