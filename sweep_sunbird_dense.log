@@ -1,0 +1,14 @@
+nohup: ignoring input
+== Recording environment ==
+Environment recorded to: data_raw/sunbird/environment_20260910-032936.txt
+  pinned CPU=4 core=4 socket=0 numa=0
+  SMT siblings on this core: 4 28 
+== Measuring empty timer bracket ==
+== Sweep grid: 58 points, mode=dense, spacing=64B ==
+== 116 runs queued (each point x2 traversal modes), order shuffled ==
+[  1/116] ws=142912      order=rand ... done (19s)
+[  2/116] ws=131072      order=seq  ... done (22s)
+[  3/116] ws=155840      order=rand ... done (24s)
+[  4/116] ws=185344      order=seq  ... done (25s)
+[  5/116] ws=17856       order=rand ... done (19s)
+[  6/116] ws=240384      order=rand ... 
