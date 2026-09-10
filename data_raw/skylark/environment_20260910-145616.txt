@@ -1,0 +1,103 @@
+# ============================================================
+# Environment record -- ECE 592 HW1 Phase I
+# Generated: 2026-09-10T14:56:17Z (UTC)
+# NOTE: Phase-I-safe commands only; no cache-size fields queried.
+# ============================================================
+
+## hostname
+skylark.ece.ncsu.edu
+
+## uname -a
+Linux skylark.ece.ncsu.edu 5.14.0-611.38.1.el9_7.x86_64 #1 SMP PREEMPT_DYNAMIC Sat Feb 28 05:07:41 EST 2026 x86_64 x86_64 x86_64 GNU/Linux
+
+## CPU model (/proc/cpuinfo, first match only)
+model name	: AMD EPYC 7532 32-Core Processor
+
+## Topology (lscpu -e=CPU,CORE,SOCKET,NODE -- no cache fields)
+CPU CORE SOCKET NODE
+  0    0      0    0
+  1    1      0    0
+  2    2      0    0
+  3    3      0    0
+  4    4      0    0
+  5    5      0    0
+  6    6      0    0
+  7    7      0    0
+  8    8      0    0
+  9    9      0    0
+ 10   10      0    0
+ 11   11      0    0
+ 12   12      0    0
+ 13   13      0    0
+ 14   14      0    0
+ 15   15      0    0
+ 16   16      0    0
+ 17   17      0    0
+ 18   18      0    0
+ 19   19      0    0
+ 20   20      0    0
+ 21   21      0    0
+ 22   22      0    0
+ 23   23      0    0
+ 24   24      0    0
+ 25   25      0    0
+ 26   26      0    0
+ 27   27      0    0
+ 28   28      0    0
+ 29   29      0    0
+ 30   30      0    0
+ 31   31      0    0
+ 32   32      1    1
+ 33   33      1    1
+ 34   34      1    1
+ 35   35      1    1
+ 36   36      1    1
+ 37   37      1    1
+ 38   38      1    1
+ 39   39      1    1
+ 40   40      1    1
+ 41   41      1    1
+ 42   42      1    1
+ 43   43      1    1
+ 44   44      1    1
+ 45   45      1    1
+ 46   46      1    1
+ 47   47      1    1
+ 48   48      1    1
+ 49   49      1    1
+ 50   50      1    1
+ 51   51      1    1
+ 52   52      1    1
+ 53   53      1    1
+ 54   54      1    1
+ 55   55      1    1
+ 56   56      1    1
+ 57   57      1    1
+ 58   58      1    1
+ 59   59      1    1
+ 60   60      1    1
+ 61   61      1    1
+ 62   62      1    1
+ 63   63      1    1
+
+## Page size (getconf PAGESIZE)
+4096
+
+## Compiler version
+gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-14)
+
+## Kernel version
+Linux version 5.14.0-611.38.1.el9_7.x86_64 (mockbuild@x86-64-05.build.eng.rdu2.redhat.com) (gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-11), GNU ld version 2.35.2-67.el9_7.1) #1 SMP PREEMPT_DYNAMIC Sat Feb 28 05:07:41 EST 2026
+
+## Load average at capture time (interference indicator)
+1.00 1.00 1.00 2/1688 1311093
+
+## Logged-in users (other users may perturb measurements)
+rrsood   pts/0        2026-09-10 10:38 (10.155.35.169)
+
+## NUMA nodes present
+2
+
+## Transparent hugepage setting (affects TLB reach; not a cache field)
+[always] madvise never
+

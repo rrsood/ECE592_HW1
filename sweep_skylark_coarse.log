@@ -1,0 +1,95 @@
+nohup: ignoring input
+Building benchmarks ...
+Building cache_bench ...
+Building timer_overhead ...
+Extracting chase() critical loop ...
+
+Build complete.
+  Binaries and listings: data_raw/skylark/build
+  Build log:             data_raw/skylark/build/build_log.txt
+  Critical loop excerpt: data_raw/skylark/build/critical_loop_chase.asm
+== Recording environment ==
+Environment recorded to: data_raw/skylark/environment_20260910-145616.txt
+  pinned CPU=4 core=4 socket=0 numa=0
+  SMT siblings on this core: 4 
+== Measuring empty timer bracket ==
+== Sweep grid: 35 points, mode=coarse, spacing=64B ==
+== 70 runs queued (each point x2 traversal modes), order shuffled ==
+[  1/ 70] ws=23726528    order=rand ... done (75s)
+[  2/ 70] ws=16777216    order=seq  ... done (5s)
+[  3/ 70] ws=33554432    order=rand ... done (92s)
+[  4/ 70] ws=67108864    order=seq  ... done (8s)
+[  5/ 70] ws=8192        order=rand ... done (4s)
+[  6/ 70] ws=33554432    order=seq  ... done (8s)
+[  7/ 70] ws=189812480   order=seq  ... done (8s)
+[  8/ 70] ws=47453120    order=seq  ... done (9s)
+[  9/ 70] ws=16384       order=rand ... done (4s)
+[ 10/ 70] ws=134217728   order=seq  ... done (8s)
+[ 11/ 70] ws=131072      order=rand ... done (8s)
+[ 12/ 70] ws=16384       order=seq  ... done (4s)
+[ 13/ 70] ws=32768       order=rand ... done (4s)
+[ 14/ 70] ws=23168       order=seq  ... done (4s)
+[ 15/ 70] ws=268435456   order=rand ... done (117s)
+[ 16/ 70] ws=536870912   order=seq  ... done (9s)
+[ 17/ 70] ws=65536       order=rand ... done (8s)
+[ 18/ 70] ws=268435456   order=seq  ... done (9s)
+[ 19/ 70] ws=185344      order=seq  ... done (5s)
+[ 20/ 70] ws=536870912   order=rand ... done (120s)
+[ 21/ 70] ws=262144      order=seq  ... done (4s)
+[ 22/ 70] ws=262144      order=rand ... done (8s)
+[ 23/ 70] ws=16777216    order=rand ... done (15s)
+[ 24/ 70] ws=2097152     order=seq  ... done (5s)
+[ 25/ 70] ws=5760        order=rand ... done (4s)
+[ 26/ 70] ws=524288      order=rand ... done (10s)
+[ 27/ 70] ws=92672       order=seq  ... done (5s)
+[ 28/ 70] ws=1048576     order=seq  ... done (5s)
+[ 29/ 70] ws=4194304     order=rand ... done (14s)
+[ 30/ 70] ws=11863232    order=rand ... done (14s)
+[ 31/ 70] ws=92672       order=rand ... done (8s)
+[ 32/ 70] ws=4096        order=seq  ... done (4s)
+[ 33/ 70] ws=1048576     order=rand ... done (14s)
+[ 34/ 70] ws=4194304     order=seq  ... done (5s)
+[ 35/ 70] ws=4096        order=rand ... done (4s)
+[ 36/ 70] ws=67108864    order=rand ... done (105s)
+[ 37/ 70] ws=5931584     order=seq  ... done (6s)
+[ 38/ 70] ws=47453120    order=rand ... done (99s)
+[ 39/ 70] ws=741440      order=rand ... done (12s)
+[ 40/ 70] ws=185344      order=rand ... done (8s)
+[ 41/ 70] ws=134217728   order=rand ... done (112s)
+[ 42/ 70] ws=32768       order=seq  ... done (4s)
+[ 43/ 70] ws=131072      order=seq  ... done (5s)
+[ 44/ 70] ws=46336       order=rand ... done (7s)
+[ 45/ 70] ws=8388608     order=seq  ... done (5s)
+[ 46/ 70] ws=5760        order=seq  ... done (5s)
+[ 47/ 70] ws=524288      order=seq  ... done (5s)
+[ 48/ 70] ws=741440      order=seq  ... done (5s)
+[ 49/ 70] ws=1482880     order=seq  ... done (4s)
+[ 50/ 70] ws=23726528    order=seq  ... done (8s)
+[ 51/ 70] ws=23168       order=rand ... done (4s)
+[ 52/ 70] ws=11584       order=rand ... done (4s)
+[ 53/ 70] ws=2965760     order=rand ... done (14s)
+[ 54/ 70] ws=379625024   order=seq  ... done (8s)
+[ 55/ 70] ws=2965760     order=seq  ... done (4s)
+[ 56/ 70] ws=1482880     order=rand ... done (15s)
+[ 57/ 70] ws=94906240    order=seq  ... done (9s)
+[ 58/ 70] ws=5931584     order=rand ... done (14s)
+[ 59/ 70] ws=189812480   order=rand ... done (115s)
+[ 60/ 70] ws=8388608     order=rand ... done (14s)
+[ 61/ 70] ws=370688      order=rand ... done (9s)
+[ 62/ 70] ws=65536       order=seq  ... done (5s)
+[ 63/ 70] ws=11863232    order=seq  ... done (4s)
+[ 64/ 70] ws=94906240    order=rand ... done (109s)
+[ 65/ 70] ws=370688      order=seq  ... done (5s)
+[ 66/ 70] ws=11584       order=seq  ... done (4s)
+[ 67/ 70] ws=8192        order=seq  ... done (4s)
+[ 68/ 70] ws=46336       order=seq  ... done (4s)
+[ 69/ 70] ws=2097152     order=rand ... done (14s)
+[ 70/ 70] ws=379625024   order=rand ... done (118s)
+
+== Sweep complete ==
+  Raw data: data_raw/skylark/capacity/raw
+  Manifest: data_raw/skylark/capacity/raw/manifest_20260910-145616.json
+
+Next: process and plot with
+  python3 scripts/process_capacity.py data_raw/skylark/capacity/raw data_raw/skylark/capacity/processed
+  python3 scripts/plot_capacity.py data_raw/skylark/capacity/processed plots/
