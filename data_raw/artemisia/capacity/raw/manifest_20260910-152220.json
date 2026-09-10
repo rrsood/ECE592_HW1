@@ -1,0 +1,59 @@
+{
+  "machine": "artemisia",
+  "experiment": "capacity",
+  "sweep_mode": "coarse",
+  "phase": "I_timing_only",
+
+  "pinning": {
+    "logical_cpu": 35,
+    "core": "35",
+    "socket": "1",
+    "numa_node": "1",
+    "smt_siblings": "35 91 ",
+    "method": "taskset -c 35"
+  },
+
+  "parameters": {
+    "node_spacing_bytes": 64,
+    "spacing_is_provisional": "TRUE until the line-size experiment confirms B; re-run with SPACING=B for reported values",
+    "N_per_batch": 1000,
+    "samples_per_point": 1000000,
+    "seed": 20260904,
+    "min_bytes": 4096,
+    "max_bytes": 536870912,
+    "num_points": 35,
+    "total_runs": 70,
+    "traversal_modes": ["randomized_primary", "sequential_control"],
+    "run_order": "shuffled (seed 20260904) to decorrelate drift from working-set size"
+  },
+
+  "timing": {
+    "timer_method": "lfence;rdtscp;lfence / rdtscp;lfence",
+    "units": "TSC ticks (NOT core clock cycles)",
+    "empty_bracket_dataset": "timer_overhead_artemisia_20260910-152220.csv.gz",
+    "overhead_handling": "characterized, NOT subtracted; amortized by batching"
+  },
+
+  "memory": {
+    "locality_method": "first-touch memset after taskset pinning",
+    "buffer_alignment_bytes": 4096,
+    "kernel_type": "read-only dependent pointer chase"
+  },
+
+  "build": {
+    "compiler": "gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-14)",
+    "flags": "-O0 -g -std=c11 -Wall -Wextra -fno-omit-frame-pointer",
+    "build_log": "../../build/build_log.txt",
+    "disassembly": "../../build/critical_loop_chase.asm"
+  },
+
+  "provenance": {
+    "git_commit": "1c5e7d2553a582a5cdbf369d0c11e639bd924458",
+    "git_uncommitted_files": 4,
+    "sweep_start_utc": "2026-09-10T15:22:24Z",
+    "sweep_end_utc": "2026-09-10T16:11:44Z",
+    "environment_record": "../../environment_20260910-152220.txt",
+    "raw_file_pattern": "capacity_ws<BYTES>_sp<SPACING>_<rand|seq>_artemisia_20260910-152220.csv.gz",
+    "excluded_runs": []
+  }
+}

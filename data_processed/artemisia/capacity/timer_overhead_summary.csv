@@ -1,0 +1,2 @@
+source_raw_file,unit,n_samples,median,mean,sd,q1,q3,p5,p95,min,max,n_outliers
+timer_overhead_artemisia_20260910-152220.csv.gz,TSC_ticks_per_empty_bracket,1000000,66.0,67.120344,33.78709154232159,66.0,68.0,64.0,70.0,60.0,10126.0,27532
