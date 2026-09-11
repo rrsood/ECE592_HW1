@@ -298,6 +298,32 @@ static int write_measurement_header(FILE *stream,
     return 0;
 }
 
+static int write_independent_measurement_header(
+    FILE *stream, const struct measurement_config *config,
+    const struct measurement_results *results)
+{
+    if (fprintf(stream, "measurement_dependency=independent-eight-lane\n") < 0 ||
+        fprintf(stream, "independent_lane_count=8\n") < 0 ||
+        fprintf(stream, "result_semantics=throughput-not-load-latency\n") < 0 ||
+        fprintf(stream, "timed_sample_count=%zu\n",
+                config->timed_sample_count) < 0 ||
+        fprintf(stream, "warmup_batch_count=%zu\n",
+                config->warmup_batch_count) < 0 ||
+        fprintf(stream, "independent_accesses_per_sample=%zu\n",
+                config->dependent_accesses_per_sample) < 0 ||
+        fprintf(stream, "zero_elapsed_count=%zu\n",
+                results->zero_elapsed_count) < 0 ||
+        fprintf(stream, "zero_overhead_count=%zu\n",
+                results->zero_overhead_count) < 0 ||
+        fprintf(stream, "data_encoding=tab-separated-decimal-integers\n") < 0 ||
+        fprintf(stream, "data_begin\n") < 0 ||
+        fprintf(stream,
+                "sample_index\telapsed_raw_ticks\ttimer_overhead_raw_ticks\n") < 0) {
+        return -1;
+    }
+    return 0;
+}
+
 static int write_inclusion_measurement_header(
     FILE *stream,
     const struct inclusion_measurement_config *config,
@@ -578,6 +604,49 @@ int raw_output_write_tsv(const char *path,
         return -1;
     }
 
+    return 0;
+}
+
+int raw_output_write_independent_tsv(
+    const char *path, const struct raw_output_context *context,
+    const struct system_metadata *metadata, const struct timer_info *timer,
+    const struct pointer_chase *chase,
+    const struct measurement_config *config,
+    const struct measurement_results *results)
+{
+    FILE *stream = NULL;
+    int descriptor = -1;
+    int saved_errno;
+
+    if (chase == NULL ||
+        raw_output_write_opened_tsv(path, context, metadata, timer, config,
+                                    results, &stream, &descriptor) != 0) {
+        if (chase == NULL) {
+            errno = EINVAL;
+        }
+        return -1;
+    }
+
+    if (write_common_file_prefix(stream, path, context, metadata, timer) != 0 ||
+        fprintf(stream, "traversal=randomized-eight-lane-independent-chains\n") < 0 ||
+        fprintf(stream, "random_seed_applicable=true\n") < 0 ||
+        fprintf(stream, "random_seed=%" PRIu64 "\n", chase->seed) < 0 ||
+        fprintf(stream, "node_count=%zu\n", chase->node_count) < 0 ||
+        fprintf(stream, "node_spacing_bytes=%zu\n",
+                chase->node_spacing_bytes) < 0 ||
+        fprintf(stream, "allocation_bytes=%zu\n",
+                chase->allocation_bytes) < 0 ||
+        fprintf(stream, "allocation_alignment_bytes=%zu\n",
+                chase->allocation_alignment_bytes) < 0 ||
+        write_independent_measurement_header(stream, config, results) != 0 ||
+        write_samples(stream, results) != 0 ||
+        raw_output_finish_tsv(stream, descriptor) != 0) {
+        saved_errno = errno == 0 ? EIO : errno;
+        (void)fclose(stream);
+        (void)unlink(path);
+        errno = saved_errno;
+        return -1;
+    }
     return 0;
 }
 

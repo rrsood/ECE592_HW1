@@ -32,6 +32,17 @@ int measurement_run(const struct pointer_chase *chase,
                     struct measurement_results *results);
 
 /*
+ * Diagnostic only: advance eight independent positions in the same cycle.
+ * The eight chains expose memory-level parallelism, so ticks/access from this
+ * routine are a throughput measure and must not be reported as hit latency.
+ * dependent_accesses_per_sample must be divisible by eight.
+ */
+int measurement_run_independent_eight_lane(
+    const struct pointer_chase *chase,
+    const struct measurement_config *config,
+    struct measurement_results *results);
+
+/*
  * Lower-level form used by experiments that build their own dependent
  * chase cycle. The start node must be non-NULL and must eventually form a
  * valid cycle so repeated batches can keep traversing safely.

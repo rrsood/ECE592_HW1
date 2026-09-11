@@ -17,6 +17,7 @@
 #endif
 
 static struct chase_node *volatile final_node_sink;
+static struct chase_node *volatile independent_final_node_sinks[8];
 
 static ECE592_NOINLINE struct chase_node *
 run_dependent_batch(struct chase_node *current, size_t access_count)
@@ -125,6 +126,115 @@ int measurement_run(const struct pointer_chase *chase,
     }
 
     return measurement_run_from_start(chase->start, config, results);
+}
+
+static ECE592_NOINLINE void
+run_independent_rounds(struct chase_node **current, size_t round_count)
+{
+    for (size_t round = 0; round < round_count; ++round) {
+        current[0] = current[0]->next;
+        current[1] = current[1]->next;
+        current[2] = current[2]->next;
+        current[3] = current[3]->next;
+        current[4] = current[4]->next;
+        current[5] = current[5]->next;
+        current[6] = current[6]->next;
+        current[7] = current[7]->next;
+    }
+
+    __asm__ __volatile__("" : "+r"(current[0]), "+r"(current[1]),
+                         "+r"(current[2]), "+r"(current[3]),
+                         "+r"(current[4]), "+r"(current[5]),
+                         "+r"(current[6]), "+r"(current[7]) : : "memory");
+}
+
+int measurement_run_independent_eight_lane(
+    const struct pointer_chase *chase,
+    const struct measurement_config *config,
+    struct measurement_results *results)
+{
+    struct chase_node *current[8];
+    struct chase_node *position;
+    size_t next_lane = 0u;
+
+    if (chase == NULL || chase->start == NULL || chase->node_count < 8u ||
+        config == NULL || results == NULL ||
+        config->timed_sample_count < ECE592_MINIMUM_TIMED_SAMPLES ||
+        config->dependent_accesses_per_sample == 0u ||
+        config->dependent_accesses_per_sample % 8u != 0u ||
+        config->timed_sample_count > SIZE_MAX / sizeof(uint64_t)) {
+        errno = EINVAL;
+        return -1;
+    }
+
+    memset(results, 0, sizeof(*results));
+    results->elapsed_ticks =
+        malloc(config->timed_sample_count * sizeof(*results->elapsed_ticks));
+    if (results->elapsed_ticks == NULL) {
+        return -1;
+    }
+    results->timer_overhead_ticks =
+        malloc(config->timed_sample_count *
+               sizeof(*results->timer_overhead_ticks));
+    if (results->timer_overhead_ticks == NULL) {
+        measurement_results_destroy(results);
+        return -1;
+    }
+
+    /* Select eight evenly separated starting positions in one cycle. */
+    position = chase->start;
+    for (size_t step = 0; step < chase->node_count && next_lane < 8u;
+         ++step) {
+        if (step == (next_lane * chase->node_count) / 8u) {
+            current[next_lane++] = position;
+        }
+        position = position->next;
+    }
+    if (next_lane != 8u) {
+        measurement_results_destroy(results);
+        errno = EINVAL;
+        return -1;
+    }
+
+    for (size_t warmup = 0; warmup < config->warmup_batch_count; ++warmup) {
+        run_independent_rounds(
+            current, config->dependent_accesses_per_sample / 8u);
+    }
+
+    for (size_t sample = 0; sample < config->timed_sample_count; ++sample) {
+        uint64_t measured_start = timer_start();
+        uint64_t measured_stop;
+        uint64_t overhead_start;
+        uint64_t overhead_stop;
+
+        run_independent_rounds(
+            current, config->dependent_accesses_per_sample / 8u);
+        measured_stop = timer_stop();
+        overhead_start = timer_start();
+        overhead_stop = timer_stop();
+
+        if (measured_stop < measured_start || overhead_stop < overhead_start) {
+            measurement_results_destroy(results);
+            errno = ERANGE;
+            return -1;
+        }
+        results->elapsed_ticks[sample] = measured_stop - measured_start;
+        results->timer_overhead_ticks[sample] =
+            overhead_stop - overhead_start;
+        if (results->elapsed_ticks[sample] == 0u) {
+            ++results->zero_elapsed_count;
+        }
+        if (results->timer_overhead_ticks[sample] == 0u) {
+            ++results->zero_overhead_count;
+        }
+    }
+
+    results->sample_count = config->timed_sample_count;
+    results->final_node = current[0];
+    for (size_t lane = 0; lane < 8u; ++lane) {
+        independent_final_node_sinks[lane] = current[lane];
+    }
+    return 0;
 }
 
 #if defined(ECE592_MEASUREMENT_SELF_TEST)

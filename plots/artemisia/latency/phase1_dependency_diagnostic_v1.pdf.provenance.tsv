@@ -1,0 +1,8 @@
+ece592_plot_provenance_version=1
+plot_kind=phase1_dependency_diagnostic
+dependent_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/artemisia/latency/phase1_dependency_diagnostic_dependent_v1.tsv
+dependent_sha256=0b4db5d958b89757e7f6a6ac5c079ca4c96ce6163e8c814d0556d081ceea7423
+independent_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/artemisia/latency/phase1_dependency_diagnostic_independent_v1.tsv
+independent_sha256=d872efb2d7550d30058b5e25331e94bb82363028fd0fe12996e5b1c8aa5d1d5b
+plotting_command=scripts/plot_dependency_diagnostic.py --dependent data_processed/artemisia/latency/phase1_dependency_diagnostic_dependent_v1.tsv --independent data_processed/artemisia/latency/phase1_dependency_diagnostic_independent_v1.tsv --output plots/artemisia/latency/phase1_dependency_diagnostic_v1.pdf
+python_version=3.9.25

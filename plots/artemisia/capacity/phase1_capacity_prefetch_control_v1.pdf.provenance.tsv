@@ -1,0 +1,8 @@
+ece592_plot_provenance_version=1
+plot_kind=phase1_capacity_prefetch_control
+randomized_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/artemisia/capacity/phase1_capacity_coarse_randomized_v3.tsv
+randomized_sha256=b36a234a1eb854a782b99fb5efc05f93ded987555b529f86a44146a97a6ab886
+sequential_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/artemisia/capacity/phase1_capacity_coarse_sequential_control_v1.tsv
+sequential_sha256=0d67408e26d3655b07113247b3db0b94dc354e887983b8ba484556db21c1b45a
+plotting_command=scripts/plot_capacity_prefetch_control.py --randomized data_processed/artemisia/capacity/phase1_capacity_coarse_randomized_v3.tsv --sequential data_processed/artemisia/capacity/phase1_capacity_coarse_sequential_control_v1.tsv --output plots/artemisia/capacity/phase1_capacity_prefetch_control_v1.pdf
+python_version=3.9.25

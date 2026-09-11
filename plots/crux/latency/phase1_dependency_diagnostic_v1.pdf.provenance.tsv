@@ -1,0 +1,8 @@
+ece592_plot_provenance_version=1
+plot_kind=phase1_dependency_diagnostic
+dependent_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/crux/latency/phase1_dependency_diagnostic_dependent_v1.tsv
+dependent_sha256=034748a57fde64e0f663942d8dd677967c24c9acbadf37500a3bed5a6a4e6dbd
+independent_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/crux/latency/phase1_dependency_diagnostic_independent_v1.tsv
+independent_sha256=3bf786f5d0094d2f084f0bd19b44ffb7196d5ab42ca23ae572ccf239c79a176f
+plotting_command=scripts/plot_dependency_diagnostic.py --dependent data_processed/crux/latency/phase1_dependency_diagnostic_dependent_v1.tsv --independent data_processed/crux/latency/phase1_dependency_diagnostic_independent_v1.tsv --output plots/crux/latency/phase1_dependency_diagnostic_v1.pdf
+python_version=3.9.25

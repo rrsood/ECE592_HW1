@@ -1,0 +1,8 @@
+ece592_plot_provenance_version=1
+plot_kind=phase1_dependency_diagnostic
+dependent_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/upgrade/latency/phase1_dependency_diagnostic_dependent_v1.tsv
+dependent_sha256=32ec323209c4080d130c2ef2077df44080221abe701de41bcc76e25beacd8748
+independent_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/upgrade/latency/phase1_dependency_diagnostic_independent_v1.tsv
+independent_sha256=770166ef52a3136162bc58dc9d6420fa1ddca8f3db222186bfcd4740a00fabe4
+plotting_command=scripts/plot_dependency_diagnostic.py --dependent data_processed/upgrade/latency/phase1_dependency_diagnostic_dependent_v1.tsv --independent data_processed/upgrade/latency/phase1_dependency_diagnostic_independent_v1.tsv --output plots/upgrade/latency/phase1_dependency_diagnostic_v1.pdf
+python_version=3.9.25

@@ -33,6 +33,15 @@ int raw_output_write_tsv(const char *path,
                          const struct measurement_config *config,
                          const struct measurement_results *results);
 
+int raw_output_write_independent_tsv(
+    const char *path,
+    const struct raw_output_context *context,
+    const struct system_metadata *metadata,
+    const struct timer_info *timer,
+    const struct pointer_chase *chase,
+    const struct measurement_config *config,
+    const struct measurement_results *results);
+
 int raw_output_write_spatial_tsv(const char *path,
                                  const struct raw_output_context *context,
                                  const struct system_metadata *metadata,

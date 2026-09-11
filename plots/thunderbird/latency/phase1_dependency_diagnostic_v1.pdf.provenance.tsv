@@ -1,0 +1,8 @@
+ece592_plot_provenance_version=1
+plot_kind=phase1_dependency_diagnostic
+dependent_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/thunderbird/latency/phase1_dependency_diagnostic_dependent_v1.tsv
+dependent_sha256=4ca618fed7790ad322756f08a6f76747f8312d7c7c314e644f7105a93f864aaf
+independent_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/thunderbird/latency/phase1_dependency_diagnostic_independent_v1.tsv
+independent_sha256=0fb454855d7a975d1eb00c33c92e9e2399e9351d2ed49c73c5c1559d904cbd52
+plotting_command=scripts/plot_dependency_diagnostic.py --dependent data_processed/thunderbird/latency/phase1_dependency_diagnostic_dependent_v1.tsv --independent data_processed/thunderbird/latency/phase1_dependency_diagnostic_independent_v1.tsv --output plots/thunderbird/latency/phase1_dependency_diagnostic_v1.pdf
+python_version=3.9.25

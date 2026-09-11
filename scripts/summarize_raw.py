@@ -90,7 +90,6 @@ def read_raw(path):
         "hostname",
         "timer_unit",
         "timed_sample_count",
-        "dependent_accesses_per_sample",
         "traversal",
         "random_seed",
     }
@@ -103,8 +102,13 @@ def read_raw(path):
 
     try:
         declared_count = int(metadata["timed_sample_count"], 10)
-        accesses_per_sample = int(
-            metadata["dependent_accesses_per_sample"], 10)
+        access_keys = [key for key in (
+            "dependent_accesses_per_sample",
+            "independent_accesses_per_sample") if key in metadata]
+        if len(access_keys) != 1:
+            raise ValueError("raw metadata must declare exactly one access count")
+        access_key = access_keys[0]
+        accesses_per_sample = int(metadata[access_key], 10)
     except ValueError as error:
         raise ValueError("invalid numeric raw metadata") from error
     if declared_count != len(elapsed):
@@ -114,7 +118,7 @@ def read_raw(path):
     if declared_count < 1_000_000:
         raise ValueError("raw file has fewer than 1000000 timed samples")
     if accesses_per_sample <= 0:
-        raise ValueError("dependent access count must be positive")
+        raise ValueError("access count must be positive")
 
     return metadata, accesses_per_sample, elapsed, overhead
 
@@ -196,8 +200,10 @@ def write_summary(path, raw_path, raw_digest, metadata, accesses_per_sample,
         stream.write("source_raw_sha256={}\n".format(raw_digest))
         for key, value in metadata.items():
             stream.write("source_{}={}\n".format(key, value))
-        stream.write("dependent_accesses_per_sample={}\n".format(
-            accesses_per_sample))
+        access_key = ("independent_accesses_per_sample"
+                      if "independent_accesses_per_sample" in metadata
+                      else "dependent_accesses_per_sample")
+        stream.write("{}={}\n".format(access_key, accesses_per_sample))
         stream.write("processing_command={}\n".format(reconstruct_command()))
         stream.write("processing_working_directory={}\n".format(os.getcwd()))
         stream.write("python_version={}\n".format(platform.python_version()))

@@ -1,0 +1,60 @@
+ece592_summary_format_version=1
+source_raw_file=/home/djariwa/ece592-raw-archive-2026-09-11/artemisia/latency/phase1_dependency_diagnostic_v1/dependent.tsv
+source_raw_sha256=21b3e8f04034b6beb6c328ed23ca0ed7131a2005fe853339d19d22dc2e45c7b3
+source_ece592_raw_format_version=1
+source_output_filename=/home/djariwa/ece592-raw-archive-2026-09-11/artemisia/latency/phase1_dependency_diagnostic_v1/dependent.tsv
+source_experiment_name=phase1-artemisia-dependent-load-diagnostic
+source_timestamp_utc=2026-09-11T14:23:15Z
+source_hostname=artemisia.ece.ncsu.edu
+source_kernel_release=6.17.8-1.el9.elrepo.x86_64
+source_isa=x86_64
+source_cpu_model=Intel(R) Xeon(R) Gold 5420+
+source_cpu_model_source=/proc/cpuinfo human-readable field
+source_page_size_bytes=4096
+source_logical_cpu=4
+source_affinity_cpu_list=4
+source_affinity_allowed_cpu_count=1
+source_physical_core_id=4
+source_physical_package_id=0
+source_topology_id_source=Linux sysfs physical topology IDs
+source_numa_node=0
+source_thread_siblings_list=4,60
+source_compiler_version=11.5.0 20240719 (Red Hat 11.5.0-14)
+source_compiler_flags=-O0 -g -std=c11 -Wall -Wextra -Wpedantic -Werror -fno-omit-frame-pointer
+source_git_commit=764d8c790cee53e7d612898613b7a1e05009bfdb-dirty
+source_build_command=cd -- /mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering && gcc -O0 -g -std=c11 -Wall -Wextra -Wpedantic -Werror -fno-omit-frame-pointer -DECE592_BUILD_FLAGS=\"-O0\ -g\ -std=c11\ -Wall\ -Wextra\ -Wpedantic\ -Werror\ -fno-omit-frame-pointer\" -DECE592_GIT_COMMIT=\"764d8c790cee53e7d612898613b7a1e05009bfdb-dirty\" -I main_code/common main_code/common/cache_bench.c main_code/common/raw_output.c main_code/common/measurement.c main_code/common/pointer_chase.c main_code/common/spatial_chase.c main_code/common/conflict_chase.c main_code/common/eviction_layout.c main_code/common/eviction_measurement.c main_code/common/inclusion_chase.c main_code/common/inclusion_measurement.c main_code/common/metadata_linux.c main_code/common/affinity_linux.c main_code/x86_64/timer_x86_64.c -o /tmp/ece592_phase1_artemisia_dependency_v1
+source_run_command='/tmp/ece592_phase1_artemisia_dependency_v1' '--mode' 'capacity' '--cpu' '4' '--nodes' '4096' '--spacing' '8' '--traversal' 'randomized' '--batch' '256' '--warmup' '1000' '--samples' '1000000' '--seed' '71592' '--experiment' 'phase1-artemisia-dependent-load-diagnostic' '--output' '/home/djariwa/ece592-raw-archive-2026-09-11/artemisia/latency/phase1_dependency_diagnostic_v1/dependent.tsv' '--build-command' 'cd -- /mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering && gcc -O0 -g -std=c11 -Wall -Wextra -Wpedantic -Werror -fno-omit-frame-pointer -DECE592_BUILD_FLAGS=\"-O0\ -g\ -std=c11\ -Wall\ -Wextra\ -Wpedantic\ -Werror\ -fno-omit-frame-pointer\" -DECE592_GIT_COMMIT=\"764d8c790cee53e7d612898613b7a1e05009bfdb-dirty\" -I main_code/common main_code/common/cache_bench.c main_code/common/raw_output.c main_code/common/measurement.c main_code/common/pointer_chase.c main_code/common/spatial_chase.c main_code/common/conflict_chase.c main_code/common/eviction_layout.c main_code/common/eviction_measurement.c main_code/common/inclusion_chase.c main_code/common/inclusion_measurement.c main_code/common/metadata_linux.c main_code/common/affinity_linux.c main_code/x86_64/timer_x86_64.c -o /tmp/ece592_phase1_artemisia_dependency_v1' '--smt-siblings-idle' 'no' '--environment-variables' 'Phase-I dependency diagnostic; no PMU'
+source_environment_variables=Phase-I dependency diagnostic; no PMU
+source_locality_method=pin-before-allocation plus first-touch memset
+source_smt_siblings_idle=no
+source_timer_name=LFENCE+RDTSC / RDTSCP+LFENCE
+source_timer_unit=TSC ticks
+source_timer_frequency_hz=0
+source_timer_frequency_hz_valid=false
+source_traversal=randomized-dependent-single-cycle
+source_random_seed_applicable=true
+source_random_seed=71592
+source_node_count=4096
+source_node_spacing_bytes=8
+source_allocation_bytes=32768
+source_allocation_alignment_bytes=4096
+source_timed_sample_count=1000000
+source_warmup_batch_count=1000
+source_dependent_accesses_per_sample=256
+source_zero_elapsed_count=0
+source_zero_overhead_count=0
+source_data_encoding=tab-separated-decimal-integers
+dependent_accesses_per_sample=256
+processing_command=scripts/summarize_raw.py --input /home/djariwa/ece592-raw-archive-2026-09-11/artemisia/latency/phase1_dependency_diagnostic_v1/dependent.tsv --output data_processed/artemisia/latency/phase1_dependency_diagnostic_dependent_v1.tsv
+processing_working_directory=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering
+python_version=3.9.25
+standard_deviation_definition=population
+quantile_method=linear interpolation at (n-1)*p
+outlier_rule=values outside Q1-1.5*IQR or Q3+1.5*IQR
+timer_overhead_subtracted=false
+data_begin
+metric	count	mean	population_stddev	minimum	p05	q1	median	q3	p95	maximum	lower_outlier_fence	upper_outlier_fence	outlier_count
+elapsed_batch_raw_ticks	1000000	1440.1991960000423	417.80775856959212	1350	1362	1364	1366	1370	2106	190062	1355	1379	108635
+elapsed_raw_ticks_per_access_unadjusted	1000000	5.6257781093751653	1.6320615569124692	5.2734375	5.3203125	5.328125	5.3359375	5.3515625	8.2265625	742.4296875	5.29296875	5.38671875	108635
+timer_overhead_raw_ticks	1000000	62.133442000000592	24.124676603690041	54	60	62	62	62	66	8126	62	62	272393
+data_end

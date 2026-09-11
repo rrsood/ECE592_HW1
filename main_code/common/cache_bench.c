@@ -25,6 +25,7 @@
 
 enum benchmark_mode {
     BENCHMARK_MODE_CAPACITY,
+    BENCHMARK_MODE_INDEPENDENT,
     BENCHMARK_MODE_SPATIAL,
     BENCHMARK_MODE_CONFLICT,
     BENCHMARK_MODE_INCLUSION,
@@ -63,7 +64,7 @@ struct program_options {
 static void print_usage(FILE *stream, const char *program)
 {
     fprintf(stream,
-            "usage: %s [--mode capacity|spatial|conflict|inclusion] "
+            "usage: %s [--mode capacity|independent|spatial|conflict|inclusion] "
             "[--mode eviction] "
             "--cpu N --batch N "
             "--warmup N --samples N --seed N "
@@ -277,6 +278,8 @@ static int parse_options(int argc, char **argv, struct program_options *options)
         case OPTION_MODE:
             if (strcmp(optarg, "capacity") == 0) {
                 options->mode = BENCHMARK_MODE_CAPACITY;
+            } else if (strcmp(optarg, "independent") == 0) {
+                options->mode = BENCHMARK_MODE_INDEPENDENT;
             } else if (strcmp(optarg, "spatial") == 0) {
                 options->mode = BENCHMARK_MODE_SPATIAL;
             } else if (strcmp(optarg, "conflict") == 0) {
@@ -454,6 +457,16 @@ static int parse_options(int argc, char **argv, struct program_options *options)
 
     if (options->mode == BENCHMARK_MODE_CAPACITY &&
         (!seen_nodes || !seen_spacing || !seen_traversal ||
+         seen_regions || seen_region_spacing || seen_probe_offset ||
+         seen_lines || seen_conflict_stride ||
+         seen_probe_nodes || seen_pressure_nodes || seen_pressure_batch ||
+         seen_target_offsets || seen_pressure_offsets)) {
+        return -1;
+    }
+    if (options->mode == BENCHMARK_MODE_INDEPENDENT &&
+        (!seen_nodes || !seen_spacing || !seen_traversal ||
+         options->traversal_order != POINTER_CHASE_RANDOMIZED ||
+         options->dependent_accesses_per_sample % 8u != 0u ||
          seen_regions || seen_region_spacing || seen_probe_offset ||
          seen_lines || seen_conflict_stride ||
          seen_probe_nodes || seen_pressure_nodes || seen_pressure_batch ||
@@ -638,21 +651,35 @@ int main(int argc, char **argv)
     output_context.smt_siblings_idle = options.smt_siblings_idle;
     output_context.environment_variables = options.environment_variables;
 
-    if (options.mode == BENCHMARK_MODE_CAPACITY) {
+    if (options.mode == BENCHMARK_MODE_CAPACITY ||
+        options.mode == BENCHMARK_MODE_INDEPENDENT) {
         if (pointer_chase_create(&chase, options.node_count,
                                  options.node_spacing_bytes,
                                  options.seed, options.traversal_order) != 0) {
             perror("pointer_chase_create");
             goto cleanup;
         }
-        if (measurement_run(&chase, &config, &results) != 0) {
-            perror("measurement_run");
+        if ((options.mode == BENCHMARK_MODE_CAPACITY &&
+             measurement_run(&chase, &config, &results) != 0) ||
+            (options.mode == BENCHMARK_MODE_INDEPENDENT &&
+             measurement_run_independent_eight_lane(
+                 &chase, &config, &results) != 0)) {
+            perror(options.mode == BENCHMARK_MODE_CAPACITY
+                       ? "measurement_run"
+                       : "measurement_run_independent_eight_lane");
             goto cleanup;
         }
-        if (raw_output_write_tsv(options.output_path, &output_context,
-                                 &metadata, &timer, &chase, &config,
-                                 &results) != 0) {
-            perror("raw_output_write_tsv");
+        if ((options.mode == BENCHMARK_MODE_CAPACITY &&
+             raw_output_write_tsv(options.output_path, &output_context,
+                                  &metadata, &timer, &chase, &config,
+                                  &results) != 0) ||
+            (options.mode == BENCHMARK_MODE_INDEPENDENT &&
+             raw_output_write_independent_tsv(
+                 options.output_path, &output_context, &metadata, &timer,
+                 &chase, &config, &results) != 0)) {
+            perror(options.mode == BENCHMARK_MODE_CAPACITY
+                       ? "raw_output_write_tsv"
+                       : "raw_output_write_independent_tsv");
             goto cleanup;
         }
     } else if (options.mode == BENCHMARK_MODE_SPATIAL) {

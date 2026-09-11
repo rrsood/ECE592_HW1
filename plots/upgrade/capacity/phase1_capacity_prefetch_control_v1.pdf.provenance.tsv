@@ -1,0 +1,8 @@
+ece592_plot_provenance_version=1
+plot_kind=phase1_capacity_prefetch_control
+randomized_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/upgrade/capacity/phase1_capacity_coarse_randomized_v2.tsv
+randomized_sha256=738d35b8ee2ebf060e9d1ab525b8b17b3dbc34d923db782494cbe08cd8bf4ca5
+sequential_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/data_processed/upgrade/capacity/phase1_capacity_coarse_sequential_control_v1.tsv
+sequential_sha256=2f6d5418fef37408dd5c7fdf3dc4439618e2e7da791bc62e71b79302f7128b21
+plotting_command=scripts/plot_capacity_prefetch_control.py --randomized data_processed/upgrade/capacity/phase1_capacity_coarse_randomized_v2.tsv --sequential data_processed/upgrade/capacity/phase1_capacity_coarse_sequential_control_v1.tsv --output plots/upgrade/capacity/phase1_capacity_prefetch_control_v1.pdf
+python_version=3.9.25
