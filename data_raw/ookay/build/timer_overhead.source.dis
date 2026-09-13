@@ -1,0 +1,560 @@
+
+data_raw/ookay/build/timer_overhead:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+0000000000001000 <_init>:
+    1000:	f3 0f 1e fa          	endbr64
+    1004:	48 83 ec 08          	sub    $0x8,%rsp
+    1008:	48 8b 05 d9 2f 00 00 	mov    0x2fd9(%rip),%rax        # 3fe8 <__gmon_start__@Base>
+    100f:	48 85 c0             	test   %rax,%rax
+    1012:	74 02                	je     1016 <_init+0x16>
+    1014:	ff d0                	call   *%rax
+    1016:	48 83 c4 08          	add    $0x8,%rsp
+    101a:	c3                   	ret
+
+Disassembly of section .plt:
+
+0000000000001020 <.plt>:
+    1020:	ff 35 62 2f 00 00    	push   0x2f62(%rip)        # 3f88 <_GLOBAL_OFFSET_TABLE_+0x8>
+    1026:	ff 25 64 2f 00 00    	jmp    *0x2f64(%rip)        # 3f90 <_GLOBAL_OFFSET_TABLE_+0x10>
+    102c:	0f 1f 40 00          	nopl   0x0(%rax)
+    1030:	f3 0f 1e fa          	endbr64
+    1034:	68 00 00 00 00       	push   $0x0
+    1039:	e9 e2 ff ff ff       	jmp    1020 <_init+0x20>
+    103e:	66 90                	xchg   %ax,%ax
+    1040:	f3 0f 1e fa          	endbr64
+    1044:	68 01 00 00 00       	push   $0x1
+    1049:	e9 d2 ff ff ff       	jmp    1020 <_init+0x20>
+    104e:	66 90                	xchg   %ax,%ax
+    1050:	f3 0f 1e fa          	endbr64
+    1054:	68 02 00 00 00       	push   $0x2
+    1059:	e9 c2 ff ff ff       	jmp    1020 <_init+0x20>
+    105e:	66 90                	xchg   %ax,%ax
+    1060:	f3 0f 1e fa          	endbr64
+    1064:	68 03 00 00 00       	push   $0x3
+    1069:	e9 b2 ff ff ff       	jmp    1020 <_init+0x20>
+    106e:	66 90                	xchg   %ax,%ax
+    1070:	f3 0f 1e fa          	endbr64
+    1074:	68 04 00 00 00       	push   $0x4
+    1079:	e9 a2 ff ff ff       	jmp    1020 <_init+0x20>
+    107e:	66 90                	xchg   %ax,%ax
+    1080:	f3 0f 1e fa          	endbr64
+    1084:	68 05 00 00 00       	push   $0x5
+    1089:	e9 92 ff ff ff       	jmp    1020 <_init+0x20>
+    108e:	66 90                	xchg   %ax,%ax
+    1090:	f3 0f 1e fa          	endbr64
+    1094:	68 06 00 00 00       	push   $0x6
+    1099:	e9 82 ff ff ff       	jmp    1020 <_init+0x20>
+    109e:	66 90                	xchg   %ax,%ax
+    10a0:	f3 0f 1e fa          	endbr64
+    10a4:	68 07 00 00 00       	push   $0x7
+    10a9:	e9 72 ff ff ff       	jmp    1020 <_init+0x20>
+    10ae:	66 90                	xchg   %ax,%ax
+
+Disassembly of section .plt.got:
+
+00000000000010b0 <__cxa_finalize@plt>:
+    10b0:	f3 0f 1e fa          	endbr64
+    10b4:	ff 25 3e 2f 00 00    	jmp    *0x2f3e(%rip)        # 3ff8 <__cxa_finalize@GLIBC_2.2.5>
+    10ba:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+Disassembly of section .plt.sec:
+
+00000000000010c0 <free@plt>:
+    10c0:	f3 0f 1e fa          	endbr64
+    10c4:	ff 25 ce 2e 00 00    	jmp    *0x2ece(%rip)        # 3f98 <free@GLIBC_2.2.5>
+    10ca:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+00000000000010d0 <puts@plt>:
+    10d0:	f3 0f 1e fa          	endbr64
+    10d4:	ff 25 c6 2e 00 00    	jmp    *0x2ec6(%rip)        # 3fa0 <puts@GLIBC_2.2.5>
+    10da:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+00000000000010e0 <__stack_chk_fail@plt>:
+    10e0:	f3 0f 1e fa          	endbr64
+    10e4:	ff 25 be 2e 00 00    	jmp    *0x2ebe(%rip)        # 3fa8 <__stack_chk_fail@GLIBC_2.4>
+    10ea:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+00000000000010f0 <printf@plt>:
+    10f0:	f3 0f 1e fa          	endbr64
+    10f4:	ff 25 b6 2e 00 00    	jmp    *0x2eb6(%rip)        # 3fb0 <printf@GLIBC_2.2.5>
+    10fa:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+0000000000001100 <strtoull@plt>:
+    1100:	f3 0f 1e fa          	endbr64
+    1104:	ff 25 ae 2e 00 00    	jmp    *0x2eae(%rip)        # 3fb8 <strtoull@GLIBC_2.2.5>
+    110a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+0000000000001110 <fprintf@plt>:
+    1110:	f3 0f 1e fa          	endbr64
+    1114:	ff 25 a6 2e 00 00    	jmp    *0x2ea6(%rip)        # 3fc0 <fprintf@GLIBC_2.2.5>
+    111a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+0000000000001120 <malloc@plt>:
+    1120:	f3 0f 1e fa          	endbr64
+    1124:	ff 25 9e 2e 00 00    	jmp    *0x2e9e(%rip)        # 3fc8 <malloc@GLIBC_2.2.5>
+    112a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+0000000000001130 <fwrite@plt>:
+    1130:	f3 0f 1e fa          	endbr64
+    1134:	ff 25 96 2e 00 00    	jmp    *0x2e96(%rip)        # 3fd0 <fwrite@GLIBC_2.2.5>
+    113a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+Disassembly of section .text:
+
+0000000000001140 <_start>:
+    1140:	f3 0f 1e fa          	endbr64
+    1144:	31 ed                	xor    %ebp,%ebp
+    1146:	49 89 d1             	mov    %rdx,%r9
+    1149:	5e                   	pop    %rsi
+    114a:	48 89 e2             	mov    %rsp,%rdx
+    114d:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+    1151:	50                   	push   %rax
+    1152:	54                   	push   %rsp
+    1153:	45 31 c0             	xor    %r8d,%r8d
+    1156:	31 c9                	xor    %ecx,%ecx
+    1158:	48 8d 3d 2e 01 00 00 	lea    0x12e(%rip),%rdi        # 128d <main>
+    115f:	ff 15 73 2e 00 00    	call   *0x2e73(%rip)        # 3fd8 <__libc_start_main@GLIBC_2.34>
+    1165:	f4                   	hlt
+    1166:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+    116d:	00 00 00 
+
+0000000000001170 <deregister_tm_clones>:
+    1170:	48 8d 3d 99 2e 00 00 	lea    0x2e99(%rip),%rdi        # 4010 <__TMC_END__>
+    1177:	48 8d 05 92 2e 00 00 	lea    0x2e92(%rip),%rax        # 4010 <__TMC_END__>
+    117e:	48 39 f8             	cmp    %rdi,%rax
+    1181:	74 15                	je     1198 <deregister_tm_clones+0x28>
+    1183:	48 8b 05 56 2e 00 00 	mov    0x2e56(%rip),%rax        # 3fe0 <_ITM_deregisterTMCloneTable@Base>
+    118a:	48 85 c0             	test   %rax,%rax
+    118d:	74 09                	je     1198 <deregister_tm_clones+0x28>
+    118f:	ff e0                	jmp    *%rax
+    1191:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+    1198:	c3                   	ret
+    1199:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+00000000000011a0 <register_tm_clones>:
+    11a0:	48 8d 3d 69 2e 00 00 	lea    0x2e69(%rip),%rdi        # 4010 <__TMC_END__>
+    11a7:	48 8d 35 62 2e 00 00 	lea    0x2e62(%rip),%rsi        # 4010 <__TMC_END__>
+    11ae:	48 29 fe             	sub    %rdi,%rsi
+    11b1:	48 89 f0             	mov    %rsi,%rax
+    11b4:	48 c1 ee 3f          	shr    $0x3f,%rsi
+    11b8:	48 c1 f8 03          	sar    $0x3,%rax
+    11bc:	48 01 c6             	add    %rax,%rsi
+    11bf:	48 d1 fe             	sar    $1,%rsi
+    11c2:	74 14                	je     11d8 <register_tm_clones+0x38>
+    11c4:	48 8b 05 25 2e 00 00 	mov    0x2e25(%rip),%rax        # 3ff0 <_ITM_registerTMCloneTable@Base>
+    11cb:	48 85 c0             	test   %rax,%rax
+    11ce:	74 08                	je     11d8 <register_tm_clones+0x38>
+    11d0:	ff e0                	jmp    *%rax
+    11d2:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+    11d8:	c3                   	ret
+    11d9:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+00000000000011e0 <__do_global_dtors_aux>:
+    11e0:	f3 0f 1e fa          	endbr64
+    11e4:	80 3d 3d 2e 00 00 00 	cmpb   $0x0,0x2e3d(%rip)        # 4028 <completed.0>
+    11eb:	75 2b                	jne    1218 <__do_global_dtors_aux+0x38>
+    11ed:	55                   	push   %rbp
+    11ee:	48 83 3d 02 2e 00 00 	cmpq   $0x0,0x2e02(%rip)        # 3ff8 <__cxa_finalize@GLIBC_2.2.5>
+    11f5:	00 
+    11f6:	48 89 e5             	mov    %rsp,%rbp
+    11f9:	74 0c                	je     1207 <__do_global_dtors_aux+0x27>
+    11fb:	48 8b 3d 06 2e 00 00 	mov    0x2e06(%rip),%rdi        # 4008 <__dso_handle>
+    1202:	e8 a9 fe ff ff       	call   10b0 <__cxa_finalize@plt>
+    1207:	e8 64 ff ff ff       	call   1170 <deregister_tm_clones>
+    120c:	c6 05 15 2e 00 00 01 	movb   $0x1,0x2e15(%rip)        # 4028 <completed.0>
+    1213:	5d                   	pop    %rbp
+    1214:	c3                   	ret
+    1215:	0f 1f 00             	nopl   (%rax)
+    1218:	c3                   	ret
+    1219:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000001220 <frame_dummy>:
+    1220:	f3 0f 1e fa          	endbr64
+    1224:	e9 77 ff ff ff       	jmp    11a0 <register_tm_clones>
+
+0000000000001229 <tsc_start>:
+
+/* Identical to cache_bench.c -- see that file for the full rationale on why
+ * RDTSCP is used at both ends and why the leading LFENCE is retained despite
+ * being largely redundant. */
+static inline uint64_t tsc_start(unsigned *aux_out)
+{
+    1229:	55                   	push   %rbp
+    122a:	48 89 e5             	mov    %rsp,%rbp
+    122d:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+}
+
+extern __inline void __attribute__((__gnu_inline__, __always_inline__, __artificial__))
+_mm_lfence (void)
+{
+  __builtin_ia32_lfence ();
+    1231:	0f ae e8             	lfence
+}
+    1234:	90                   	nop
+    1235:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+    1239:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+/* rdtscp */
+extern __inline unsigned long long
+__attribute__((__gnu_inline__, __always_inline__, __artificial__))
+__rdtscp (unsigned int *__A)
+{
+  return __builtin_ia32_rdtscp (__A);
+    123d:	0f 01 f9             	rdtscp
+    1240:	89 ce                	mov    %ecx,%esi
+    1242:	48 8b 4d f8          	mov    -0x8(%rbp),%rcx
+    1246:	89 31                	mov    %esi,(%rcx)
+    1248:	48 c1 e2 20          	shl    $0x20,%rdx
+    124c:	48 09 d0             	or     %rdx,%rax
+    uint64_t t;
+    _mm_lfence();
+    t = __rdtscp(aux_out);
+    124f:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+  __builtin_ia32_lfence ();
+    1253:	0f ae e8             	lfence
+}
+    1256:	90                   	nop
+    _mm_lfence();
+    return t;
+    1257:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+}
+    125b:	5d                   	pop    %rbp
+    125c:	c3                   	ret
+
+000000000000125d <tsc_stop>:
+
+static inline uint64_t tsc_stop(unsigned *aux_out)
+{
+    125d:	55                   	push   %rbp
+    125e:	48 89 e5             	mov    %rsp,%rbp
+    1261:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+    1265:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+    1269:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+    126d:	0f 01 f9             	rdtscp
+    1270:	89 ce                	mov    %ecx,%esi
+    1272:	48 8b 4d f8          	mov    -0x8(%rbp),%rcx
+    1276:	89 31                	mov    %esi,(%rcx)
+    1278:	48 c1 e2 20          	shl    $0x20,%rdx
+    127c:	48 09 d0             	or     %rdx,%rax
+    uint64_t t;
+    t = __rdtscp(aux_out);
+    127f:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+  __builtin_ia32_lfence ();
+    1283:	0f ae e8             	lfence
+}
+    1286:	90                   	nop
+    _mm_lfence();
+    return t;
+    1287:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+}
+    128b:	5d                   	pop    %rbp
+    128c:	c3                   	ret
+
+000000000000128d <main>:
+
+int main(int argc, char **argv)
+{
+    128d:	f3 0f 1e fa          	endbr64
+    1291:	55                   	push   %rbp
+    1292:	48 89 e5             	mov    %rsp,%rbp
+    1295:	48 83 ec 70          	sub    $0x70,%rsp
+    1299:	89 7d 9c             	mov    %edi,-0x64(%rbp)
+    129c:	48 89 75 90          	mov    %rsi,-0x70(%rbp)
+    12a0:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+    12a7:	00 00 
+    12a9:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+    12ad:	31 c0                	xor    %eax,%eax
+    if (argc < 2) {
+    12af:	83 7d 9c 01          	cmpl   $0x1,-0x64(%rbp)
+    12b3:	7f 2f                	jg     12e4 <main+0x57>
+        fprintf(stderr, "usage: %s <num_samples>\n", argv[0]);
+    12b5:	48 8b 45 90          	mov    -0x70(%rbp),%rax
+    12b9:	48 8b 10             	mov    (%rax),%rdx
+    12bc:	48 8b 05 5d 2d 00 00 	mov    0x2d5d(%rip),%rax        # 4020 <stderr@GLIBC_2.2.5>
+    12c3:	48 8d 0d 3e 0d 00 00 	lea    0xd3e(%rip),%rcx        # 2008 <_IO_stdin_used+0x8>
+    12ca:	48 89 ce             	mov    %rcx,%rsi
+    12cd:	48 89 c7             	mov    %rax,%rdi
+    12d0:	b8 00 00 00 00       	mov    $0x0,%eax
+    12d5:	e8 36 fe ff ff       	call   1110 <fprintf@plt>
+        return 1;
+    12da:	b8 01 00 00 00       	mov    $0x1,%eax
+    12df:	e9 35 03 00 00       	jmp    1619 <main+0x38c>
+    }
+
+    uint64_t num_samples = strtoull(argv[1], NULL, 10);
+    12e4:	48 8b 45 90          	mov    -0x70(%rbp),%rax
+    12e8:	48 83 c0 08          	add    $0x8,%rax
+    12ec:	48 8b 00             	mov    (%rax),%rax
+    12ef:	ba 0a 00 00 00       	mov    $0xa,%edx
+    12f4:	be 00 00 00 00       	mov    $0x0,%esi
+    12f9:	48 89 c7             	mov    %rax,%rdi
+    12fc:	e8 ff fd ff ff       	call   1100 <strtoull@plt>
+    1301:	48 89 45 d8          	mov    %rax,-0x28(%rbp)
+    if (num_samples == 0) {
+    1305:	48 83 7d d8 00       	cmpq   $0x0,-0x28(%rbp)
+    130a:	75 2d                	jne    1339 <main+0xac>
+        fprintf(stderr, "ERROR: num_samples must be > 0\n");
+    130c:	48 8b 05 0d 2d 00 00 	mov    0x2d0d(%rip),%rax        # 4020 <stderr@GLIBC_2.2.5>
+    1313:	48 89 c1             	mov    %rax,%rcx
+    1316:	ba 1f 00 00 00       	mov    $0x1f,%edx
+    131b:	be 01 00 00 00       	mov    $0x1,%esi
+    1320:	48 8d 05 01 0d 00 00 	lea    0xd01(%rip),%rax        # 2028 <_IO_stdin_used+0x28>
+    1327:	48 89 c7             	mov    %rax,%rdi
+    132a:	e8 01 fe ff ff       	call   1130 <fwrite@plt>
+        return 1;
+    132f:	b8 01 00 00 00       	mov    $0x1,%eax
+    1334:	e9 e0 02 00 00       	jmp    1619 <main+0x38c>
+    }
+
+    uint64_t *samples = malloc((size_t)num_samples * sizeof(*samples));
+    1339:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+    133d:	48 c1 e0 03          	shl    $0x3,%rax
+    1341:	48 89 c7             	mov    %rax,%rdi
+    1344:	e8 d7 fd ff ff       	call   1120 <malloc@plt>
+    1349:	48 89 45 e0          	mov    %rax,-0x20(%rbp)
+    if (!samples) {
+    134d:	48 83 7d e0 00       	cmpq   $0x0,-0x20(%rbp)
+    1352:	75 2c                	jne    1380 <main+0xf3>
+        fprintf(stderr, "ERROR: malloc failed for %" PRIu64 " samples\n",
+    1354:	48 8b 05 c5 2c 00 00 	mov    0x2cc5(%rip),%rax        # 4020 <stderr@GLIBC_2.2.5>
+    135b:	48 8b 55 d8          	mov    -0x28(%rbp),%rdx
+    135f:	48 8d 0d e2 0c 00 00 	lea    0xce2(%rip),%rcx        # 2048 <_IO_stdin_used+0x48>
+    1366:	48 89 ce             	mov    %rcx,%rsi
+    1369:	48 89 c7             	mov    %rax,%rdi
+    136c:	b8 00 00 00 00       	mov    $0x0,%eax
+    1371:	e8 9a fd ff ff       	call   1110 <fprintf@plt>
+                num_samples);
+        return 1;
+    1376:	b8 01 00 00 00       	mov    $0x1,%eax
+    137b:	e9 99 02 00 00       	jmp    1619 <main+0x38c>
+
+    /* Warm-up: run the bracket a few times untimed so that the instruction
+     * cache, branch predictors, and any first-call effects have settled before
+     * the recorded samples begin -- the same principle as cache_bench's
+     * warm-up, applied to the instrumentation itself. */
+    for (uint64_t i = 0; i < 1000; i++) {
+    1380:	48 c7 45 b8 00 00 00 	movq   $0x0,-0x48(%rbp)
+    1387:	00 
+    1388:	eb 1d                	jmp    13a7 <main+0x11a>
+        unsigned a, b;
+        (void)tsc_start(&a);
+    138a:	48 8d 45 ac          	lea    -0x54(%rbp),%rax
+    138e:	48 89 c7             	mov    %rax,%rdi
+    1391:	e8 93 fe ff ff       	call   1229 <tsc_start>
+        (void)tsc_stop(&b);
+    1396:	48 8d 45 b0          	lea    -0x50(%rbp),%rax
+    139a:	48 89 c7             	mov    %rax,%rdi
+    139d:	e8 bb fe ff ff       	call   125d <tsc_stop>
+    for (uint64_t i = 0; i < 1000; i++) {
+    13a2:	48 83 45 b8 01       	addq   $0x1,-0x48(%rbp)
+    13a7:	48 81 7d b8 e7 03 00 	cmpq   $0x3e7,-0x48(%rbp)
+    13ae:	00 
+    13af:	76 d9                	jbe    138a <main+0xfd>
+    }
+
+    unsigned aux_first        = 0;
+    13b1:	c7 45 b4 00 00 00 00 	movl   $0x0,-0x4c(%rbp)
+    uint64_t migrated_samples = 0;
+    13b8:	48 c7 45 c0 00 00 00 	movq   $0x0,-0x40(%rbp)
+    13bf:	00 
+
+    for (uint64_t r = 0; r < num_samples; r++) {
+    13c0:	48 c7 45 c8 00 00 00 	movq   $0x0,-0x38(%rbp)
+    13c7:	00 
+    13c8:	eb 7b                	jmp    1445 <main+0x1b8>
+        unsigned aux_a, aux_b;
+
+        /* THE EMPTY BRACKET: nothing whatsoever between the two reads. The
+         * measured interval is therefore the cost of the instrumentation
+         * itself -- two RDTSCPs and three LFENCEs -- and nothing else. */
+        uint64_t t0 = tsc_start(&aux_a);
+    13ca:	48 8d 45 ac          	lea    -0x54(%rbp),%rax
+    13ce:	48 89 c7             	mov    %rax,%rdi
+    13d1:	e8 53 fe ff ff       	call   1229 <tsc_start>
+    13d6:	48 89 45 e8          	mov    %rax,-0x18(%rbp)
+        uint64_t t1 = tsc_stop(&aux_b);
+    13da:	48 8d 45 b0          	lea    -0x50(%rbp),%rax
+    13de:	48 89 c7             	mov    %rax,%rdi
+    13e1:	e8 77 fe ff ff       	call   125d <tsc_stop>
+    13e6:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+
+        if (r == 0) aux_first = aux_a;
+    13ea:	48 83 7d c8 00       	cmpq   $0x0,-0x38(%rbp)
+    13ef:	75 06                	jne    13f7 <main+0x16a>
+    13f1:	8b 45 ac             	mov    -0x54(%rbp),%eax
+    13f4:	89 45 b4             	mov    %eax,-0x4c(%rbp)
+
+        if (aux_a != aux_b) {
+    13f7:	8b 55 ac             	mov    -0x54(%rbp),%edx
+    13fa:	8b 45 b0             	mov    -0x50(%rbp),%eax
+    13fd:	39 c2                	cmp    %eax,%edx
+    13ff:	74 21                	je     1422 <main+0x195>
+            samples[r] = SAMPLE_MIGRATED;
+    1401:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+    1405:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+    140c:	00 
+    140d:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+    1411:	48 01 d0             	add    %rdx,%rax
+    1414:	48 c7 00 ff ff ff ff 	movq   $0xffffffffffffffff,(%rax)
+            migrated_samples++;
+    141b:	48 83 45 c0 01       	addq   $0x1,-0x40(%rbp)
+    1420:	eb 1e                	jmp    1440 <main+0x1b3>
+        } else {
+            samples[r] = t1 - t0;
+    1422:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+    1426:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+    142d:	00 
+    142e:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+    1432:	48 01 c2             	add    %rax,%rdx
+    1435:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+    1439:	48 2b 45 e8          	sub    -0x18(%rbp),%rax
+    143d:	48 89 02             	mov    %rax,(%rdx)
+    for (uint64_t r = 0; r < num_samples; r++) {
+    1440:	48 83 45 c8 01       	addq   $0x1,-0x38(%rbp)
+    1445:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+    1449:	48 3b 45 d8          	cmp    -0x28(%rbp),%rax
+    144d:	0f 82 77 ff ff ff    	jb     13ca <main+0x13d>
+        }
+    }
+
+    fprintf(stderr, "# cache_bench_metadata_version=1\n");
+    1453:	48 8b 05 c6 2b 00 00 	mov    0x2bc6(%rip),%rax        # 4020 <stderr@GLIBC_2.2.5>
+    145a:	48 89 c1             	mov    %rax,%rcx
+    145d:	ba 21 00 00 00       	mov    $0x21,%edx
+    1462:	be 01 00 00 00       	mov    $0x1,%esi
+    1467:	48 8d 05 02 0c 00 00 	lea    0xc02(%rip),%rax        # 2070 <_IO_stdin_used+0x70>
+    146e:	48 89 c7             	mov    %rax,%rdi
+    1471:	e8 ba fc ff ff       	call   1130 <fwrite@plt>
+    fprintf(stderr, "# experiment=timer_overhead\n");
+    1476:	48 8b 05 a3 2b 00 00 	mov    0x2ba3(%rip),%rax        # 4020 <stderr@GLIBC_2.2.5>
+    147d:	48 89 c1             	mov    %rax,%rcx
+    1480:	ba 1c 00 00 00       	mov    $0x1c,%edx
+    1485:	be 01 00 00 00       	mov    $0x1,%esi
+    148a:	48 8d 05 01 0c 00 00 	lea    0xc01(%rip),%rax        # 2092 <_IO_stdin_used+0x92>
+    1491:	48 89 c7             	mov    %rax,%rdi
+    1494:	e8 97 fc ff ff       	call   1130 <fwrite@plt>
+    fprintf(stderr, "# num_samples_requested=%" PRIu64 "\n", num_samples);
+    1499:	48 8b 05 80 2b 00 00 	mov    0x2b80(%rip),%rax        # 4020 <stderr@GLIBC_2.2.5>
+    14a0:	48 8b 55 d8          	mov    -0x28(%rbp),%rdx
+    14a4:	48 8d 0d 04 0c 00 00 	lea    0xc04(%rip),%rcx        # 20af <_IO_stdin_used+0xaf>
+    14ab:	48 89 ce             	mov    %rcx,%rsi
+    14ae:	48 89 c7             	mov    %rax,%rdi
+    14b1:	b8 00 00 00 00       	mov    $0x0,%eax
+    14b6:	e8 55 fc ff ff       	call   1110 <fprintf@plt>
+    fprintf(stderr, "# num_samples_emitted=%" PRIu64 "\n",
+    14bb:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+    14bf:	48 2b 45 c0          	sub    -0x40(%rbp),%rax
+    14c3:	48 89 c2             	mov    %rax,%rdx
+    14c6:	48 8b 05 53 2b 00 00 	mov    0x2b53(%rip),%rax        # 4020 <stderr@GLIBC_2.2.5>
+    14cd:	48 8d 0d f8 0b 00 00 	lea    0xbf8(%rip),%rcx        # 20cc <_IO_stdin_used+0xcc>
+    14d4:	48 89 ce             	mov    %rcx,%rsi
+    14d7:	48 89 c7             	mov    %rax,%rdi
+    14da:	b8 00 00 00 00       	mov    $0x0,%eax
+    14df:	e8 2c fc ff ff       	call   1110 <fprintf@plt>
+            num_samples - migrated_samples);
+    fprintf(stderr, "# timer_method=lfence;rdtscp;lfence / rdtscp;lfence\n");
+    14e4:	48 8b 05 35 2b 00 00 	mov    0x2b35(%rip),%rax        # 4020 <stderr@GLIBC_2.2.5>
+    14eb:	48 89 c1             	mov    %rax,%rcx
+    14ee:	ba 34 00 00 00       	mov    $0x34,%edx
+    14f3:	be 01 00 00 00       	mov    $0x1,%esi
+    14f8:	48 8d 05 e9 0b 00 00 	lea    0xbe9(%rip),%rax        # 20e8 <_IO_stdin_used+0xe8>
+    14ff:	48 89 c7             	mov    %rax,%rdi
+    1502:	e8 29 fc ff ff       	call   1130 <fwrite@plt>
+    fprintf(stderr, "# timer_units=TSC_ticks\n");
+    1507:	48 8b 05 12 2b 00 00 	mov    0x2b12(%rip),%rax        # 4020 <stderr@GLIBC_2.2.5>
+    150e:	48 89 c1             	mov    %rax,%rcx
+    1511:	ba 18 00 00 00       	mov    $0x18,%edx
+    1516:	be 01 00 00 00       	mov    $0x1,%esi
+    151b:	48 8d 05 fb 0b 00 00 	lea    0xbfb(%rip),%rax        # 211d <_IO_stdin_used+0x11d>
+    1522:	48 89 c7             	mov    %rax,%rdi
+    1525:	e8 06 fc ff ff       	call   1130 <fwrite@plt>
+    fprintf(stderr, "# bracket_contents=empty\n");
+    152a:	48 8b 05 ef 2a 00 00 	mov    0x2aef(%rip),%rax        # 4020 <stderr@GLIBC_2.2.5>
+    1531:	48 89 c1             	mov    %rax,%rcx
+    1534:	ba 19 00 00 00       	mov    $0x19,%edx
+    1539:	be 01 00 00 00       	mov    $0x1,%esi
+    153e:	48 8d 05 f1 0b 00 00 	lea    0xbf1(%rip),%rax        # 2136 <_IO_stdin_used+0x136>
+    1545:	48 89 c7             	mov    %rax,%rdi
+    1548:	e8 e3 fb ff ff       	call   1130 <fwrite@plt>
+    fprintf(stderr, "# logical_cpu_from_tsc_aux=%u\n", aux_first);
+    154d:	48 8b 05 cc 2a 00 00 	mov    0x2acc(%rip),%rax        # 4020 <stderr@GLIBC_2.2.5>
+    1554:	8b 55 b4             	mov    -0x4c(%rbp),%edx
+    1557:	48 8d 0d f2 0b 00 00 	lea    0xbf2(%rip),%rcx        # 2150 <_IO_stdin_used+0x150>
+    155e:	48 89 ce             	mov    %rcx,%rsi
+    1561:	48 89 c7             	mov    %rax,%rdi
+    1564:	b8 00 00 00 00       	mov    $0x0,%eax
+    1569:	e8 a2 fb ff ff       	call   1110 <fprintf@plt>
+    fprintf(stderr, "# migrated_samples_excluded=%" PRIu64 "\n",
+    156e:	48 8b 05 ab 2a 00 00 	mov    0x2aab(%rip),%rax        # 4020 <stderr@GLIBC_2.2.5>
+    1575:	48 8b 55 c0          	mov    -0x40(%rbp),%rdx
+    1579:	48 8d 0d f0 0b 00 00 	lea    0xbf0(%rip),%rcx        # 2170 <_IO_stdin_used+0x170>
+    1580:	48 89 ce             	mov    %rcx,%rsi
+    1583:	48 89 c7             	mov    %rax,%rdi
+    1586:	b8 00 00 00 00       	mov    $0x0,%eax
+    158b:	e8 80 fb ff ff       	call   1110 <fprintf@plt>
+            migrated_samples);
+
+    printf("sample_index,ticks_elapsed\n");
+    1590:	48 8d 05 fa 0b 00 00 	lea    0xbfa(%rip),%rax        # 2191 <_IO_stdin_used+0x191>
+    1597:	48 89 c7             	mov    %rax,%rdi
+    159a:	e8 31 fb ff ff       	call   10d0 <puts@plt>
+    for (uint64_t r = 0; r < num_samples; r++) {
+    159f:	48 c7 45 d0 00 00 00 	movq   $0x0,-0x30(%rbp)
+    15a6:	00 
+    15a7:	eb 55                	jmp    15fe <main+0x371>
+        if (samples[r] == SAMPLE_MIGRATED) continue;
+    15a9:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+    15ad:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+    15b4:	00 
+    15b5:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+    15b9:	48 01 d0             	add    %rdx,%rax
+    15bc:	48 8b 00             	mov    (%rax),%rax
+    15bf:	48 83 f8 ff          	cmp    $0xffffffffffffffff,%rax
+    15c3:	74 33                	je     15f8 <main+0x36b>
+        printf("%" PRIu64 ",%" PRIu64 "\n", r, samples[r]);
+    15c5:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+    15c9:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+    15d0:	00 
+    15d1:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+    15d5:	48 01 d0             	add    %rdx,%rax
+    15d8:	48 8b 10             	mov    (%rax),%rdx
+    15db:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+    15df:	48 89 c6             	mov    %rax,%rsi
+    15e2:	48 8d 05 c3 0b 00 00 	lea    0xbc3(%rip),%rax        # 21ac <_IO_stdin_used+0x1ac>
+    15e9:	48 89 c7             	mov    %rax,%rdi
+    15ec:	b8 00 00 00 00       	mov    $0x0,%eax
+    15f1:	e8 fa fa ff ff       	call   10f0 <printf@plt>
+    15f6:	eb 01                	jmp    15f9 <main+0x36c>
+        if (samples[r] == SAMPLE_MIGRATED) continue;
+    15f8:	90                   	nop
+    for (uint64_t r = 0; r < num_samples; r++) {
+    15f9:	48 83 45 d0 01       	addq   $0x1,-0x30(%rbp)
+    15fe:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+    1602:	48 3b 45 d8          	cmp    -0x28(%rbp),%rax
+    1606:	72 a1                	jb     15a9 <main+0x31c>
+    }
+
+    free(samples);
+    1608:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+    160c:	48 89 c7             	mov    %rax,%rdi
+    160f:	e8 ac fa ff ff       	call   10c0 <free@plt>
+    return 0;
+    1614:	b8 00 00 00 00       	mov    $0x0,%eax
+}
+    1619:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+    161d:	64 48 2b 14 25 28 00 	sub    %fs:0x28,%rdx
+    1624:	00 00 
+    1626:	74 05                	je     162d <main+0x3a0>
+    1628:	e8 b3 fa ff ff       	call   10e0 <__stack_chk_fail@plt>
+    162d:	c9                   	leave
+    162e:	c3                   	ret
+
+Disassembly of section .fini:
+
+0000000000001630 <_fini>:
+    1630:	f3 0f 1e fa          	endbr64
+    1634:	48 83 ec 08          	sub    $0x8,%rsp
+    1638:	48 83 c4 08          	add    $0x8,%rsp
+    163c:	c3                   	ret

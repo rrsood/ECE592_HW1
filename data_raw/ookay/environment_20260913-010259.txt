@@ -1,0 +1,49 @@
+# ============================================================
+# Environment record -- ECE 592 HW1 Phase I
+# Generated: 2026-09-13T01:03:00Z (UTC)
+# NOTE: Phase-I-safe commands only; no cache-size fields queried.
+# ============================================================
+
+## hostname
+ookay.ece.ncsu.edu
+
+## uname -a
+Linux ookay.ece.ncsu.edu 6.8.0-100-generic #100-Ubuntu SMP PREEMPT_DYNAMIC Tue Jan 13 16:40:06 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+
+## CPU model (/proc/cpuinfo, first match only)
+model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
+
+## Topology (lscpu -e=CPU,CORE,SOCKET,NODE -- no cache fields)
+CPU CORE SOCKET NODE
+  0    0      0    0
+  1    1      0    0
+  2    2      0    0
+  3    3      0    0
+  4    0      0    0
+  5    1      0    0
+  6    2      0    0
+  7    3      0    0
+
+## Page size (getconf PAGESIZE)
+4096
+
+## Compiler version
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+
+## Kernel version
+Linux version 6.8.0-100-generic (buildd@lcy02-amd64-061) (x86_64-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #100-Ubuntu SMP PREEMPT_DYNAMIC Tue Jan 13 16:40:06 UTC 2026
+
+## Load average at capture time (interference indicator)
+0.09 0.12 0.09 1/1145 1160441
+
+## Logged-in users (other users may perturb measurements)
+nsngo    pts/1        2026-09-08 22:37 (tmux(910669).%0)
+dchen27  pts/2        2026-09-09 13:14 (tmux(951177).%0)
+rrsood   pts/7        2026-09-12 20:53 (10.136.42.56)
+
+## NUMA nodes present
+1
+
+## Transparent hugepage setting (affects TLB reach; not a cache field)
+always [madvise] never
+
