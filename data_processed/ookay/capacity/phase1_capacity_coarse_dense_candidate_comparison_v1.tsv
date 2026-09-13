@@ -1,0 +1,25 @@
+ece592_capacity_candidate_comparison_version=1
+coarse_transition_file=/home/rrsood/ECE592_HW1/data_processed/ookay/capacity/phase1_capacity_coarse_transition_candidates_v1.tsv
+coarse_transition_sha256=c92bdd0bc4287bf9f53ee02f1bedb4ce71bc49e14dcaf15639422e064270654e
+dense_transition_file=/home/rrsood/ECE592_HW1/data_processed/ookay/capacity/phase1_capacity_dense_transition_candidates_v1.tsv
+dense_transition_sha256=075af5584cba91fecee3d14cbd8b1d12d426932f2b2a907304ebd0ca5a47d337
+source_hostname=ookay.ece.ncsu.edu
+source_isa=x86_64
+top_coarse_rank_count=6
+comparison_method=coarse_interval_vs_overlapping_dense_intervals
+dense_best_selection=largest_relative_increase_then_largest_slope
+cache_boundary_labels_assigned=false
+timer_overhead_subtracted=false
+comparison_script=/home/rrsood/ECE592_HW1/scripts/compare_capacity_candidates.py
+comparison_command=scripts/compare_capacity_candidates.py --coarse data_processed/ookay/capacity/phase1_capacity_coarse_transition_candidates_v1.tsv --dense data_processed/ookay/capacity/phase1_capacity_dense_transition_candidates_v1.tsv --top-count 6 --output data_processed/ookay/capacity/phase1_capacity_coarse_dense_candidate_comparison_v1.tsv
+comparison_working_directory=/home/rrsood/ECE592_HW1
+python_version=3.12.3
+data_begin
+coarse_rank	coarse_lower_span	coarse_upper_span	coarse_relative_increase	coarse_log2_latency_slope	coarse_trial_disagreement_fraction	dense_overlapping_interval_count	dense_best_rank	dense_best_lower_span	dense_best_upper_span	dense_best_relative_increase	dense_best_log2_latency_slope	dense_best_trial_disagreement_fraction	dense_support_status
+1	6990512	8388608	0.5154268083647584	2.2800313238500665	0.33514308336161069	4	1	7689568	7829376	0.93354298937874569	36.593764290843794	0.46388019394832136	strong-measured-jump
+2	5592408	6990512	0.40027202176174104	1.5087421768113816	0.19997714546908923	5	16	6291464	6710896	0.097011529126213691	1.4346387438555486	0.023439120514416097	moderate-measured-jump
+3	174768	218456	0.28567632208344396	1.1262056200896275	0.050020669698222407	4	12	174768	192248	0.20223226149348927	1.932090431323789	0.15207780725022105	strong-measured-jump
+4	11184816	13981016	0.25476579047883607	1.0170548226935248	0.0067710684398763843	4	2	13421784	13981016	0.21116794543904516	4.6932581728655052	0.15055958330400507	strong-measured-jump
+5	262144	349528	0.27153439153439152	0.83501200077283488	0.044274300932090546	6	9	288360	314576	0.20578602620087327	2.1505430771784928	0.14803078315980081	strong-measured-jump
+6	13981016	16777216	0.14990591100287798	0.7661204253125391	0.0084951748369552146	4	25	14540264	15379120	0.045323664284952603	0.79028814849113271	0.0063252397469904104	weak-measured-jump
+data_end
