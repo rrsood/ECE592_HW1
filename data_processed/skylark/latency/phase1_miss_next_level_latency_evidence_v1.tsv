@@ -1,0 +1,24 @@
+ece592_miss_latency_evidence_format_version=1
+evidence_purpose=8.2.6_miss_next_level_latency
+method=compare_representative_points_below_and_above_measured_timing_boundaries
+cache_boundary_labels_assigned=false
+timer_overhead_subtracted=false
+source_latency_representatives_file=/mnt/ncsudrive/r/rrsood/ECE592/ECE592_HW1/data_processed/skylark/latency/phase1_hit_latency_representatives_v1.tsv
+source_latency_representatives_sha256=2317648c3974271c4cb18269102146616c9886b8ccc9f7793c8109c272520468
+source_raw_hostname=skylark.ece.ncsu.edu
+source_raw_isa=x86_64
+source_raw_timer_unit=TSC ticks
+source_raw_traversal=randomized-dependent-single-cycle
+source_raw_timed_sample_count=1000000
+evidence_script=/mnt/ncsudrive/r/rrsood/ECE592/ECE592_HW1/scripts/make_miss_latency_evidence.py
+evidence_command=scripts/make_miss_latency_evidence.py --latency-representatives data_processed/skylark/latency/phase1_hit_latency_representatives_v1.tsv --output data_processed/skylark/latency/phase1_miss_next_level_latency_evidence_v1.tsv
+evidence_working_directory=/mnt/ncsudrive/r/rrsood/ECE592/ECE592_HW1
+python_version=3.9.25
+evidence_row_count=4
+data_begin
+evidence_rank	dense_refined_interval_bytes	dense_support_status	below_span_bytes	near_upper_span_bytes	above_span_bytes	below_median_ticks_per_access	near_upper_median_ticks_per_access	above_median_ticks_per_access	above_minus_below_median_ticks_per_access	above_divided_by_below_median_ratio	below_iqr_ticks_per_access	above_iqr_ticks_per_access	below_min_ticks_per_access	above_max_ticks_per_access	timed_sample_count	dependent_accesses_per_sample	timer_overhead_raw_ticks_median
+1	16777216..17895704	strong-measured-jump	15099496	17895704	18454936	28.125	48.1875	56.15625	28.03125	1.9966666666666666	0.9375	7.40625	26.71875	915.46875	1000000	256	72
+2	25165832..26843544	moderate-measured-jump	25165824	26843544	26843552	121.5	132.65625	132.65625	11.15625	1.091820987654321	11.4375	11.53125	82.59375	958.03125	1000000	256	72
+3	32768..36048	strong-measured-jump	29496	36048	39328	6.28125	7.03125	7.59375	1.3125	1.208955223880597	0.46875	0.46875	4.96875	116.8125	1000000	256	72
+4	31317480..33554432	weak-measured-jump	30758240	33554432	33554440	148.03125	158.8125	158.71875	10.6875	1.0721975934135528	11.4375	11.4375	106.3125	845.8125	1000000	256	72
+data_end

@@ -1,0 +1,24 @@
+ece592_miss_latency_evidence_format_version=1
+evidence_purpose=8.2.6_miss_next_level_latency
+method=compare_representative_points_below_and_above_measured_timing_boundaries
+cache_boundary_labels_assigned=false
+timer_overhead_subtracted=false
+source_latency_representatives_file=/mnt/ncsudrive/r/rrsood/ECE592/ECE592_HW1/data_processed/charnwood/latency/phase1_hit_latency_representatives_v1.tsv
+source_latency_representatives_sha256=19ef1ed12835ad2c9caaa3f8c12d0e07ca05b4c369285b0c25d78572c37a6d67
+source_raw_hostname=charnwood.ece.ncsu.edu
+source_raw_isa=x86_64
+source_raw_timer_unit=TSC ticks
+source_raw_traversal=randomized-dependent-single-cycle
+source_raw_timed_sample_count=1000000
+evidence_script=/mnt/ncsudrive/r/rrsood/ECE592/ECE592_HW1/scripts/make_miss_latency_evidence.py
+evidence_command=scripts/make_miss_latency_evidence.py --latency-representatives data_processed/charnwood/latency/phase1_hit_latency_representatives_v1.tsv --output data_processed/charnwood/latency/phase1_miss_next_level_latency_evidence_v1.tsv
+evidence_working_directory=/mnt/ncsudrive/r/rrsood/ECE592/ECE592_HW1
+python_version=3.9.25
+evidence_row_count=4
+data_begin
+evidence_rank	dense_refined_interval_bytes	dense_support_status	below_span_bytes	near_upper_span_bytes	above_span_bytes	below_median_ticks_per_access	near_upper_median_ticks_per_access	above_median_ticks_per_access	above_minus_below_median_ticks_per_access	above_divided_by_below_median_ratio	below_iqr_ticks_per_access	above_iqr_ticks_per_access	below_min_ticks_per_access	above_max_ticks_per_access	timed_sample_count	dependent_accesses_per_sample	timer_overhead_raw_ticks_median
+1	5592416..6151648	strong-measured-jump	5592408	6151648	6291464	53.09375	50.171875	53.1171875	0.0234375	1.0004414361389053	5.765625	5.671875	43.71875	667.1796875	1000000	256	56
+2	6990512..7270136	strong-measured-jump	6710896	7270136	7549752	65.9765625	102.5703125	83.296875	17.3203125	1.2625222024866785	9.5078125	9.8828125	49.171875	4170.8671875	1000000	256	64
+3	8388616..8738144	strong-measured-jump	8388608	8738144	8947856	97.8671875	122.5859375	106.9609375	9.09375	1.0929192943242596	12.359375	13.8359375	69.984375	4267.984375	1000000	256	76
+4	11744056..12303296	strong-measured-jump	11184816	12303296	12582912	142.671875	274.328125	177.703125	35.03125	1.2455371810316505	28.78125	89.1875	110.6953125	15904.71875	1000000	256	80
+data_end
