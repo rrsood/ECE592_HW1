@@ -1,0 +1,21 @@
+ece592_capacity_evidence_summary_version=1
+coarse_dense_comparison_file=/home/rrsood/ECE592_HW1/data_processed/skylark/capacity/phase1_capacity_coarse_dense_candidate_comparison_v1.tsv
+coarse_dense_comparison_sha256=2abfed61bcc4f325e1c63ff4301b8a7caaef88a12f11c92b8ed2fb530e94eb58
+top_count=6
+summary_purpose=report_evidence_for_8.2.1_and_8.2.2
+evidence_scope=coarse_and_dense_randomized_dependent_pointer_chasing
+cache_boundary_labels_assigned=false
+timer_overhead_subtracted=false
+summary_script=/home/rrsood/ECE592_HW1/scripts/make_capacity_evidence_summary.py
+summary_command=scripts/make_capacity_evidence_summary.py --candidate-comparison data_processed/skylark/capacity/phase1_capacity_coarse_dense_candidate_comparison_v1.tsv --top-count 6 --output data_processed/skylark/capacity/phase1_capacity_evidence_summary_v1.tsv
+summary_working_directory=/home/rrsood/ECE592_HW1
+python_version=3.9.25
+data_begin
+evidence_rank	coarse_interval_bytes	coarse_relative_increase	coarse_trial_disagreement_fraction	dense_overlapping_interval_count	dense_refined_interval_bytes	dense_relative_increase	dense_trial_disagreement_fraction	dense_support_status
+1	16777216..22369624	2.3801261829652995	0.0060662622491833877	5	16777216..17895704	0.620253164556962	0.00390625	strong-measured-jump
+2	22369624..27962032	0.36397573495100333	0.0060662622491833877	8	25165832..26843544	0.091399922869263461	0.0011569610489780178	moderate-measured-jump
+3	32768..43696	0.29323308270676685	0.0075187969924812026	4	32768..36048	0.1278195488721805	0.0075187969924812026	strong-measured-jump
+4	27962032..33554432	0.16284639069449192	0.0030790283954840918	5	31317480..33554432	0.048576732673267342	0.00061881188118811882	weak-measured-jump
+5	436912..524288	0.11764705882352944	0.019607843137254902	2	436912..480608	0.050156739811912265	0.044776119402985072	moderate-measured-jump
+6	33554432..44739248	0.18917328626066499	0.0014844136566056407	9	41943040..43620760	0.11776753712237586	0.083829592304168574	strong-measured-jump
+data_end
