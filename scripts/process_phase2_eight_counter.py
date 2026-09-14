@@ -14,7 +14,7 @@ import sys
 import tempfile
 
 
-MACHINES = ("thunderbird", "artemisia", "crux", "upgrade")
+MACHINES = ("sunbird", "skylark", "charnwood", "ookay")
 WORKLOADS = ("l1_resident", "last_cache_sized", "larger_than_last_cache")
 EVENT_FIELDS = (
     "cycles",
