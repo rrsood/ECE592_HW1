@@ -1,0 +1,26 @@
+generated_by=scripts/make_phase3_hazel_summary.py
+source_root=data_processed/phase3
+scope=Hazel Phase III five-CPU processed timing artifacts
+data_begin
+machine	evidence_rank	coarse_interval_bytes	coarse_relative_increase	dense_refined_interval_bytes	dense_relative_increase	dense_support_status	source_file
+haswell	1	25165824..29360128	0.45587278347161209	25165824..26424120	0.15854367319827301	strong-measured-jump	data_processed/phase3/haswell_capacity_830101/processed/capacity/evidence_summary.tsv
+haswell	2	29360128..33554432	0.28351537838366347	30198992..32296144	0.14073511304393382	strong-measured-jump	data_processed/phase3/haswell_capacity_830101/processed/capacity/evidence_summary.tsv
+haswell	3	262144..327680	0.3653464189741793	262144..275256	0.10771309260623929	strong-measured-jump	data_processed/phase3/haswell_capacity_830101/processed/capacity/evidence_summary.tsv
+haswell	4	33554432..41943040	0.28940495364123109	33554432..35232160	0.072780615016842409	moderate-measured-jump	data_processed/phase3/haswell_capacity_830101/processed/capacity/evidence_summary.tsv
+broadwell	1	29360128..33554432	0.31870236785263062	30198992..32296144	0.073877872431813207	moderate-measured-jump	data_processed/phase3/broadwell_capacity_830108/processed/capacity/evidence_summary.tsv
+broadwell	2	33554432..41943040	0.42677009611521455	33554432..35232160	0.11147423067300477	strong-measured-jump	data_processed/phase3/broadwell_capacity_830108/processed/capacity/evidence_summary.tsv
+broadwell	3	327680..393216	0.21897999826824832	367008..393216	0.070519098922624979	moderate-measured-jump	data_processed/phase3/broadwell_capacity_830108/processed/capacity/evidence_summary.tsv
+broadwell	4	41943040..50331648	0.19347571806091057	43620760..46137344	0.059908120188726155	moderate-measured-jump	data_processed/phase3/broadwell_capacity_830108/processed/capacity/evidence_summary.tsv
+cascadelake	1	20971520..25165824	0.57221609702315335	23488104..25165824	0.22270858912080294	strong-measured-jump	data_processed/phase3/cascadelake_capacity_830115/processed/capacity/evidence_summary.tsv
+cascadelake	2	25165824..29360128	0.30261529576767598	25165824..26424120	0.13136869679109364	strong-measured-jump	data_processed/phase3/cascadelake_capacity_830115/processed/capacity/evidence_summary.tsv
+cascadelake	3	29360128..33554432	0.15843308632592312	32715576..35232160	0.10991793259996507	strong-measured-jump	data_processed/phase3/cascadelake_capacity_830115/processed/capacity/evidence_summary.tsv
+cascadelake	4	1310720..1572864	0.21242484969939879	1468008..1572864	0.056645118878054124	moderate-measured-jump	data_processed/phase3/cascadelake_capacity_830115/processed/capacity/evidence_summary.tsv
+genoa	1	33554432..41943040	0.39980685659101889	33554432..36909880	0.19093539054966246	strong-measured-jump	data_processed/phase3/genoa_capacity_830122/processed/capacity/evidence_summary.tsv
+genoa	2	32768..40960	0.38636363636363646	32768..36048	0.16666666666666674	strong-measured-jump	data_processed/phase3/genoa_capacity_830122/processed/capacity/evidence_summary.tsv
+genoa	3	41943040..50331648	0.21352190410486371	46976208..50331648	0.077767612076852677	moderate-measured-jump	data_processed/phase3/genoa_capacity_830122/processed/capacity/evidence_summary.tsv
+genoa	4	1048576..1310720	0.2373660030627871	1048576..1153432	0.077380952380952328	moderate-measured-jump	data_processed/phase3/genoa_capacity_830122/processed/capacity/evidence_summary.tsv
+skylake	1	20971520..25165824	0.52535728868926101	23488104..25165824	0.2958938808158913	strong-measured-jump	data_processed/phase3/skylake_capacity_830272/processed/capacity/evidence_summary.tsv
+skylake	2	25165824..29360128	0.35737230966912947	27262976..27682408	0.1078167115902966	strong-measured-jump	data_processed/phase3/skylake_capacity_830272/processed/capacity/evidence_summary.tsv
+skylake	3	1048576..1310720	0.33060873306087335	1258296..1310720	0.07800669131889415	moderate-measured-jump	data_processed/phase3/skylake_capacity_830272/processed/capacity/evidence_summary.tsv
+skylake	4	786432..917504	0.17326866073834557	865080..943720	0.079090204187128421	moderate-measured-jump	data_processed/phase3/skylake_capacity_830272/processed/capacity/evidence_summary.tsv
+data_end

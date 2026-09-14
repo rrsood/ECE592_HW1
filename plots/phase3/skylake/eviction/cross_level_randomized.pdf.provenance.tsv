@@ -1,0 +1,12 @@
+ece592_plot_provenance_version=1
+plot_type=cross-level-eviction-reload-evidence
+input_filename=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/phase3_extracted_hazel_5cpus_20260914/skylake_eviction_832714/processed/eviction/cross_level_randomized.tsv
+input_sha256=123a2d82744c1db5ee7407ad8b35494542a8a02f59ce146001b62bab8806404c
+output_filename=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/plots/phase3/skylake/eviction/cross_level_randomized.pdf
+plotting_command=scripts/plot_eviction_evidence.py --input phase3_extracted_hazel_5cpus_20260914/skylake_eviction_832714/processed/eviction/cross_level_randomized.tsv --output plots/phase3/skylake/eviction/cross_level_randomized.pdf
+plotting_working_directory=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering
+python_version=3.9.25
+gnuplot_version=gnuplot 5.4 patchlevel 3
+raw_row_count=8
+aggregated_condition_count=4
+cache_policy_labels_assigned=false

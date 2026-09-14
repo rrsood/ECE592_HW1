@@ -1,0 +1,12 @@
+ece592_plot_provenance_version=1
+plot_type=cross-level-eviction-reload-evidence
+input_filename=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/phase3_extracted_hazel_5cpus_20260914/genoa_eviction_830058/processed/eviction/cross_level_randomized.tsv
+input_sha256=da3554ea6dc52c3e8c3b57198f9b423880ea039147e0f0147ab5f36ccb48d783
+output_filename=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/plots/phase3/genoa/eviction/cross_level_randomized.pdf
+plotting_command=scripts/plot_eviction_evidence.py --input phase3_extracted_hazel_5cpus_20260914/genoa_eviction_830058/processed/eviction/cross_level_randomized.tsv --output plots/phase3/genoa/eviction/cross_level_randomized.pdf
+plotting_working_directory=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering
+python_version=3.9.25
+gnuplot_version=gnuplot 5.4 patchlevel 3
+raw_row_count=8
+aggregated_condition_count=4
+cache_policy_labels_assigned=false

@@ -1,0 +1,24 @@
+ece592_miss_latency_evidence_format_version=1
+evidence_purpose=8.2.6_miss_next_level_latency
+method=compare_representative_points_below_and_above_measured_timing_boundaries
+cache_boundary_labels_assigned=false
+timer_overhead_subtracted=false
+source_latency_representatives_file=/share/ece592f26/djariwa/tmp/ece592_phase3_broadwell_capacity_830108/processed/latency/hit_representatives.tsv
+source_latency_representatives_sha256=550158e1df0341cbe2f0fd04ec5bd6fa23acc39324b9bb5fa9149883d0c61e0d
+source_raw_hostname=c202n08
+source_raw_isa=x86_64
+source_raw_timer_unit=TSC ticks
+source_raw_traversal=randomized-dependent-single-cycle
+source_raw_timed_sample_count=1000000
+evidence_script=/home/djariwa/ECE-592---Cache-Reverse-Engineering/scripts/make_miss_latency_evidence.py
+evidence_command=scripts/make_miss_latency_evidence.py --latency-representatives /share/ece592f26/djariwa/tmp/ece592_phase3_broadwell_capacity_830108/processed/latency/hit_representatives.tsv --output /share/ece592f26/djariwa/tmp/ece592_phase3_broadwell_capacity_830108/processed/latency/miss_next_level_evidence.tsv
+evidence_working_directory=/home/djariwa/ECE-592---Cache-Reverse-Engineering
+python_version=3.9.23
+evidence_row_count=4
+data_begin
+evidence_rank	dense_refined_interval_bytes	dense_support_status	below_span_bytes	near_upper_span_bytes	above_span_bytes	below_median_ticks_per_access	near_upper_median_ticks_per_access	above_median_ticks_per_access	above_minus_below_median_ticks_per_access	above_divided_by_below_median_ratio	below_iqr_ticks_per_access	above_iqr_ticks_per_access	below_min_ticks_per_access	above_max_ticks_per_access	timed_sample_count	dependent_accesses_per_sample	timer_overhead_raw_ticks_median
+1	30198992..32296144	moderate-measured-jump	29360128	32296144	33554432	54.21875	57.39453125	63.7734375	9.5546875	1.1762247838616715	3.8203125	6.22265625	44.546875	841.52734375	1000000	256	46
+2	33554432..35232160	strong-measured-jump	32296144	35232160	36909880	59.80078125	70.171875	75.578125	15.77734375	1.2638317329675355	4.8671875	6.54296875	47.24609375	6093.89453125	1000000	256	46
+3	367008..393216	moderate-measured-jump	360448	393216	409600	26.55078125	27.30078125	28.83984375	2.2890625	1.0862145063998823	1.46875	1.43359375	22.8984375	392.015625	1000000	256	47
+4	43620760..46137344	moderate-measured-jump	41943040	46137344	46976208	90.37109375	100.375	101.3203125	10.94921875	1.1211584179814134	7.63671875	7.36328125	70.5625	750.2890625	1000000	256	47
+data_end

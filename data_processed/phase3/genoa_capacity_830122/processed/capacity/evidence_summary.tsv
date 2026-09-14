@@ -1,0 +1,19 @@
+ece592_capacity_evidence_summary_version=1
+coarse_dense_comparison_file=/share/ece592f26/djariwa/tmp/ece592_phase3_genoa_capacity_830122/processed/capacity/candidate_comparison.tsv
+coarse_dense_comparison_sha256=dedd3c620b25fe1775a99087aab3c99fb39d6bd0c8d606f482c661d5e9730291
+top_count=4
+summary_purpose=report_evidence_for_8.2.1_and_8.2.2
+evidence_scope=coarse_and_dense_randomized_dependent_pointer_chasing
+cache_boundary_labels_assigned=false
+timer_overhead_subtracted=false
+summary_script=/home/djariwa/ECE-592---Cache-Reverse-Engineering/scripts/make_capacity_evidence_summary.py
+summary_command=scripts/make_capacity_evidence_summary.py --candidate-comparison /share/ece592f26/djariwa/tmp/ece592_phase3_genoa_capacity_830122/processed/capacity/candidate_comparison.tsv --top-count 4 --output /share/ece592f26/djariwa/tmp/ece592_phase3_genoa_capacity_830122/processed/capacity/evidence_summary.tsv
+summary_working_directory=/home/djariwa/ECE-592---Cache-Reverse-Engineering
+python_version=3.9.23
+data_begin
+evidence_rank	coarse_interval_bytes	coarse_relative_increase	coarse_trial_disagreement_fraction	dense_overlapping_interval_count	dense_refined_interval_bytes	dense_relative_increase	dense_trial_disagreement_fraction	dense_support_status
+1	33554432..41943040	0.39980685659101889	0.0014485755673587638	4	33554432..36909880	0.19093539054966246	0.0057859209257473485	strong-measured-jump
+2	32768..40960	0.38636363636363646	0.0054644808743169399	4	32768..36048	0.16666666666666674	0	strong-measured-jump
+3	41943040..50331648	0.21352190410486371	0.00034494653328734045	5	46976208..50331648	0.077767612076852677	0.0067911714770797962	moderate-measured-jump
+4	1048576..1310720	0.2373660030627871	0.0099009900990099011	3	1048576..1153432	0.077380952380952328	0.002976190476190476	moderate-measured-jump
+data_end

@@ -1,0 +1,21 @@
+generated_by=scripts/make_phase3_hazel_summary.py
+source_root=data_processed/phase3
+scope=Hazel Phase III five-CPU processed timing artifacts
+data_begin
+machine	case	estimated_hit_rate	wilson_95_low	wilson_95_high	target_median_ticks_per_access	balanced_calibration_accuracy	source_file
+haswell	l1_resident	0.99988999999999995	0.99986743509068243	0.99990872431037137	14.875	0.99994450000000001	data_processed/phase3/haswell_software_832724/processed/software_hit_rate/l1_resident.tsv
+haswell	nonresident_256mib	9.9999999999999995e-07	1.7652457674537171e-07	5.6649118043114428e-06	203.5	0.99994450000000001	data_processed/phase3/haswell_software_832724/processed/software_hit_rate/nonresident_256mib.tsv
+haswell	standardized_8mib	0.99975999999999998	0.99972765963219257	0.9997885007676367	48.25	0.99994450000000001	data_processed/phase3/haswell_software_832724/processed/software_hit_rate/standardized_8mib.tsv
+broadwell	l1_resident	0.99995400000000001	0.99993864863962878	0.99996551026972025	14.375	0.99997599999999998	data_processed/phase3/broadwell_software_832726/processed/software_hit_rate/l1_resident.tsv
+broadwell	nonresident_256mib	1.9999999999999999e-06	5.4847230959605618e-07	7.2929563885726299e-06	178.625	0.99997599999999998	data_processed/phase3/broadwell_software_832726/processed/software_hit_rate/nonresident_256mib.tsv
+broadwell	standardized_8mib	0.99980100000000005	0.99977136756362306	0.99982679252120799	47.75	0.99997599999999998	data_processed/phase3/broadwell_software_832726/processed/software_hit_rate/standardized_8mib.tsv
+cascadelake	l1_resident	0.99993399999999999	0.99991604186414995	0.99994811719885679	14.75	0.99996700000000005	data_processed/phase3/cascadelake_software_832727/processed/software_hit_rate/l1_resident.tsv
+cascadelake	nonresident_256mib	0	4.2351484671230661e-22	3.8414440639449411e-06	239	0.99996700000000005	data_processed/phase3/cascadelake_software_832727/processed/software_hit_rate/nonresident_256mib.tsv
+cascadelake	standardized_8mib	0.13303499999999999	0.13237078108115702	0.13370203826988483	181	0.99996700000000005	data_processed/phase3/cascadelake_software_832727/processed/software_hit_rate/standardized_8mib.tsv
+genoa	l1_resident	0.99991699999999994	0.99989712127444696	0.99993303791916888	21	0.99995149999999999	data_processed/phase3/genoa_software_832728/processed/software_hit_rate/l1_resident.tsv
+genoa	nonresident_256mib	1.4e-05	8.3398747243275635e-06	2.3501461779183591e-05	321	0.99995149999999999	data_processed/phase3/genoa_software_832728/processed/software_hit_rate/nonresident_256mib.tsv
+genoa	standardized_8mib	0.97359399999999996	0.97327791660362328	0.97390644482665667	75	0.99995149999999999	data_processed/phase3/genoa_software_832728/processed/software_hit_rate/standardized_8mib.tsv
+skylake	l1_resident	0.99995599999999996	0.999940937733799	0.99996722116018422	10.5	0.99997800000000003	data_processed/phase3/skylake_software_832715/processed/software_hit_rate/l1_resident.tsv
+skylake	nonresident_256mib	0	4.2351484671230661e-22	3.8414440639449411e-06	179.75	0.99997800000000003	data_processed/phase3/skylake_software_832715/processed/software_hit_rate/nonresident_256mib.tsv
+skylake	standardized_8mib	0.99980100000000005	0.99977136756362306	0.99982679252120799	48.5	0.99997800000000003	data_processed/phase3/skylake_software_832715/processed/software_hit_rate/standardized_8mib.tsv
+data_end

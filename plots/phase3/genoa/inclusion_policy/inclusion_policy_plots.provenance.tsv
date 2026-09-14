@@ -1,0 +1,14 @@
+ece592_plot_provenance_version=1
+plot_type=cross-level-inclusion-exclusion-evidence
+input_filename=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/phase3_extracted_hazel_5cpus_20260914/data_processed/genoa/inclusion_policy/genoa_inclusion_policy_20260914T180542Z.tsv
+input_sha256=c20537133d5c30a4da773ca7ec4d63300d3e4b0caee01391f46ff497f7a970ce
+output_filename=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/plots/phase3/genoa/inclusion_policy/inclusion_policy_eviction_probability.pdf
+output_filename=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/plots/phase3/genoa/inclusion_policy/inclusion_policy_reload_latency.pdf
+output_filename=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/plots/phase3/genoa/inclusion_policy/inclusion_policy_reload_boxplots.pdf
+plotting_command=scripts/plot_inclusion_policy_curve.py --input phase3_extracted_hazel_5cpus_20260914/data_processed/genoa/inclusion_policy/genoa_inclusion_policy_20260914T180542Z.tsv --output-prefix plots/phase3/genoa/inclusion_policy/inclusion_policy --machine genoa --l1-bytes 32768 --l2-bytes 1048576 --llc-bytes 33554432
+plotting_working_directory=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering
+python_version=3.9.25
+matplotlib_version=3.9.4
+processed_row_count=84
+aggregated_point_count=42
+cache_policy_labels_assigned=false

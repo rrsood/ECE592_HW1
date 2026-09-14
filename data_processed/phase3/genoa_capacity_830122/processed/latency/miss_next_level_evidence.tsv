@@ -1,0 +1,24 @@
+ece592_miss_latency_evidence_format_version=1
+evidence_purpose=8.2.6_miss_next_level_latency
+method=compare_representative_points_below_and_above_measured_timing_boundaries
+cache_boundary_labels_assigned=false
+timer_overhead_subtracted=false
+source_latency_representatives_file=/share/ece592f26/djariwa/tmp/ece592_phase3_genoa_capacity_830122/processed/latency/hit_representatives.tsv
+source_latency_representatives_sha256=2eede2141cb2c36a7ffdf03875213395938195a7b1c274130f1a9f44e4e4cf79
+source_raw_hostname=n0398
+source_raw_isa=x86_64
+source_raw_timer_unit=TSC ticks
+source_raw_traversal=randomized-dependent-single-cycle
+source_raw_timed_sample_count=1000000
+evidence_script=/home/djariwa/ECE-592---Cache-Reverse-Engineering/scripts/make_miss_latency_evidence.py
+evidence_command=scripts/make_miss_latency_evidence.py --latency-representatives /share/ece592f26/djariwa/tmp/ece592_phase3_genoa_capacity_830122/processed/latency/hit_representatives.tsv --output /share/ece592f26/djariwa/tmp/ece592_phase3_genoa_capacity_830122/processed/latency/miss_next_level_evidence.tsv
+evidence_working_directory=/home/djariwa/ECE-592---Cache-Reverse-Engineering
+python_version=3.9.23
+evidence_row_count=4
+data_begin
+evidence_rank	dense_refined_interval_bytes	dense_support_status	below_span_bytes	near_upper_span_bytes	above_span_bytes	below_median_ticks_per_access	near_upper_median_ticks_per_access	above_median_ticks_per_access	above_minus_below_median_ticks_per_access	above_divided_by_below_median_ratio	below_iqr_ticks_per_access	above_iqr_ticks_per_access	below_min_ticks_per_access	above_max_ticks_per_access	timed_sample_count	dependent_accesses_per_sample	timer_overhead_raw_ticks_median
+1	33554432..36909880	strong-measured-jump	30198992	36909880	37748736	90.84375	116.15625	118.96875	28.125	1.3095975232198143	9.0	11.34375	65.0625	1594.125	1000000	256	120
+2	32768..36048	strong-measured-jump	29496	36048	36864	6.0	7.21875	7.5	1.5	1.25	0.09375	0.46875	5.625	747.1875	1000000	256	120
+3	46976208..50331648	moderate-measured-jump	46137344	50331648	52428800	150.1875	165.65625	172.78125	22.59375	1.1504369538077404	11.53125	12.1875	114.65625	10088.0625	1000000	256	120
+4	1048576..1153432	moderate-measured-jump	943720	1153432	1258296	28.6875	33.84375	36.46875	7.78125	1.2712418300653594	1.78125	2.25	24.46875	1233.84375	1000000	256	120
+data_end

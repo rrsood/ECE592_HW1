@@ -1,0 +1,8 @@
+ece592_plot_provenance_version=1
+plot_kind=phase1_capacity_prefetch_control
+randomized_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/phase3_extracted_hazel_5cpus_20260914/genoa_capacity_830122/processed/capacity/coarse_randomized.tsv
+randomized_sha256=9808352113c50e8af42a58f9750078443376583e0d39509e87a55a142bf04eb6
+sequential_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/phase3_extracted_hazel_5cpus_20260914/genoa_capacity_830122/processed/capacity/coarse_sequential.tsv
+sequential_sha256=c3dd928ec65ec20edf1829befd9ed00e9999482c6f84155e9c6b24de0c0c9960
+plotting_command=scripts/plot_capacity_prefetch_control.py --randomized phase3_extracted_hazel_5cpus_20260914/genoa_capacity_830122/processed/capacity/coarse_randomized.tsv --sequential phase3_extracted_hazel_5cpus_20260914/genoa_capacity_830122/processed/capacity/coarse_sequential.tsv --output plots/phase3/genoa/capacity/prefetch_control.pdf
+python_version=3.9.25

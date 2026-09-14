@@ -1,0 +1,8 @@
+ece592_plot_provenance_version=1
+plot_kind=phase1_capacity_prefetch_control
+randomized_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/phase3_extracted_hazel_5cpus_20260914/haswell_capacity_830101/processed/capacity/coarse_randomized.tsv
+randomized_sha256=f71da704ebb1ca97578e0b27a2e2916fab12bd41c950ea0a004d79083bb4aea1
+sequential_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/phase3_extracted_hazel_5cpus_20260914/haswell_capacity_830101/processed/capacity/coarse_sequential.tsv
+sequential_sha256=773abfc61b5105fec9203d489d8eee1e8029ff78cd347a2e7929beca0f0ea049
+plotting_command=scripts/plot_capacity_prefetch_control.py --randomized phase3_extracted_hazel_5cpus_20260914/haswell_capacity_830101/processed/capacity/coarse_randomized.tsv --sequential phase3_extracted_hazel_5cpus_20260914/haswell_capacity_830101/processed/capacity/coarse_sequential.tsv --output plots/phase3/haswell/capacity/prefetch_control.pdf
+python_version=3.9.25

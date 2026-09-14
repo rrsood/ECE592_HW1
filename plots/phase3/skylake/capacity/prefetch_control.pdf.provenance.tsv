@@ -1,0 +1,8 @@
+ece592_plot_provenance_version=1
+plot_kind=phase1_capacity_prefetch_control
+randomized_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/phase3_extracted_hazel_5cpus_20260914/skylake_capacity_830272/processed/capacity/coarse_randomized.tsv
+randomized_sha256=5900bc293b84a00650228b573b6ed37649556a72a46ccaf6346faf8d25b922c2
+sequential_input=/mnt/ncsudrive/d/djariwa/ECE-592---Cache-Reverse-Engineering/phase3_extracted_hazel_5cpus_20260914/skylake_capacity_830272/processed/capacity/coarse_sequential.tsv
+sequential_sha256=2ac604494183452bc0efb4314ae54eb2af58bcde860c1b9f176c820042bffa9e
+plotting_command=scripts/plot_capacity_prefetch_control.py --randomized phase3_extracted_hazel_5cpus_20260914/skylake_capacity_830272/processed/capacity/coarse_randomized.tsv --sequential phase3_extracted_hazel_5cpus_20260914/skylake_capacity_830272/processed/capacity/coarse_sequential.tsv --output plots/phase3/skylake/capacity/prefetch_control.pdf
+python_version=3.9.25

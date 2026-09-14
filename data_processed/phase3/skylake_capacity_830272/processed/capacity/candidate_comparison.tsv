@@ -1,0 +1,25 @@
+ece592_capacity_candidate_comparison_version=1
+coarse_transition_file=/share/ece592f26/djariwa/tmp/ece592_phase3_skylake_capacity_830272/processed/capacity/coarse_transitions.tsv
+coarse_transition_sha256=f3fea963787df132fac9d74f779a52a01a659dab015de71dec163681c5991a23
+dense_transition_file=/share/ece592f26/djariwa/tmp/ece592_phase3_skylake_capacity_830272/processed/capacity/dense_transitions.tsv
+dense_transition_sha256=5fe4a5368467f425a9c7de171880962297b0de721e5ade55af1dda3480996180
+source_hostname=c052n01
+source_isa=x86_64
+top_coarse_rank_count=6
+comparison_method=coarse_interval_vs_overlapping_dense_intervals
+dense_best_selection=largest_relative_increase_then_largest_slope
+cache_boundary_labels_assigned=false
+timer_overhead_subtracted=false
+comparison_script=/home/djariwa/ECE-592---Cache-Reverse-Engineering/scripts/compare_capacity_candidates.py
+comparison_command=scripts/compare_capacity_candidates.py --coarse /share/ece592f26/djariwa/tmp/ece592_phase3_skylake_capacity_830272/processed/capacity/coarse_transitions.tsv --dense /share/ece592f26/djariwa/tmp/ece592_phase3_skylake_capacity_830272/processed/capacity/dense_transitions.tsv --top-count 6 --output /share/ece592f26/djariwa/tmp/ece592_phase3_skylake_capacity_830272/processed/capacity/candidate_comparison.tsv
+comparison_working_directory=/home/djariwa/ECE-592---Cache-Reverse-Engineering
+python_version=3.9.23
+data_begin
+coarse_rank	coarse_lower_span	coarse_upper_span	coarse_relative_increase	coarse_log2_latency_slope	coarse_trial_disagreement_fraction	dense_overlapping_interval_count	dense_best_rank	dense_best_lower_span	dense_best_upper_span	dense_best_relative_increase	dense_best_log2_latency_slope	dense_best_trial_disagreement_fraction	dense_support_status
+1	20971520	25165824	0.52535728868926101	2.3158461221377382	0.025484527251311704	4	3	23488104	25165824	0.2958938808158913	3.7569239085838491	0.14489995370608508	strong-measured-jump
+2	25165824	29360128	0.35737230966912947	1.9821560688887634	0.025484527251311704	4	2	27262976	27682408	0.1078167115902966	6.7064647892235909	0.072965432449047143	strong-measured-jump
+3	1048576	1310720	0.33060873306087335	1.2800572988650869	0.019574101957410196	6	8	1258296	1310720	0.07800669131889415	1.8402015949822168	0.027768703038222802	moderate-measured-jump
+4	786432	917504	0.17326866073834557	1.0366063965008805	0.042259990813045475	3	18	865080	943720	0.079090204187128421	0.87484713140597492	0.023233532934131735	moderate-measured-jump
+5	29360128	33554432	0.14002287697708349	0.98140465064501181	0.0058471438950973946	5	5	30198992	31457280	0.11075559931085399	2.5731417029867738	0.017800428392052588	strong-measured-jump
+6	1310720	1572864	0.17959909473003566	0.9059522824680164	0.014548981571290009	4	14	1468008	1572864	0.064878262137337828	0.91113004101832307	0.0038335158817086527	moderate-measured-jump
+data_end
