@@ -1,0 +1,29 @@
+machine=charnwood
+experiment=phase2_associativity_l2_before
+conflict_stride_bytes=65536
+conflict_line_count=8
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/charnwood/phase2_validation/associativity_l2_before_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_charnwood_v1 --mode conflict --cpu 4 --lines 8 --conflict-stride 65536 --batch 256 --warmup 1000 --samples 1000000 --seed 40900 --experiment phase2-associativity-l2_before --output /home/rrsood/ece592-raw-archive-2026-09-11/charnwood/phase2_validation/associativity_l2_before_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_charnwood_v1 --smt-siblings-idle no --environment-variables Phase-II PMU associativity validation; SMT sibling 0,4 not reserved':
+
+     5,260,476,630      cycles                                                                  (49.93%)
+     3,441,892,608      instructions                     #    0.65  insn per cycle              (62.54%)
+         3,680,254      cache-references                                                        (62.57%)
+         1,528,406      cache-misses                     #   41.53% of all cache refs           (62.57%)
+     1,638,197,441      L1-dcache-loads                                                         (62.57%)
+         2,191,224      L1-dcache-load-misses            #    0.13% of all L1-dcache accesses   (62.55%)
+           148,606      LLC-loads                                                               (49.91%)
+            38,509      LLC-load-misses                  #   25.91% of all LL-cache accesses    (49.91%)
+
+       1.437158917 seconds time elapsed
+
+       1.409006000 seconds user
+       0.018012000 seconds sys
+
+
+data_end

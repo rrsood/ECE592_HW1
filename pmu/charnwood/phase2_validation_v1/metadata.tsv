@@ -1,0 +1,7 @@
+machine=charnwood
+phase=phase2
+timestamp_utc=2026-09-14T15:49:08Z
+git_commit=382853bd9613f10606e2edaaf39b9b5b0e0ebf4f
+hostname=charnwood.ece.ncsu.edu
+kernel=Linux charnwood.ece.ncsu.edu 6.8.0-101-generic #101-Ubuntu SMP PREEMPT_DYNAMIC Mon Feb  9 10:15:05 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+isa=x86_64

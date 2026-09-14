@@ -1,0 +1,27 @@
+machine=charnwood
+experiment=phase2_line_size_offset_64
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/charnwood/phase2_validation/line_size_offset_64_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_charnwood_v1 --mode spatial --cpu 4 --regions 257 --region-spacing 4096 --probe-offset 64 --batch 256 --warmup 1000 --samples 1000000 --seed 40856 --experiment phase2-line-size-offset-64 --output /home/rrsood/ece592-raw-archive-2026-09-11/charnwood/phase2_validation/line_size_offset_64_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_charnwood_v1 --smt-siblings-idle no --environment-variables Phase-II PMU line-size validation; SMT sibling 0,4 not reserved':
+
+    10,056,960,610      cycles                                                                  (49.99%)
+     3,460,551,826      instructions                     #    0.34  insn per cycle              (62.49%)
+       802,217,255      cache-references                                                        (62.50%)
+         3,584,192      cache-misses                     #    0.45% of all cache refs           (62.49%)
+     1,640,867,520      L1-dcache-loads                                                         (62.51%)
+       258,759,909      L1-dcache-load-misses            #   15.77% of all L1-dcache accesses   (62.50%)
+       124,650,530      LLC-loads                                                               (50.01%)
+           136,139      LLC-load-misses                  #    0.11% of all LL-cache accesses    (50.00%)
+
+       2.775066377 seconds time elapsed
+
+       2.740121000 seconds user
+       0.020000000 seconds sys
+
+
+data_end

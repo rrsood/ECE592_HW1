@@ -1,0 +1,31 @@
+machine=charnwood
+workload=l1_resident
+nodes=2048
+spacing_bytes=8
+working_set_bytes=16384
+timed_samples=1000000
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/charnwood/phase2_validation/eight_counter_l1_resident_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_charnwood_v1 --mode capacity --cpu 4 --nodes 2048 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 40992 --experiment phase2-eight-counter-l1_resident --output /home/rrsood/ece592-raw-archive-2026-09-11/charnwood/phase2_validation/eight_counter_l1_resident_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_charnwood_v1 --smt-siblings-idle no --environment-variables Phase-II exactly-eight-counter workload; SMT sibling 0,4 not reserved':
+
+     2,993,145,972      cycles                                                                  (49.83%)
+     3,402,659,008      instructions                     #    1.14  insn per cycle              (62.44%)
+         3,844,990      cache-references                                                        (62.62%)
+         1,538,373      cache-misses                     #   40.01% of all cache refs           (62.64%)
+     1,640,017,189      L1-dcache-loads                                                         (62.67%)
+         2,418,846      L1-dcache-load-misses            #    0.15% of all L1-dcache accesses   (62.56%)
+           228,911      LLC-loads                                                               (49.86%)
+            83,355      LLC-load-misses                  #   36.41% of all LL-cache accesses    (49.83%)
+
+       0.848664595 seconds time elapsed
+
+       0.809009000 seconds user
+       0.023970000 seconds sys
+
+
+data_end

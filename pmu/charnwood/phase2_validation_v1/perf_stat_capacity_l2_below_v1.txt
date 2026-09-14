@@ -1,0 +1,28 @@
+machine=charnwood
+experiment=phase2_capacity_boundary_l2_below
+working_set_bytes=1048576
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/charnwood/phase2_validation/capacity_l2_below_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_charnwood_v1 --mode capacity --cpu 4 --nodes 131072 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 40692 --experiment phase2-capacity-boundary-l2_below --output /home/rrsood/ece592-raw-archive-2026-09-11/charnwood/phase2_validation/capacity_l2_below_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_charnwood_v1 --smt-siblings-idle no --environment-variables Phase-II PMU capacity validation; SMT sibling 0,4 not reserved':
+
+    12,136,508,473      cycles                                                                  (49.99%)
+     3,455,945,524      instructions                     #    0.28  insn per cycle              (62.50%)
+       618,001,790      cache-references                                                        (62.53%)
+         8,717,815      cache-misses                     #    1.41% of all cache refs           (62.53%)
+     1,654,679,630      L1-dcache-loads                                                         (62.53%)
+       253,310,282      L1-dcache-load-misses            #   15.31% of all L1-dcache accesses   (62.50%)
+       200,639,055      LLC-loads                                                               (49.97%)
+         2,163,981      LLC-load-misses                  #    1.08% of all LL-cache accesses    (49.97%)
+
+       3.482862089 seconds time elapsed
+
+       3.443196000 seconds user
+       0.022994000 seconds sys
+
+
+data_end
