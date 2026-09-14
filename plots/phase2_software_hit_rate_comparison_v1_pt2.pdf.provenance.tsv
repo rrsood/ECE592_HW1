@@ -1,0 +1,12 @@
+ece592_plot_provenance_version=1
+plot_type=software-hit-rate-pmu-comparison
+output_plot_file=/mnt/ncsudrive/r/rrsood/ECE592/ECE592_HW1/plots/phase2_software_hit_rate_comparison_v1_pt2.pdf
+output_plot_sha256=5f809a8663c633cff635abfc8beb663dff883fed169b3f6cf24abffded059bdf
+plotting_script=/mnt/ncsudrive/r/rrsood/ECE592/ECE592_HW1/scripts/process_software_hit_rate_summary.py
+plotting_command=scripts/process_software_hit_rate_summary.py --pmu-summary data_processed/phase2_eight_counter_summary_v1_pt2.tsv --output data_processed/phase2_software_hit_rate_comparison_v1_pt2.tsv --plot-output plots/phase2_software_hit_rate_comparison_v1_pt2.pdf
+plotting_working_directory=/mnt/ncsudrive/r/rrsood/ECE592/ECE592_HW1
+python_version=3.9.25
+gnuplot_version=gnuplot 5.4 patchlevel 3
+plotted_software_points=12
+plotted_pmu_proxy_points=9
+omitted_pmu_proxy_points=3
