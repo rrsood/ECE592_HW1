@@ -161,7 +161,7 @@ python3 scripts/analyze_capacity_transitions.py \
   --output "$work/processed/capacity/coarse_transitions.tsv"
 python3 scripts/generate_dense_capacity_plan.py \
   --transitions "$work/processed/capacity/coarse_transitions.tsv" \
-  --top-k 6 --padding-factor 1.25 --points-per-octave 8 --trials 2 \
+  --top-k 6 --padding-factor 5/4 --points-per-octave 8 --trials 2 \
   --seed 82592 --node-spacing-bytes 8 --node-bytes 8 \
   --output "$work/plans/capacity_dense.tsv"
 python3 scripts/run_capacity_plan.py \
