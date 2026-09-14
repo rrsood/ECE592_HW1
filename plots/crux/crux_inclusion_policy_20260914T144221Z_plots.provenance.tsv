@@ -1,0 +1,14 @@
+ece592_plot_provenance_version=1
+plot_type=cross-level-inclusion-exclusion-evidence
+input_filename=/home/rrsood/ECE592_HW1/data_processed/crux/inclusion_policy/crux_inclusion_policy_20260914T144221Z.tsv
+input_sha256=8cf484bfe2730358613b062d3298a15efc546ae74c77348981e3135120989f8e
+output_filename=/home/rrsood/ECE592_HW1/plots/crux/crux_inclusion_policy_20260914T144221Z_eviction_probability.pdf
+output_filename=/home/rrsood/ECE592_HW1/plots/crux/crux_inclusion_policy_20260914T144221Z_reload_latency.pdf
+output_filename=/home/rrsood/ECE592_HW1/plots/crux/crux_inclusion_policy_20260914T144221Z_reload_boxplots.pdf
+plotting_command=/home/rrsood/ECE592_HW1/scripts/plot_inclusion_policy_curve.py --input /home/rrsood/ECE592_HW1/data_processed/crux/inclusion_policy/crux_inclusion_policy_20260914T144221Z.tsv --output-prefix /home/rrsood/ECE592_HW1/plots/crux/crux_inclusion_policy_20260914T144221Z --machine crux --llc-bytes 31457280 --l1-bytes 32768 --l2-bytes 262144
+plotting_working_directory=/home/rrsood/ECE592_HW1
+python_version=3.12.3
+matplotlib_version=3.6.3
+processed_row_count=84
+aggregated_point_count=42
+cache_policy_labels_assigned=false
