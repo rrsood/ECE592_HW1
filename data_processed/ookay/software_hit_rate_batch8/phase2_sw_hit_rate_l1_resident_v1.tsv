@@ -1,0 +1,22 @@
+ece592_software_hit_rate_estimate_version=1
+metric=timing_derived_cache_hit_rate
+pmu_counters_used=false
+estimator_script=/home/rrsood/ECE592_HW1/software_hit_rate/estimate_hit_rate.py
+hit_calibration_file=/home/rrsood/ece592-raw-archive-2026-09-11/ookay/software_hit_rate/phase2_sw_hit_rate_batch8_v1/l1_resident.tsv
+miss_calibration_file=/home/rrsood/ece592-raw-archive-2026-09-11/ookay/software_hit_rate/phase2_sw_hit_rate_batch8_v1/larger_than_last_cache.tsv
+target_file=/home/rrsood/ece592-raw-archive-2026-09-11/ookay/software_hit_rate/phase2_sw_hit_rate_batch8_v1/l1_resident.tsv
+timer_unit=TSC ticks
+dependent_accesses_per_sample=8
+threshold_rule=midpoint_between_hit_p95_and_miss_p05
+threshold_ticks_per_access=146.375
+classification_rule=sample_is_hit_like_if_ticks_per_access_le_threshold
+hit_calibration_median_ticks_per_access=16.25
+miss_calibration_median_ticks_per_access=270.5
+target_median_ticks_per_access=16.25
+hit_calibration_hit_like_fraction=0.99988699999999997
+miss_calibration_false_hit_like_fraction=0
+balanced_calibration_accuracy=0.99994349999999999
+data_begin
+target_sample_count	hit_like_sample_count	estimated_hit_rate	wilson_95_low	wilson_95_high	target_minimum_ticks_per_access	target_p05_ticks_per_access	target_q1_ticks_per_access	target_median_ticks_per_access	target_q3_ticks_per_access	target_p95_ticks_per_access	target_maximum_ticks_per_access
+1000000	999887	0.99988699999999997	0.99986415791400152	0.99990600151010101	14.75	15.5	16	16.25	18.75	55	6471.5
+data_end

@@ -1,0 +1,28 @@
+machine=ookay
+experiment=phase2_capacity_boundary_l2_below
+working_set_bytes=524288
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/ookay/phase2_validation/capacity_l2_below_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_ookay_v1 --mode capacity --cpu 4 --nodes 65536 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 50692 --experiment phase2-capacity-boundary-l2_below --output /home/rrsood/ece592-raw-archive-2026-09-11/ookay/phase2_validation/capacity_l2_below_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_ookay_v1 --smt-siblings-idle no --environment-variables Phase-II PMU capacity validation; SMT sibling 0,4 not reserved':
+
+    10,593,030,579      cycles                                                                  (50.01%)
+     3,428,901,548      instructions                     #    0.32  insn per cycle              (62.50%)
+       552,883,717      cache-references                                                        (62.48%)
+         2,947,521      cache-misses                     #    0.53% of all cache refs           (62.49%)
+     1,652,855,235      L1-dcache-loads                                                         (62.49%)
+       245,938,427      L1-dcache-load-misses            #   14.88% of all L1-dcache accesses   (62.51%)
+       164,525,394      LLC-loads                                                               (50.01%)
+           595,235      LLC-load-misses                  #    0.36% of all LL-cache accesses    (50.01%)
+
+       2.575792165 seconds time elapsed
+
+       2.544754000 seconds user
+       0.024007000 seconds sys
+
+
+data_end

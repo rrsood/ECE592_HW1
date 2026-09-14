@@ -1,0 +1,29 @@
+machine=ookay
+experiment=phase2_associativity_l2_before
+conflict_stride_bytes=32768
+conflict_line_count=8
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/ookay/phase2_validation/associativity_l2_before_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_ookay_v1 --mode conflict --cpu 4 --lines 8 --conflict-stride 32768 --batch 256 --warmup 1000 --samples 1000000 --seed 50900 --experiment phase2-associativity-l2_before --output /home/rrsood/ece592-raw-archive-2026-09-11/ookay/phase2_validation/associativity_l2_before_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_ookay_v1 --smt-siblings-idle no --environment-variables Phase-II PMU associativity validation; SMT sibling 0,4 not reserved':
+
+     3,627,726,047      cycles                                                                  (50.02%)
+     3,393,603,013      instructions                     #    0.94  insn per cycle              (62.51%)
+         3,249,218      cache-references                                                        (62.51%)
+         1,227,638      cache-misses                     #   37.78% of all cache refs           (62.54%)
+     1,643,368,209      L1-dcache-loads                                                         (62.54%)
+         1,905,262      L1-dcache-load-misses            #    0.12% of all L1-dcache accesses   (62.48%)
+           119,835      LLC-loads                                                               (49.96%)
+            26,553      LLC-load-misses                  #   22.16% of all LL-cache accesses    (49.96%)
+
+       0.883239649 seconds time elapsed
+
+       0.858648000 seconds user
+       0.014010000 seconds sys
+
+
+data_end

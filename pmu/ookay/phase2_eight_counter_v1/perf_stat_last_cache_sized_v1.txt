@@ -1,0 +1,31 @@
+machine=ookay
+workload=last_cache_sized
+nodes=262144
+spacing_bytes=8
+working_set_bytes=2097152
+timed_samples=1000000
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/ookay/phase2_validation/eight_counter_last_cache_sized_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_ookay_v1 --mode capacity --cpu 4 --nodes 262144 --spacing 8 --traversal randomized --batch 256 --warmup 1024 --samples 1000000 --seed 50993 --experiment phase2-eight-counter-last_cache_sized --output /home/rrsood/ece592-raw-archive-2026-09-11/ookay/phase2_validation/eight_counter_last_cache_sized_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_ookay_v1 --smt-siblings-idle no --environment-variables Phase-II exactly-eight-counter workload; SMT sibling 0,4 not reserved':
+
+    12,997,399,918      cycles                                                                  (49.99%)
+     3,475,357,469      instructions                     #    0.27  insn per cycle              (62.49%)
+       690,224,545      cache-references                                                        (62.49%)
+         1,353,329      cache-misses                     #    0.20% of all cache refs           (62.48%)
+     1,669,937,295      L1-dcache-loads                                                         (62.48%)
+       256,817,803      L1-dcache-load-misses            #   15.38% of all L1-dcache accesses   (62.51%)
+       223,771,524      LLC-loads                                                               (50.03%)
+            37,772      LLC-load-misses                  #    0.02% of all LL-cache accesses    (50.02%)
+
+       3.144256983 seconds time elapsed
+
+       3.118799000 seconds user
+       0.017004000 seconds sys
+
+
+data_end

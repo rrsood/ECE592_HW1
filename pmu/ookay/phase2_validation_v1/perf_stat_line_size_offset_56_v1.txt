@@ -1,0 +1,27 @@
+machine=ookay
+experiment=phase2_line_size_offset_56
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/ookay/phase2_validation/line_size_offset_56_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_ookay_v1 --mode spatial --cpu 4 --regions 257 --region-spacing 4096 --probe-offset 56 --batch 256 --warmup 1000 --samples 1000000 --seed 50848 --experiment phase2-line-size-offset-56 --output /home/rrsood/ece592-raw-archive-2026-09-11/ookay/phase2_validation/line_size_offset_56_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_ookay_v1 --smt-siblings-idle no --environment-variables Phase-II PMU line-size validation; SMT sibling 0,4 not reserved':
+
+     9,041,593,838      cycles                                                                  (49.99%)
+     3,437,335,033      instructions                     #    0.38  insn per cycle              (62.49%)
+       564,792,847      cache-references                                                        (62.50%)
+         1,723,210      cache-misses                     #    0.31% of all cache refs           (62.46%)
+     1,644,130,989      L1-dcache-loads                                                         (62.49%)
+       184,141,538      L1-dcache-load-misses            #   11.20% of all L1-dcache accesses   (62.52%)
+       132,838,227      LLC-loads                                                               (50.04%)
+           159,824      LLC-load-misses                  #    0.12% of all LL-cache accesses    (50.00%)
+
+       2.205111006 seconds time elapsed
+
+       2.180320000 seconds user
+       0.019002000 seconds sys
+
+
+data_end
