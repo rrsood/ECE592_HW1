@@ -13,3 +13,4 @@ data_raw/*/*/phase1_*_randomized*/
 phase3/slurm_logs/
 phase3/results/*/raw_timing_samples.tar.gz
 build/
+.venv/

@@ -1,0 +1,14 @@
+ece592_plot_provenance_version=1
+plot_type=cross-level-inclusion-exclusion-evidence
+input_filename=/Users/rohitsood/ECE592_HW1/data_processed/thunderbird/inclusion_policy/thunderbird_inclusion_policy_20260914T143529Z.tsv
+input_sha256=76a14193fc2922b9e43ed4dab4089ad01260133f89084e03b821b70fd9cc857d
+output_filename=/Users/rohitsood/ECE592_HW1/plots/thunderbird/thunderbird_inclusion_policy_20260914T143529Z_eviction_probability.pdf
+output_filename=/Users/rohitsood/ECE592_HW1/plots/thunderbird/thunderbird_inclusion_policy_20260914T143529Z_reload_latency.pdf
+output_filename=/Users/rohitsood/ECE592_HW1/plots/thunderbird/thunderbird_inclusion_policy_20260914T143529Z_reload_boxplots.pdf
+plotting_command=scripts/plot_inclusion_policy_curve.py --input data_processed/thunderbird/inclusion_policy/thunderbird_inclusion_policy_20260914T143529Z.tsv --output-prefix plots/thunderbird/thunderbird_inclusion_policy_20260914T143529Z --machine thunderbird --llc-bytes 31457280 --l1-bytes 32768 --l2-bytes 262144
+plotting_working_directory=/Users/rohitsood/ECE592_HW1
+python_version=3.14.0
+matplotlib_version=3.11.2
+processed_row_count=84
+aggregated_point_count=42
+cache_policy_labels_assigned=false
