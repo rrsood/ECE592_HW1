@@ -12,3 +12,4 @@ data_raw/*/*/phase1_*_randomized*/
 # scripts, plans, processed summaries, hashes, and metadata trackable.
 phase3/slurm_logs/
 phase3/results/*/raw_timing_samples.tar.gz
+build/
