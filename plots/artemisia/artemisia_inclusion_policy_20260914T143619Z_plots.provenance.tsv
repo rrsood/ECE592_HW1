@@ -1,0 +1,14 @@
+ece592_plot_provenance_version=1
+plot_type=cross-level-inclusion-exclusion-evidence
+input_filename=/home/rrsood/ECE592_HW1/data_processed/artemisia/inclusion_policy/artemisia_inclusion_policy_20260914T143619Z.tsv
+input_sha256=a0f70801e250b22c01fb78c01181550756b39076dd466bc6d7198657b64cb50c
+output_filename=/home/rrsood/ECE592_HW1/plots/artemisia/artemisia_inclusion_policy_20260914T143619Z_eviction_probability.pdf
+output_filename=/home/rrsood/ECE592_HW1/plots/artemisia/artemisia_inclusion_policy_20260914T143619Z_reload_latency.pdf
+output_filename=/home/rrsood/ECE592_HW1/plots/artemisia/artemisia_inclusion_policy_20260914T143619Z_reload_boxplots.pdf
+plotting_command=/home/rrsood/ECE592_HW1/scripts/plot_inclusion_policy_curve.py --input /home/rrsood/ECE592_HW1/data_processed/artemisia/inclusion_policy/artemisia_inclusion_policy_20260914T143619Z.tsv --output-prefix /home/rrsood/ECE592_HW1/plots/artemisia/artemisia_inclusion_policy_20260914T143619Z --machine artemisia --llc-bytes 31457280 --l1-bytes 32768 --l2-bytes 262144
+plotting_working_directory=/home/rrsood/ECE592_HW1
+python_version=3.9.25
+matplotlib_version=3.9.4
+processed_row_count=84
+aggregated_point_count=42
+cache_policy_labels_assigned=false
