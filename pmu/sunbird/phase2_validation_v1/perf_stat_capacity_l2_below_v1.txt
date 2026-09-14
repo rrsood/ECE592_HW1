@@ -1,0 +1,28 @@
+machine=sunbird
+experiment=phase2_capacity_boundary_l2_below
+working_set_bytes=262144
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/sunbird/phase2_validation/capacity_l2_below_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_sunbird_v1 --mode capacity --cpu 4 --nodes 32768 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 20692 --experiment phase2-capacity-boundary-l2_below --output /home/rrsood/ece592-raw-archive-2026-09-11/sunbird/phase2_validation/capacity_l2_below_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_sunbird_v1 --smt-siblings-idle no --environment-variables Phase-II PMU capacity validation; SMT sibling 4,28 not reserved':
+
+     6,193,186,764      cycles:u                                                                (50.01%)
+     3,449,266,457      instructions:u                   #    0.56  insn per cycle              (62.54%)
+        38,676,982      cache-references:u                                                      (62.51%)
+            94,670      cache-misses:u                   #    0.24% of all cache refs           (62.49%)
+     1,637,115,707      L1-dcache-loads:u                                                       (62.41%)
+       230,964,614      L1-dcache-load-misses:u          #   14.11% of all L1-dcache accesses   (24.99%)
+        38,682,042      LLC-loads:u                                                             (25.01%)
+            91,073      LLC-load-misses:u                #    0.24% of all LL-cache accesses    (37.50%)
+
+       5.250809324 seconds time elapsed
+
+       2.486294000 seconds user
+       0.016887000 seconds sys
+
+
+data_end

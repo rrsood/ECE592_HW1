@@ -1,0 +1,31 @@
+machine=sunbird
+workload=l1_resident
+nodes=2048
+spacing_bytes=8
+working_set_bytes=16384
+timed_samples=1000000
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/sunbird/phase2_validation/eight_counter_l1_resident_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_sunbird_v1 --mode capacity --cpu 4 --nodes 2048 --spacing 8 --traversal randomized --batch 256 --warmup 1000 --samples 1000000 --seed 20992 --experiment phase2-eight-counter-l1_resident --output /home/rrsood/ece592-raw-archive-2026-09-11/sunbird/phase2_validation/eight_counter_l1_resident_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_sunbird_v1 --smt-siblings-idle no --environment-variables Phase-II exactly-eight-counter workload; SMT sibling 4,28 not reserved':
+
+     3,323,967,761      cycles:u                                                                (50.01%)
+     3,471,495,911      instructions:u                   #    1.04  insn per cycle              (62.45%)
+           102,193      cache-references:u                                                      (62.74%)
+            37,343      cache-misses:u                   #   36.54% of all cache refs           (62.63%)
+     1,629,974,468      L1-dcache-loads:u                                                       (62.41%)
+           837,546      L1-dcache-load-misses:u          #    0.05% of all L1-dcache accesses   (24.85%)
+            72,650      LLC-loads:u                                                             (24.92%)
+            36,138      LLC-load-misses:u                #   49.74% of all LL-cache accesses    (37.42%)
+
+       2.894084905 seconds time elapsed
+
+       1.329019000 seconds user
+       0.019790000 seconds sys
+
+
+data_end

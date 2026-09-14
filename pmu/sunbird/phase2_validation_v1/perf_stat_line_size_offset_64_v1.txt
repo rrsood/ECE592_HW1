@@ -1,0 +1,27 @@
+machine=sunbird
+experiment=phase2_line_size_offset_64
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/sunbird/phase2_validation/line_size_offset_64_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_sunbird_v1 --mode spatial --cpu 4 --regions 257 --region-spacing 4096 --probe-offset 64 --batch 256 --warmup 1000 --samples 1000000 --seed 20856 --experiment phase2-line-size-offset-64 --output /home/rrsood/ece592-raw-archive-2026-09-11/sunbird/phase2_validation/line_size_offset_64_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_sunbird_v1 --smt-siblings-idle no --environment-variables Phase-II PMU line-size validation; SMT sibling 4,28 not reserved':
+
+    14,251,299,367      cycles:u                                                                (50.03%)
+     3,477,473,513      instructions:u                   #    0.24  insn per cycle              (62.50%)
+       256,397,635      cache-references:u                                                      (62.48%)
+           229,506      cache-misses:u                   #    0.09% of all cache refs           (62.45%)
+     1,632,160,647      L1-dcache-loads:u                                                       (62.43%)
+       257,074,087      L1-dcache-load-misses:u          #   15.75% of all L1-dcache accesses   (25.04%)
+       256,205,855      LLC-loads:u                                                             (25.06%)
+           226,636      LLC-load-misses:u                #    0.09% of all LL-cache accesses    (37.53%)
+
+      11.750068387 seconds time elapsed
+
+       5.713605000 seconds user
+       0.021861000 seconds sys
+
+
+data_end

@@ -1,0 +1,29 @@
+machine=sunbird
+experiment=phase2_associativity_l1_after
+conflict_stride_bytes=65536
+conflict_line_count=5
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/sunbird/phase2_validation/associativity_l1_after_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_sunbird_v1 --mode conflict --cpu 4 --lines 5 --conflict-stride 65536 --batch 256 --warmup 1000 --samples 1000000 --seed 20897 --experiment phase2-associativity-l1_after --output /home/rrsood/ece592-raw-archive-2026-09-11/sunbird/phase2_validation/associativity_l1_after_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_sunbird_v1 --smt-siblings-idle no --environment-variables Phase-II PMU associativity validation; SMT sibling 4,28 not reserved':
+
+     5,348,141,607      cycles:u                                                                (49.99%)
+     3,455,210,153      instructions:u                   #    0.65  insn per cycle              (62.56%)
+            92,659      cache-references:u                                                      (62.54%)
+            54,427      cache-misses:u                   #   58.74% of all cache refs           (62.45%)
+     1,634,357,640      L1-dcache-loads:u                                                       (62.37%)
+           895,439      L1-dcache-load-misses:u          #    0.05% of all L1-dcache accesses   (24.96%)
+            71,367      LLC-loads:u                                                             (25.09%)
+            53,960      LLC-load-misses:u                #   75.61% of all LL-cache accesses    (37.52%)
+
+       4.550246267 seconds time elapsed
+
+       2.144674000 seconds user
+       0.018882000 seconds sys
+
+
+data_end
