@@ -1,0 +1,10 @@
+constraint	cpu_family	generation	vendor	isa	introduction_year	required_coverage_note
+haswell	Intel Xeon E5 v3	Haswell	Intel	x86_64	2013	oldest documented Hazel generation
+broadwell	Intel Xeon E5 v4	Broadwell	Intel	x86_64	2014	attempt when visible to the course project
+skylake	Intel Xeon Scalable Processor	Skylake-SP	Intel	x86_64	2017	attempt when visible to the course project
+cascadelake	Intel Xeon 2nd Gen SP	Cascade Lake	Intel	x86_64	2019	attempt when visible to the course project
+icelake_6326	Intel Xeon Gold 6326	Ice Lake-SP	Intel	x86_64	2021	distinct constraint; record exact allocated model
+icelake_8358	Intel Xeon Platinum 8358	Ice Lake-SP	Intel	x86_64	2021	distinct constraint; record exact allocated model
+sapphirerapids	Intel Xeon 4th Gen	Sapphire Rapids	Intel	x86_64	2023	attempt when visible to the course project
+genoa	AMD EPYC 4th Gen	Zen 4 / Genoa	AMD	x86_64	2022	required AMD coverage when accessible
+turin	AMD EPYC 5th Gen	Zen 5 / Turin	AMD	x86_64	2024	newest documented generation when visible

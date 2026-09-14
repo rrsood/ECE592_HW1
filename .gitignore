@@ -6,3 +6,9 @@ __pycache__/
 # each run contains millions of timing rows. Keep small reproducible plans.
 data_raw/*/*/phase1_*_randomized*/
 !data_raw/*/*/*plan*.tsv
+
+# Phase-III Slurm logs and compressed million-sample archives are preserved for
+# submission/archival, but are too large/noisy for Git. Keep generated job
+# scripts, plans, processed summaries, hashes, and metadata trackable.
+phase3/slurm_logs/
+phase3/results/*/raw_timing_samples.tar.gz

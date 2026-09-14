@@ -1,0 +1,9 @@
+machine	year	vendor	isa	microarchitecture	cpu_model	process_nm	llc_domain_core_count	l1d_capacity_bytes	l1d_associativity	l1d_hit_latency_ns	l1_miss_penalty_ns	l2_capacity_per_core_bytes	l2_associativity	l2_hit_latency_ns	l2_miss_penalty_ns	llc_capacity_bytes	llc_capacity_per_core_bytes	llc_effective_associativity	llc_hit_latency_ns	llc_memory_penalty_ns	line_size_bytes	inclusion_behavior	software_residency_rate	pmu_l1_misses_per_timed_access	pmu_last_cache_misses_per_timed_access
+sunbird		Intel	x86_64																						
+thunderbird		Ampere	AArch64																						
+skylark		AMD	x86_64																						
+artemisia		Intel	x86_64																						
+charnwood		Intel	x86_64																						
+crux		Intel	x86_64																						
+ookay		Intel	x86_64																						
+upgrade		Intel	x86_64																						
