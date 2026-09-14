@@ -1,0 +1,28 @@
+machine=skylark
+experiment=phase2_capacity_boundary_llc_above
+working_set_bytes=16777216
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/skylark/phase2_validation/capacity_llc_above_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_skylark_v1 --mode capacity --cpu 4 --nodes 2097152 --spacing 8 --traversal randomized --batch 256 --warmup 8192 --samples 1000000 --seed 30692 --experiment phase2-capacity-boundary-llc_above --output /home/rrsood/ece592-raw-archive-2026-09-11/skylark/phase2_validation/capacity_llc_above_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_skylark_v1 --smt-siblings-idle not-applicable --environment-variables Phase-II PMU capacity validation; No SMT sibling':
+
+    12,496,907,449      cycles:u                                                                (83.32%)
+     3,815,360,113      instructions:u                   #    0.31  insn per cycle              (83.32%)
+       520,943,814      cache-references:u                                                      (83.33%)
+       259,320,797      cache-misses:u                   #   49.78% of all cache refs           (83.34%)
+     2,350,037,825      L1-dcache-loads:u                                                       (83.35%)
+       268,181,573      L1-dcache-load-misses:u          #   11.41% of all L1-dcache accesses   (83.34%)
+   <not supported>      LLC-loads:u                                                           
+   <not supported>      LLC-load-misses:u                                                     
+
+       3.883036112 seconds time elapsed
+
+       3.827635000 seconds user
+       0.007949000 seconds sys
+
+
+data_end

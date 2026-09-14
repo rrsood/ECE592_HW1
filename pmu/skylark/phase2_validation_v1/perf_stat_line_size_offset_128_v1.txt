@@ -1,0 +1,27 @@
+machine=skylark
+experiment=phase2_line_size_offset_128
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/skylark/phase2_validation/line_size_offset_128_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_skylark_v1 --mode spatial --cpu 4 --regions 257 --region-spacing 4096 --probe-offset 128 --batch 256 --warmup 1000 --samples 1000000 --seed 30920 --experiment phase2-line-size-offset-128 --output /home/rrsood/ece592-raw-archive-2026-09-11/skylark/phase2_validation/line_size_offset_128_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_skylark_v1 --smt-siblings-idle not-applicable --environment-variables Phase-II PMU line-size validation; No SMT sibling':
+
+     8,536,992,323      cycles:u                                                                (83.31%)
+     3,460,004,050      instructions:u                   #    0.41  insn per cycle              (83.33%)
+       386,543,129      cache-references:u                                                      (83.34%)
+       254,718,155      cache-misses:u                   #   65.90% of all cache refs           (83.35%)
+     2,114,224,978      L1-dcache-loads:u                                                       (83.35%)
+       256,995,004      L1-dcache-load-misses:u          #   12.16% of all L1-dcache accesses   (83.32%)
+   <not supported>      LLC-loads:u                                                           
+   <not supported>      LLC-load-misses:u                                                     
+
+       2.660471649 seconds time elapsed
+
+       2.610336000 seconds user
+       0.011914000 seconds sys
+
+
+data_end

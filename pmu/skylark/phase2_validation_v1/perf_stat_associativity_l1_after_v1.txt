@@ -1,0 +1,29 @@
+machine=skylark
+experiment=phase2_associativity_l1_after
+conflict_stride_bytes=65536
+conflict_line_count=9
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/skylark/phase2_validation/associativity_l1_after_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_skylark_v1 --mode conflict --cpu 4 --lines 9 --conflict-stride 65536 --batch 256 --warmup 1000 --samples 1000000 --seed 30901 --experiment phase2-associativity-l1_after --output /home/rrsood/ece592-raw-archive-2026-09-11/skylark/phase2_validation/associativity_l1_after_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_skylark_v1 --smt-siblings-idle not-applicable --environment-variables Phase-II PMU associativity validation; No SMT sibling':
+
+     7,298,048,502      cycles:u                                                                (83.34%)
+     3,466,130,010      instructions:u                   #    0.47  insn per cycle              (83.34%)
+       257,977,241      cache-references:u                                                      (83.34%)
+            30,039      cache-misses:u                   #    0.01% of all cache refs           (83.34%)
+     2,111,238,476      L1-dcache-loads:u                                                       (83.34%)
+       257,095,351      L1-dcache-load-misses:u          #   12.18% of all L1-dcache accesses   (83.29%)
+   <not supported>      LLC-loads:u                                                           
+   <not supported>      LLC-load-misses:u                                                     
+
+       2.276104391 seconds time elapsed
+
+       2.220182000 seconds user
+       0.020855000 seconds sys
+
+
+data_end

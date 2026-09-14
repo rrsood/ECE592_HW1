@@ -1,0 +1,31 @@
+machine=skylark
+workload=larger_than_last_cache
+nodes=16777216
+spacing_bytes=8
+working_set_bytes=134217728
+timed_samples=1000000
+events=cycles,instructions,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses
+data_begin
+output_filename=/home/rrsood/ece592-raw-archive-2026-09-11/skylark/phase2_validation/eight_counter_larger_than_last_cache_v1.tsv
+timed_sample_count=1000000
+timer_unit=TSC ticks
+status=ok
+
+ Performance counter stats for '/tmp/ece592_phase1_skylark_v1 --mode capacity --cpu 4 --nodes 16777216 --spacing 8 --traversal randomized --batch 256 --warmup 65536 --samples 1000000 --seed 30994 --experiment phase2-eight-counter-larger_than_last_cache --output /home/rrsood/ece592-raw-archive-2026-09-11/skylark/phase2_validation/eight_counter_larger_than_last_cache_v1.tsv --build-command bash scripts/build_phase1.sh /tmp/ece592_phase1_skylark_v1 --smt-siblings-idle not-applicable --environment-variables Phase-II exactly-eight-counter workload; No SMT sibling':
+
+    98,318,238,935      cycles:u                                                                (83.33%)
+     6,239,499,174      instructions:u                   #    0.06  insn per cycle              (83.33%)
+       620,414,681      cache-references:u                                                      (83.33%)
+       307,150,962      cache-misses:u                   #   49.51% of all cache refs           (83.33%)
+     3,968,865,942      L1-dcache-loads:u                                                       (83.33%)
+       317,244,766      L1-dcache-load-misses:u          #    7.99% of all L1-dcache accesses   (83.33%)
+   <not supported>      LLC-loads:u                                                           
+   <not supported>      LLC-load-misses:u                                                     
+
+      30.295258125 seconds time elapsed
+
+      29.998344000 seconds user
+       0.033677000 seconds sys
+
+
+data_end
