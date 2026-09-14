@@ -74,6 +74,32 @@ archive. Keep the raw archive outside Git but include it in the final submitted
 data archive. If plotting was deferred, run the existing plot scripts against
 the copied `processed/` files on a host with `gnuplot`.
 
+### Short-walltime partner partitions
+
+When a target is available only through a partition whose QOS limits jobs to
+two hours, generate staged jobs instead of shortening the monolithic job. The
+staged form separates capacity, line size, inclusion, eviction, and the
+software metric, and divides the long associativity sweep into three stride
+groups. Each job has its own result directory and raw archive, so a timeout or
+retry cannot overwrite another stage.
+
+```bash
+python3 scripts/generate_hazel_slurm_jobs.py \
+  --targets phase3/hazel_targets.tsv \
+  --availability-file phase3/scheduler_availability/sinfo_YYYYMMDD.txt \
+  --visible-constraints skylake,icelake_6326,icelake_8358,sapphirerapids,genoa,turin \
+  --unfrozen-run \
+  --partition compute_partners \
+  --time 02:00:00 \
+  --staged \
+  --result-root /PERSISTENT/PROJECT/PATH/ece592_phase3_results \
+  --output-directory phase3/slurm_jobs_partners_staged_v1
+```
+
+The three associativity result files are intentionally separate. Preserve all
+three; combine them only during the final inference/plotting pass so the raw
+stage provenance remains intact.
+
 After committing the timing-only Hazel inference table, build the final
 chronological table and figures as follows. The optional uncertainty table is
 long-form so bounds can be supplied only where the measurement supports them.
